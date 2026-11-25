@@ -1,0 +1,205 @@
+{
+  "id": "BLK-0015",
+  "key": "filter-sort-sheet",
+  "name": "필터·정렬 시트",
+  "tier": "standard",
+  "category": "ux",
+  "version": "1.3.0",
+  "status": "active",
+  "owner": "김서연",
+  "tags": [
+    "필터",
+    "정렬",
+    "바텀시트"
+  ],
+  "description": "목록의 정렬과 필터 조건을 바텀시트에서 한 번에 바꾼다.",
+  "context": "상품·매장·콘텐츠 목록 상단.",
+  "platforms": [
+    "iOS",
+    "Android"
+  ],
+  "slots": [
+    "정렬 옵션",
+    "필터 칩",
+    "적용 버튼",
+    "초기화"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 95,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "357:2350",
+    "file": "UXUI Standard Patterns",
+    "page": "UX 패턴",
+    "synced_at": "2026-11-05",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=357-2350"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "상품·매장·콘텐츠 목록 상단.",
+    "avoid": "조건이 2개 이하인 목록은 시트 대신 상단 칩으로 바로 노출한다.",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": "김서연"
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/FilterSortSheet",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1720",
+    "extracted_at": "2026-11-05",
+    "props": [
+      {
+        "name": "정렬 옵션",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "필터 칩",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "적용 버튼",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "초기화",
+        "type": "BOOLEAN",
+        "default": "false"
+      }
+    ],
+    "variants": [
+      {
+        "name": "높이",
+        "values": [
+          "절반",
+          "전체"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/bg/subtle",
+        "color/bg/surface",
+        "color/status/danger",
+        "color/brand/primary"
+      ],
+      "spacing": [
+        "space/24",
+        "space/16"
+      ],
+      "radius": [
+        "radius/8"
+      ],
+      "typography": [
+        "type/body/m",
+        "type/caption/s"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/16",
+      "padding": "space/24",
+      "width": "FILL",
+      "height": "HUG",
+      "position": "하단 오버레이",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0003"
+    ],
+    "interactions": [
+      {
+        "layer": "적용 버튼",
+        "trigger": "탭",
+        "action": "동작 실행"
+      }
+    ],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/blocks",
+    "component": "FilterSortSheet",
+    "path": "packages/blocks/src/FilterSortSheet/FilterSortSheet.tsx",
+    "props": {
+      "정렬 옵션": "sortOptions",
+      "필터 칩": "filters",
+      "적용 버튼": "onApply",
+      "초기화": "onReset"
+    }
+  },
+  "references": [
+    {
+      "project": "P05",
+      "range": "^1",
+      "screens": 3
+    },
+    {
+      "project": "P04",
+      "range": "^1",
+      "screens": 5
+    },
+    {
+      "project": "P07",
+      "range": "^1",
+      "screens": 6
+    },
+    {
+      "project": "P06",
+      "range": "^1",
+      "screens": 6
+    },
+    {
+      "project": "P01",
+      "range": "^1",
+      "screens": 4
+    },
+    {
+      "project": "P03",
+      "range": "^1",
+      "screens": 3
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-06-27",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "7962eaf"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-08-01",
+      "author": "이수진",
+      "summary": "피그마 원본 디자인 변경 반영",
+      "commit": "e03f4fd"
+    },
+    {
+      "version": "1.2.0",
+      "level": "MINOR",
+      "date": "2026-09-05",
+      "author": "김서연",
+      "summary": "'적용 버튼' 슬롯 추가",
+      "commit": "2451a92"
+    },
+    {
+      "version": "1.3.0",
+      "level": "MINOR",
+      "date": "2026-10-10",
+      "author": "김서연",
+      "summary": "'초기화' 슬롯 추가",
+      "commit": "8b2e0e1"
+    }
+  ]
+}

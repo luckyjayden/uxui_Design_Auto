@@ -1,0 +1,188 @@
+{
+  "id": "BLK-0018",
+  "key": "banner-carousel",
+  "name": "배너 캐러셀",
+  "tier": "standard",
+  "category": "ui",
+  "version": "1.2.1",
+  "status": "active",
+  "owner": "박지훈",
+  "tags": [
+    "배너",
+    "프로모션"
+  ],
+  "description": "여러 프로모션 배너를 가로로 넘겨 보여준다.",
+  "context": "홈 상단, 기획전.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "배너 이미지",
+    "제목",
+    "페이지 표시",
+    "자동 넘김"
+  ],
+  "a11y": {
+    "reviewed": false
+  },
+  "docs_completeness": 70,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "1503:3518",
+    "file": "UXUI Standard Patterns",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-03",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=1503-3518"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "홈 상단, 기획전.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/BannerCarousel",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1802",
+    "extracted_at": "2026-11-03",
+    "props": [
+      {
+        "name": "배너 이미지",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "제목",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "페이지 표시",
+        "type": "BOOLEAN",
+        "default": "false"
+      },
+      {
+        "name": "자동 넘김",
+        "type": "BOOLEAN",
+        "default": "false"
+      }
+    ],
+    "variants": [
+      {
+        "name": "비율",
+        "values": [
+          "16:9",
+          "1:1"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/bg/surface",
+        "color/border/default",
+        "color/brand/primary",
+        "color/text/primary"
+      ],
+      "spacing": [
+        "space/8",
+        "space/16"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [
+      {
+        "prop": "fill",
+        "value": "#FF5A36",
+        "layer": "배지"
+      },
+      {
+        "prop": "font-size",
+        "value": "13px",
+        "layer": "설명"
+      }
+    ],
+    "layout": {
+      "mode": "가로 스크롤",
+      "gap": "space/8",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "FIXED 200",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [],
+    "readiness": 60
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P07",
+      "range": "^1",
+      "screens": 4
+    },
+    {
+      "project": "P04",
+      "range": "^1",
+      "screens": 3
+    },
+    {
+      "project": "P05",
+      "range": "^1",
+      "screens": 2
+    },
+    {
+      "project": "P02",
+      "range": "^1",
+      "screens": 3
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-05-18",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "33589f0"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-06-27",
+      "author": "박지훈",
+      "summary": "'페이지 표시' 슬롯 추가",
+      "commit": "4d1ad45"
+    },
+    {
+      "version": "1.2.0",
+      "level": "MINOR",
+      "date": "2026-08-06",
+      "author": "이수진",
+      "summary": "'자동 넘김' 슬롯 추가",
+      "commit": "89a7154"
+    },
+    {
+      "version": "1.2.1",
+      "level": "PATCH",
+      "date": "2026-09-15",
+      "author": "박지훈",
+      "summary": "설명·태그 보완",
+      "commit": "88a713b"
+    }
+  ]
+}

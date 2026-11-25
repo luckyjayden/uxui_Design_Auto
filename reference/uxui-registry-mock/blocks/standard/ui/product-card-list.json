@@ -1,0 +1,244 @@
+{
+  "id": "BLK-0017",
+  "key": "product-card-list",
+  "name": "상품 카드 리스트",
+  "tier": "standard",
+  "category": "ui",
+  "version": "2.3.0",
+  "status": "active",
+  "owner": "김서연",
+  "tags": [
+    "상품",
+    "카드",
+    "목록"
+  ],
+  "description": "상품을 2열 카드로 나열하고 가격·할인·배지를 보여준다.",
+  "context": "홈 추천, 카테고리 목록, 검색 결과.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "썸네일",
+    "상품명",
+    "가격",
+    "할인율",
+    "배지",
+    "찜하기"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 95,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "1288:2457",
+    "file": "UXUI Standard Patterns",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-04",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=1288-2457"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "홈 추천, 카테고리 목록, 검색 결과.",
+    "avoid": "상품이 1~2개뿐인 영역, 가격 비교가 핵심인 표 형태 화면에는 쓰지 않는다.",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": "김서연"
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/ProductCardList",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1763",
+    "extracted_at": "2026-11-04",
+    "props": [
+      {
+        "name": "썸네일",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "상품명",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "가격",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "할인율",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "배지",
+        "type": "BOOLEAN",
+        "default": "false"
+      },
+      {
+        "name": "찜하기",
+        "type": "BOOLEAN",
+        "default": "false"
+      }
+    ],
+    "variants": [
+      {
+        "name": "레이아웃",
+        "values": [
+          "2열",
+          "가로 스크롤"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/brand/primary",
+        "color/text/primary",
+        "color/text/secondary",
+        "color/status/danger"
+      ],
+      "spacing": [
+        "space/16",
+        "space/12"
+      ],
+      "radius": [
+        "radius/8"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/caption/s"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "그리드 2열",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0012",
+      "BLK-0006"
+    ],
+    "interactions": [
+      {
+        "layer": "찜하기",
+        "trigger": "탭",
+        "action": "상태 토글"
+      }
+    ],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/blocks",
+    "component": "ProductCardList",
+    "path": "packages/blocks/src/ProductCardList/ProductCardList.tsx",
+    "props": {
+      "썸네일": "image",
+      "상품명": "name",
+      "가격": "price",
+      "할인율": "discountRate",
+      "배지": "badge",
+      "찜하기": "wishlisted"
+    }
+  },
+  "references": [
+    {
+      "project": "P08",
+      "range": "^2",
+      "screens": 3
+    },
+    {
+      "project": "P07",
+      "range": "^2",
+      "screens": 8
+    },
+    {
+      "project": "P06",
+      "range": "^2",
+      "screens": 7
+    },
+    {
+      "project": "P05",
+      "range": "^2",
+      "screens": 7
+    },
+    {
+      "project": "P04",
+      "range": "^2",
+      "screens": 9
+    },
+    {
+      "project": "P03",
+      "range": "^1",
+      "screens": 7
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-04-24",
+      "author": "김서연",
+      "summary": "최초 등록",
+      "commit": "347bf3e"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-05-24",
+      "author": "이수진",
+      "summary": "'레거시 썸네일' 슬롯 추가",
+      "commit": "1b59224"
+    },
+    {
+      "version": "1.1.1",
+      "level": "PATCH",
+      "date": "2026-06-23",
+      "author": "김서연",
+      "summary": "설명·태그 보완",
+      "commit": "1a5920b"
+    },
+    {
+      "version": "2.0.0",
+      "level": "MAJOR",
+      "date": "2026-07-23",
+      "author": "김서연",
+      "summary": "2열 카드 구조로 개편 (1열 리스트형 제거)",
+      "commit": "07fc556"
+    },
+    {
+      "version": "2.1.0",
+      "level": "MINOR",
+      "date": "2026-08-22",
+      "author": "김서연",
+      "summary": "'할인율' 슬롯 추가",
+      "commit": "a1bdc14"
+    },
+    {
+      "version": "2.2.0",
+      "level": "MINOR",
+      "date": "2026-09-21",
+      "author": "김서연",
+      "summary": "'배지' 슬롯 추가",
+      "commit": "b2eb13a"
+    },
+    {
+      "version": "2.3.0",
+      "level": "MINOR",
+      "date": "2026-10-21",
+      "author": "김서연",
+      "summary": "'찜하기' 슬롯 추가",
+      "commit": "4b6f4af"
+    }
+  ]
+}

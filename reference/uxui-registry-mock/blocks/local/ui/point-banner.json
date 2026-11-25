@@ -1,0 +1,141 @@
+{
+  "id": "BLK-0024",
+  "key": "point-banner",
+  "name": "포인트 적립 배너",
+  "tier": "local",
+  "category": "ui",
+  "version": "0.1.0",
+  "status": "active",
+  "owner": "김서연",
+  "project": "P02",
+  "tags": [
+    "포인트",
+    "배너"
+  ],
+  "description": "적립 가능한 포인트를 띠 배너로 알린다.",
+  "context": "결제 완료, 마이페이지.",
+  "platforms": [
+    "iOS",
+    "Android"
+  ],
+  "slots": [
+    "배너 문구",
+    "적립 아이콘",
+    "이동 링크"
+  ],
+  "a11y": {
+    "reviewed": false
+  },
+  "docs_completeness": 60,
+  "figma": {
+    "file_key": "Lp91E637Prj",
+    "node_id": "1325:1625",
+    "file": "멤버십 앱 고도화 · 화면설계",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-04",
+    "url": "https://www.figma.com/design/Lp91E637Prj/%EB%A9%A4%EB%B2%84%EC%8B%AD-%EC%95%B1-%EA%B3%A0%EB%8F%84%ED%99%94-%C2%B7-%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84?node-id=1325-1625"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "결제 완료, 마이페이지.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/PointBanner",
+    "type": "COMPONENT",
+    "figma_file_version": "v1937",
+    "extracted_at": "2026-11-04",
+    "props": [
+      {
+        "name": "배너 문구",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "적립 아이콘",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "이동 링크",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [],
+    "tokens": {
+      "color": [
+        "color/text/primary",
+        "color/brand/primary",
+        "color/bg/surface",
+        "color/border/default"
+      ],
+      "spacing": [
+        "space/12",
+        "space/16"
+      ],
+      "radius": [
+        "radius/8"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [
+      {
+        "prop": "fill",
+        "value": "#FF5A36",
+        "layer": "배지"
+      },
+      {
+        "prop": "font-size",
+        "value": "13px",
+        "layer": "설명"
+      }
+    ],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [
+      {
+        "layer": "이동 링크",
+        "trigger": "탭",
+        "action": "화면 이동"
+      }
+    ],
+    "readiness": 60
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P02",
+      "range": "^0",
+      "screens": 2
+    }
+  ],
+  "history": [
+    {
+      "version": "0.1.0",
+      "level": "INIT",
+      "date": "2026-10-22",
+      "author": "김서연",
+      "summary": "프로젝트 블록 최초 등록",
+      "commit": "24b47c2"
+    }
+  ]
+}

@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "uxui-registry/schema/block.schema.json",
+  "title": "UXUI Block",
+  "type": "object",
+  "required": [
+    "id",
+    "key",
+    "name",
+    "tier",
+    "category",
+    "version",
+    "owner",
+    "description",
+    "slots",
+    "figma"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^BLK-[0-9]{4}$"
+    },
+    "key": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "파일명과 코드에서 쓰는 영문 키"
+    },
+    "name": {
+      "type": "string",
+      "description": "glossary/terms.json 의 표준 용어 사용"
+    },
+    "tier": {
+      "enum": [
+        "core",
+        "standard",
+        "local"
+      ]
+    },
+    "category": {
+      "enum": [
+        "common",
+        "ux",
+        "ui"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "deprecated"
+      ]
+    },
+    "owner": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string",
+      "description": "tier=local 일 때 필수"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string"
+    },
+    "context": {
+      "type": "string"
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "iOS",
+          "Android",
+          "Web"
+        ]
+      }
+    },
+    "slots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      },
+      "description": "추가는 Minor, 삭제·이름 변경은 Major"
+    },
+    "a11y": {
+      "type": "object",
+      "properties": {
+        "reviewed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "figma": {
+      "type": "object",
+      "required": [
+        "file_key",
+        "node_id"
+      ],
+      "properties": {
+        "file_key": {
+          "type": "string"
+        },
+        "node_id": {
+          "type": "string",
+          "pattern": "^[0-9]+:[0-9]+$"
+        },
+        "file": {
+          "type": "string"
+        },
+        "page": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string"
+          },
+          "range": {
+            "type": "string",
+            "pattern": "^\\^[0-9]+$"
+          },
+          "screens": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "version",
+          "level",
+          "date",
+          "author",
+          "summary"
+        ],
+        "properties": {
+          "level": {
+            "enum": [
+              "INIT",
+              "PATCH",
+              "MINOR",
+              "MAJOR",
+              "PROMO"
+            ]
+          }
+        }
+      }
+    },
+    "guidance": {
+      "type": "object",
+      "description": "사람이 작성. 동기화로 덮어쓰지 않는다",
+      "properties": {
+        "usage": {
+          "type": "string"
+        },
+        "avoid": {
+          "type": "string",
+          "description": "쓰지 않을 때. AI 블록 선택의 핵심 근거"
+        },
+        "ai_assisted": {
+          "type": "boolean"
+        },
+        "pending_ai_draft": {
+          "type": "boolean",
+          "description": "true면 AI 컨텍스트에서 제외"
+        },
+        "confirmed_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "description": "피그마 자동 추출. 읽기 전용, 동기화 때 통째로 교체",
+      "properties": {
+        "component": {
+          "type": "string",
+          "pattern": "^Block/[A-Z][A-Za-z0-9]+$"
+        },
+        "figma_file_version": {
+          "type": "string"
+        },
+        "extracted_at": {
+          "type": "string"
+        },
+        "props": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "TEXT",
+                  "BOOLEAN",
+                  "INSTANCE_SWAP",
+                  "VARIANT"
+                ]
+              },
+              "default": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "variants": {
+          "type": "array"
+        },
+        "tokens": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "array"
+            },
+            "spacing": {
+              "type": "array"
+            },
+            "radius": {
+              "type": "array"
+            },
+            "typography": {
+              "type": "array"
+            }
+          }
+        },
+        "hardcoded": {
+          "type": "array",
+          "description": "토큰에 연결되지 않은 직접 입력 값"
+        },
+        "layout": {
+          "type": "object"
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^BLK-"
+          }
+        },
+        "interactions": {
+          "type": "array"
+        },
+        "readiness": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "code": {
+      "type": "object",
+      "description": "개발 저장소 Code Connect 매핑. 레지스트리는 링크만 보관하고 코드는 저장하지 않는다",
+      "properties": {
+        "framework": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "component": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "props": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

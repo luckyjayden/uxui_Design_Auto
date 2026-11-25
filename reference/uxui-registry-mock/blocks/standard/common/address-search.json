@@ -1,0 +1,162 @@
+{
+  "id": "BLK-0009",
+  "key": "address-search",
+  "name": "주소 검색",
+  "tier": "standard",
+  "category": "common",
+  "version": "1.1.0",
+  "status": "active",
+  "owner": "박지훈",
+  "tags": [
+    "주소",
+    "검색",
+    "배송"
+  ],
+  "description": "도로명·지번으로 주소를 찾고 상세 주소를 입력한다.",
+  "context": "배송지 등록, 매장 위치 입력.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "검색창",
+    "결과 목록",
+    "상세 주소 입력"
+  ],
+  "a11y": {
+    "reviewed": false
+  },
+  "docs_completeness": 70,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "423:3404",
+    "file": "UXUI Standard Patterns",
+    "page": "공통 모듈",
+    "synced_at": "2026-11-04",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=423-3404"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "배송지 등록, 매장 위치 입력.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/AddressSearch",
+    "type": "COMPONENT",
+    "figma_file_version": "v1906",
+    "extracted_at": "2026-11-04",
+    "props": [
+      {
+        "name": "검색창",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "결과 목록",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "상세 주소 입력",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [],
+    "tokens": {
+      "color": [
+        "color/border/default",
+        "color/status/danger",
+        "color/bg/surface",
+        "color/text/primary"
+      ],
+      "spacing": [
+        "space/24",
+        "space/12"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/caption/s",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [
+      {
+        "prop": "fill",
+        "value": "#FF5A36",
+        "layer": "배지"
+      },
+      {
+        "prop": "font-size",
+        "value": "13px",
+        "layer": "설명"
+      },
+      {
+        "prop": "gap",
+        "value": "10px",
+        "layer": "콘텐츠"
+      }
+    ],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0004",
+      "BLK-0012"
+    ],
+    "interactions": [],
+    "readiness": 80
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P08",
+      "range": "^1",
+      "screens": 2
+    },
+    {
+      "project": "P04",
+      "range": "^1",
+      "screens": 4
+    },
+    {
+      "project": "P05",
+      "range": "^1",
+      "screens": 1
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-05-19",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "4d023be"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-07-18",
+      "author": "박지훈",
+      "summary": "'상세 주소 입력' 슬롯 추가",
+      "commit": "4537588"
+    }
+  ]
+}

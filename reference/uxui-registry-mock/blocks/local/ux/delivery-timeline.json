@@ -1,0 +1,163 @@
+{
+  "id": "BLK-0023",
+  "key": "delivery-timeline",
+  "name": "배송 추적 타임라인",
+  "tier": "local",
+  "category": "ux",
+  "version": "0.2.1",
+  "status": "active",
+  "owner": "정민호",
+  "project": "P04",
+  "tags": [
+    "배송",
+    "주문"
+  ],
+  "description": "주문 이후 배송 단계를 세로 타임라인으로 보여준다.",
+  "context": "주문 상세, 배송 조회.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "단계 점",
+    "단계명",
+    "시각",
+    "현재 위치"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 80,
+  "figma": {
+    "file_key": "Lp8BE62DPrj",
+    "node_id": "1712:3721",
+    "file": "배달 주문 앱 · 화면설계",
+    "page": "UX 패턴",
+    "synced_at": "2026-11-05",
+    "url": "https://www.figma.com/design/Lp8BE62DPrj/%EB%B0%B0%EB%8B%AC-%EC%A3%BC%EB%AC%B8-%EC%95%B1-%C2%B7-%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84?node-id=1712-3721"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "주문 상세, 배송 조회.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/DeliveryTimeline",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1784",
+    "extracted_at": "2026-11-05",
+    "props": [
+      {
+        "name": "단계 점",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "단계명",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "시각",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "현재 위치",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [
+      {
+        "name": "단계",
+        "values": [
+          "접수",
+          "준비",
+          "배달 중",
+          "완료"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/brand/primary",
+        "color/bg/subtle",
+        "color/border/default",
+        "color/text/primary"
+      ],
+      "spacing": [
+        "space/12",
+        "space/16"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/caption/s"
+      ]
+    },
+    "hardcoded": [
+      {
+        "prop": "fill",
+        "value": "#FF5A36",
+        "layer": "배지"
+      }
+    ],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P04",
+      "range": "^0",
+      "screens": 3
+    }
+  ],
+  "history": [
+    {
+      "version": "0.1.0",
+      "level": "INIT",
+      "date": "2026-10-10",
+      "author": "이수진",
+      "summary": "프로젝트 블록 최초 등록",
+      "commit": "ecb0f13"
+    },
+    {
+      "version": "0.2.0",
+      "level": "MINOR",
+      "date": "2026-10-20",
+      "author": "이수진",
+      "summary": "'현재 위치' 슬롯 추가",
+      "commit": "af854c8"
+    },
+    {
+      "version": "0.2.1",
+      "level": "PATCH",
+      "date": "2026-10-30",
+      "author": "정민호",
+      "summary": "설명·태그 보완",
+      "commit": "b0854e1"
+    }
+  ]
+}

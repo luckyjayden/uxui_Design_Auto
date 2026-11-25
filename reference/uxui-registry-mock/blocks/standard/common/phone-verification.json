@@ -1,0 +1,183 @@
+{
+  "id": "BLK-0008",
+  "key": "phone-verification",
+  "name": "휴대폰 본인인증",
+  "tier": "standard",
+  "category": "common",
+  "version": "1.1.0",
+  "status": "active",
+  "owner": "박지훈",
+  "tags": [
+    "인증",
+    "가입"
+  ],
+  "description": "휴대폰 번호로 인증번호를 받아 본인을 확인한다.",
+  "context": "가입, 비밀번호 재설정, 고액 결제.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "휴대폰 번호",
+    "인증 요청",
+    "인증번호 입력",
+    "재전송 타이머"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 85,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "322:4612",
+    "file": "UXUI Standard Patterns",
+    "page": "공통 모듈",
+    "synced_at": "2026-11-03",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=322-4612"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "가입, 비밀번호 재설정, 고액 결제.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/PhoneVerification",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1714",
+    "extracted_at": "2026-11-03",
+    "props": [
+      {
+        "name": "휴대폰 번호",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "인증 요청",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "인증번호 입력",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "재전송 타이머",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [
+      {
+        "name": "단계",
+        "values": [
+          "번호 입력",
+          "인증번호 입력"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/bg/surface",
+        "color/text/primary",
+        "color/bg/subtle",
+        "color/status/danger"
+      ],
+      "spacing": [
+        "space/16",
+        "space/12"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/body/m",
+        "type/title/m"
+      ]
+    },
+    "hardcoded": [
+      {
+        "prop": "fill",
+        "value": "#FF5A36",
+        "layer": "배지"
+      },
+      {
+        "prop": "font-size",
+        "value": "13px",
+        "layer": "설명"
+      }
+    ],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0004",
+      "BLK-0003"
+    ],
+    "interactions": [],
+    "readiness": 80
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P08",
+      "range": "^1",
+      "screens": 1
+    },
+    {
+      "project": "P07",
+      "range": "^1",
+      "screens": 1
+    },
+    {
+      "project": "P06",
+      "range": "^1",
+      "screens": 3
+    },
+    {
+      "project": "P05",
+      "range": "^1",
+      "screens": 4
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-05-20",
+      "author": "박지훈",
+      "summary": "최초 등록",
+      "commit": "89fc4f4"
+    },
+    {
+      "version": "1.0.1",
+      "level": "PATCH",
+      "date": "2026-07-09",
+      "author": "박지훈",
+      "summary": "설명·태그 보완",
+      "commit": "8afc50d"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-08-28",
+      "author": "박지훈",
+      "summary": "'재전송 타이머' 슬롯 추가",
+      "commit": "70d97db"
+    }
+  ]
+}

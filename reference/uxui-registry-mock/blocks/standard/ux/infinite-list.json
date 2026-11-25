@@ -1,0 +1,194 @@
+{
+  "id": "BLK-0013",
+  "key": "infinite-list",
+  "name": "무한 스크롤 목록",
+  "tier": "standard",
+  "category": "ux",
+  "version": "2.0.0",
+  "status": "active",
+  "owner": "박지훈",
+  "tags": [
+    "목록",
+    "로딩",
+    "페이지네이션"
+  ],
+  "description": "스크롤 끝에서 다음 페이지를 자동으로 불러온다.",
+  "context": "피드, 상품 목록, 알림 목록.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "목록 항목",
+    "로딩 표시",
+    "끝 안내",
+    "맨 위로"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 90,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "1782:3932",
+    "file": "UXUI Standard Patterns",
+    "page": "UX 패턴",
+    "synced_at": "2026-11-05",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=1782-3932"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "피드, 상품 목록, 알림 목록.",
+    "avoid": "정렬 순서가 중요한 결제·정산 내역에는 페이지 번호형 목록을 쓴다.",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": "박지훈"
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/InfiniteList",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1815",
+    "extracted_at": "2026-11-05",
+    "props": [
+      {
+        "name": "목록 항목",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "로딩 표시",
+        "type": "BOOLEAN",
+        "default": "false"
+      },
+      {
+        "name": "끝 안내",
+        "type": "BOOLEAN",
+        "default": "false"
+      },
+      {
+        "name": "맨 위로",
+        "type": "BOOLEAN",
+        "default": "false"
+      }
+    ],
+    "variants": [
+      {
+        "name": "상태",
+        "values": [
+          "불러오는 중",
+          "끝"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/bg/surface",
+        "color/status/danger",
+        "color/border/default",
+        "color/text/primary"
+      ],
+      "spacing": [
+        "space/8",
+        "space/12"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/caption/s"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0012"
+    ],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/blocks",
+    "component": "InfiniteList",
+    "path": "packages/blocks/src/InfiniteList/InfiniteList.tsx",
+    "props": {
+      "목록 항목": "renderItem",
+      "로딩 표시": "loading",
+      "끝 안내": "endMessage",
+      "맨 위로": "showScrollTop"
+    }
+  },
+  "references": [
+    {
+      "project": "P03",
+      "range": "^2",
+      "screens": 4
+    },
+    {
+      "project": "P02",
+      "range": "^2",
+      "screens": 3
+    },
+    {
+      "project": "P01",
+      "range": "^2",
+      "screens": 3
+    },
+    {
+      "project": "P07",
+      "range": "^2",
+      "screens": 5
+    },
+    {
+      "project": "P06",
+      "range": "^1",
+      "screens": 7
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-05-16",
+      "author": "박지훈",
+      "summary": "최초 등록",
+      "commit": "a197d29"
+    },
+    {
+      "version": "1.0.1",
+      "level": "PATCH",
+      "date": "2026-06-30",
+      "author": "박지훈",
+      "summary": "설명·태그 보완",
+      "commit": "a297d43"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-08-14",
+      "author": "박지훈",
+      "summary": "'레거시 목록 항목' 슬롯 추가",
+      "commit": "87d59d4"
+    },
+    {
+      "version": "2.0.0",
+      "level": "MAJOR",
+      "date": "2026-09-28",
+      "author": "박지훈",
+      "summary": "슬롯 구조 개편 ('레거시 목록 항목' 제거)",
+      "commit": "9d79fb0"
+    }
+  ]
+}

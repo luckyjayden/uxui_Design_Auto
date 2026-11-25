@@ -1,0 +1,231 @@
+{
+  "id": "BLK-0001",
+  "key": "global-header",
+  "name": "글로벌 헤더",
+  "tier": "core",
+  "category": "common",
+  "version": "2.1.0",
+  "status": "active",
+  "owner": "이수진",
+  "tags": [
+    "내비게이션",
+    "상단",
+    "필수"
+  ],
+  "description": "모든 화면 상단에 고정되는 헤더. 뒤로가기, 타이틀, 우측 액션 영역으로 구성한다.",
+  "context": "서비스 전 화면 공통. 스크롤 시 고정 여부는 화면 유형별로 지정한다.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "로고",
+    "뒤로가기",
+    "타이틀",
+    "우측 액션",
+    "검색"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 100,
+  "figma": {
+    "file_key": "Kc8Rz2LqUXUICore",
+    "node_id": "505:8845",
+    "file": "UXUI Core Library",
+    "page": "공통 모듈",
+    "synced_at": "2026-11-05",
+    "url": "https://www.figma.com/design/Kc8Rz2LqUXUICore/UXUI-Core-Library?node-id=505-8845"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "서비스 전 화면 공통. 스크롤 시 고정 여부는 화면 유형별로 지정한다.",
+    "avoid": "전체 화면 미디어 뷰어에서는 헤더를 숨긴다.",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": "이수진"
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/GlobalHeader",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1720",
+    "extracted_at": "2026-11-05",
+    "props": [
+      {
+        "name": "로고",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "뒤로가기",
+        "type": "BOOLEAN",
+        "default": "false"
+      },
+      {
+        "name": "타이틀",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "우측 액션",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "검색",
+        "type": "BOOLEAN",
+        "default": "false"
+      }
+    ],
+    "variants": [
+      {
+        "name": "유형",
+        "values": [
+          "메인",
+          "서브"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/brand/primary",
+        "color/status/danger",
+        "color/bg/surface",
+        "color/text/primary"
+      ],
+      "spacing": [
+        "space/24",
+        "space/12"
+      ],
+      "radius": [
+        "radius/8"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "가로",
+      "gap": "space/8",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "FIXED 56",
+      "position": "상단 고정",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/core",
+    "component": "GlobalHeader",
+    "path": "packages/core/src/GlobalHeader/GlobalHeader.tsx",
+    "props": {
+      "로고": "logo",
+      "뒤로가기": "showBack",
+      "타이틀": "title",
+      "우측 액션": "actions",
+      "검색": "showSearch"
+    }
+  },
+  "references": [
+    {
+      "project": "P04",
+      "range": "^2",
+      "screens": 7
+    },
+    {
+      "project": "P05",
+      "range": "^2",
+      "screens": 6
+    },
+    {
+      "project": "P06",
+      "range": "^2",
+      "screens": 7
+    },
+    {
+      "project": "P07",
+      "range": "^2",
+      "screens": 5
+    },
+    {
+      "project": "P01",
+      "range": "^2",
+      "screens": 3
+    },
+    {
+      "project": "P02",
+      "range": "^2",
+      "screens": 8
+    },
+    {
+      "project": "P03",
+      "range": "^2",
+      "screens": 3
+    },
+    {
+      "project": "P08",
+      "range": "^1",
+      "screens": 7
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-02-17",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "bf2ca72"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-04-03",
+      "author": "이수진",
+      "summary": "'타이틀' 슬롯 추가",
+      "commit": "58ee130"
+    },
+    {
+      "version": "1.2.0",
+      "level": "MINOR",
+      "date": "2026-05-18",
+      "author": "이수진",
+      "summary": "'레거시 로고' 슬롯 추가",
+      "commit": "6a1b656"
+    },
+    {
+      "version": "2.0.0",
+      "level": "MAJOR",
+      "date": "2026-07-02",
+      "author": "이수진",
+      "summary": "슬롯 구조 개편 ('레거시 로고' 제거)",
+      "commit": "ebac45a"
+    },
+    {
+      "version": "2.0.1",
+      "level": "PATCH",
+      "date": "2026-08-16",
+      "author": "이수진",
+      "summary": "설명·태그 보완",
+      "commit": "ecac473"
+    },
+    {
+      "version": "2.1.0",
+      "level": "MINOR",
+      "date": "2026-09-30",
+      "author": "이수진",
+      "summary": "'검색' 슬롯 추가",
+      "commit": "d289740"
+    }
+  ]
+}

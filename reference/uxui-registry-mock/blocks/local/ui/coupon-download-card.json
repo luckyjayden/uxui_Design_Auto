@@ -1,0 +1,166 @@
+{
+  "id": "BLK-0022",
+  "key": "coupon-download-card",
+  "name": "쿠폰 다운로드 카드",
+  "tier": "local",
+  "category": "ui",
+  "version": "0.2.0",
+  "status": "active",
+  "owner": "김서연",
+  "project": "P01",
+  "tags": [
+    "쿠폰",
+    "혜택"
+  ],
+  "description": "쿠폰 혜택과 조건을 보여주고 바로 내려받게 한다.",
+  "context": "상품 상세, 기획전.",
+  "platforms": [
+    "iOS",
+    "Android"
+  ],
+  "slots": [
+    "할인 금액",
+    "사용 조건",
+    "다운로드 버튼",
+    "유효기간"
+  ],
+  "a11y": {
+    "reviewed": false
+  },
+  "docs_completeness": 60,
+  "figma": {
+    "file_key": "Lp8EE632Prj",
+    "node_id": "751:2688",
+    "file": "커머스 앱 리뉴얼 · 화면설계",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-03",
+    "url": "https://www.figma.com/design/Lp8EE632Prj/%EC%BB%A4%EB%A8%B8%EC%8A%A4-%EC%95%B1-%EB%A6%AC%EB%89%B4%EC%96%BC-%C2%B7-%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84?node-id=751-2688"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "상품 상세, 기획전.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/CouponDownloadCard",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1756",
+    "extracted_at": "2026-11-03",
+    "props": [
+      {
+        "name": "할인 금액",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "사용 조건",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "다운로드 버튼",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "유효기간",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [
+      {
+        "name": "상태",
+        "values": [
+          "받기 전",
+          "받음",
+          "소진"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/text/secondary",
+        "color/border/default",
+        "color/brand/primary",
+        "color/bg/surface"
+      ],
+      "spacing": [
+        "space/24",
+        "space/16"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/caption/s"
+      ]
+    },
+    "hardcoded": [
+      {
+        "prop": "fill",
+        "value": "#FF5A36",
+        "layer": "배지"
+      },
+      {
+        "prop": "font-size",
+        "value": "13px",
+        "layer": "설명"
+      }
+    ],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0003"
+    ],
+    "interactions": [
+      {
+        "layer": "다운로드 버튼",
+        "trigger": "탭",
+        "action": "동작 실행"
+      }
+    ],
+    "readiness": 80
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P01",
+      "range": "^0",
+      "screens": 4
+    }
+  ],
+  "history": [
+    {
+      "version": "0.1.0",
+      "level": "INIT",
+      "date": "2026-10-10",
+      "author": "김서연",
+      "summary": "프로젝트 블록 최초 등록",
+      "commit": "17444df"
+    },
+    {
+      "version": "0.2.0",
+      "level": "MINOR",
+      "date": "2026-10-24",
+      "author": "김서연",
+      "summary": "'유효기간' 슬롯 추가",
+      "commit": "f41fa9a"
+    }
+  ]
+}

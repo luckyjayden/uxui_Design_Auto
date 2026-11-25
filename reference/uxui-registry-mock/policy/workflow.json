@@ -1,0 +1,77 @@
+{
+  "request_types": {
+    "new": "가이드 외 요소 신규 등록",
+    "version": "표준·Core 블록 버전 변경",
+    "promote": "표준 블록 Core 승격"
+  },
+  "states": [
+    "requested",
+    "review",
+    "approved",
+    "rejected",
+    "done"
+  ],
+  "transitions": [
+    {
+      "from": "requested",
+      "to": "review",
+      "when": "1단계 승인, 다음 단계 남음"
+    },
+    {
+      "from": [
+        "requested",
+        "review"
+      ],
+      "to": "approved",
+      "when": "type=new 의 모든 단계 승인 (표준 반영 대기)"
+    },
+    {
+      "from": [
+        "requested",
+        "review"
+      ],
+      "to": "done",
+      "when": "type=version|promote 의 모든 단계 승인, 즉시 반영"
+    },
+    {
+      "from": "approved",
+      "to": "done",
+      "when": "관리자가 표준 반영 체크리스트 완료"
+    },
+    {
+      "from": [
+        "requested",
+        "review"
+      ],
+      "to": "rejected",
+      "when": "반려, 사유 필수"
+    },
+    {
+      "from": "rejected",
+      "to": "requested",
+      "when": "요청자가 보완 후 재요청 (resubmit_of 연결)"
+    }
+  ],
+  "steps": {
+    "new": [
+      "approver"
+    ],
+    "version": "policy/version-approval.json 로 결정",
+    "promote": [
+      "admin"
+    ]
+  },
+  "reflect_checklist": [
+    "피그마 Standard Patterns 라이브러리 게시",
+    "blocks/local → blocks/standard 이동",
+    "가이드 문서 작성"
+  ],
+  "notifications": {
+    "on_request": "첫 단계 역할",
+    "on_step_done": "다음 단계 역할 + 요청자",
+    "on_reject": "요청자",
+    "on_done": "요청자",
+    "on_major": "참조 프로젝트 담당자",
+    "on_figma_change": "블록 담당자"
+  }
+}

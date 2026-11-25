@@ -1,0 +1,150 @@
+{
+  "id": "BLK-0021",
+  "key": "review-card",
+  "name": "리뷰 카드",
+  "tier": "standard",
+  "category": "ui",
+  "version": "1.1.0",
+  "status": "active",
+  "owner": "박지훈",
+  "tags": [
+    "리뷰",
+    "평점",
+    "UGC"
+  ],
+  "description": "작성자·별점·본문·사진으로 구성된 리뷰 한 건.",
+  "context": "상품 상세 리뷰 영역.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "작성자",
+    "별점",
+    "본문",
+    "사진"
+  ],
+  "a11y": {
+    "reviewed": false
+  },
+  "docs_completeness": 70,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "1113:2112",
+    "file": "UXUI Standard Patterns",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-05",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=1113-2112"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "상품 상세 리뷰 영역.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/ReviewCard",
+    "type": "COMPONENT",
+    "figma_file_version": "v1998",
+    "extracted_at": "2026-11-05",
+    "props": [
+      {
+        "name": "작성자",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "별점",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "본문",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "사진",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      }
+    ],
+    "variants": [],
+    "tokens": {
+      "color": [
+        "color/text/primary",
+        "color/text/secondary",
+        "color/brand/primary",
+        "color/bg/surface"
+      ],
+      "spacing": [
+        "space/12",
+        "space/16"
+      ],
+      "radius": [
+        "radius/8"
+      ],
+      "typography": [
+        "type/caption/s",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [
+      {
+        "prop": "fill",
+        "value": "#FF5A36",
+        "layer": "배지"
+      }
+    ],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": false
+    },
+    "instances": [],
+    "interactions": [],
+    "readiness": 80
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P02",
+      "range": "^1",
+      "screens": 3
+    },
+    {
+      "project": "P03",
+      "range": "^1",
+      "screens": 2
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-05-23",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "9e7efb5"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-07-22",
+      "author": "박지훈",
+      "summary": "'사진' 슬롯 추가",
+      "commit": "3840673"
+    }
+  ]
+}

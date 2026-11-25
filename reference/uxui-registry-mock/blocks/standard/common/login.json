@@ -1,0 +1,176 @@
+{
+  "id": "BLK-0011",
+  "key": "login",
+  "name": "로그인",
+  "tier": "standard",
+  "category": "common",
+  "version": "1.1.1",
+  "status": "active",
+  "owner": "박지훈",
+  "tags": [
+    "인증",
+    "로그인"
+  ],
+  "description": "아이디·비밀번호와 간편 로그인을 함께 제공한다.",
+  "context": "서비스 진입, 세션 만료 후 재로그인.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "아이디",
+    "비밀번호",
+    "자동 로그인",
+    "간편 로그인"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 95,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "245:2598",
+    "file": "UXUI Standard Patterns",
+    "page": "공통 모듈",
+    "synced_at": "2026-11-05",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=245-2598"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "서비스 진입, 세션 만료 후 재로그인.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/Login",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1762",
+    "extracted_at": "2026-11-05",
+    "props": [
+      {
+        "name": "아이디",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "비밀번호",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "자동 로그인",
+        "type": "BOOLEAN",
+        "default": "false"
+      },
+      {
+        "name": "간편 로그인",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [
+      {
+        "name": "유형",
+        "values": [
+          "기본",
+          "간편 로그인만"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/text/secondary",
+        "color/status/danger",
+        "color/text/primary",
+        "color/bg/surface"
+      ],
+      "spacing": [
+        "space/24",
+        "space/12"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/caption/s"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0004",
+      "BLK-0003"
+    ],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/blocks",
+    "component": "LoginForm",
+    "path": "packages/blocks/src/LoginForm/LoginForm.tsx",
+    "props": {
+      "아이디": "username",
+      "비밀번호": "password",
+      "자동 로그인": "keepSignedIn",
+      "간편 로그인": "socialProviders"
+    }
+  },
+  "references": [
+    {
+      "project": "P08",
+      "range": "^1",
+      "screens": 3
+    },
+    {
+      "project": "P01",
+      "range": "^1",
+      "screens": 2
+    },
+    {
+      "project": "P03",
+      "range": "^1",
+      "screens": 6
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-05-08",
+      "author": "박지훈",
+      "summary": "최초 등록",
+      "commit": "ebbe0af"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-07-07",
+      "author": "박지훈",
+      "summary": "'간편 로그인' 슬롯 추가",
+      "commit": "f24bb9d"
+    },
+    {
+      "version": "1.1.1",
+      "level": "PATCH",
+      "date": "2026-09-05",
+      "author": "박지훈",
+      "summary": "설명·태그 보완",
+      "commit": "f14bb84"
+    }
+  ]
+}

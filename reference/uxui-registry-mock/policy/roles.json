@@ -1,0 +1,13 @@
+{
+  "roles": {
+    "requester": "요청자",
+    "approver": "승인자",
+    "admin": "관리자"
+  },
+  "members": {
+    "김서연": "requester",
+    "정민호": "requester",
+    "박지훈": "approver",
+    "이수진": "admin"
+  }
+}

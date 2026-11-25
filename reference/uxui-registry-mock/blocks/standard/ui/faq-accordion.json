@@ -1,0 +1,148 @@
+{
+  "id": "BLK-0019",
+  "key": "faq-accordion",
+  "name": "FAQ 아코디언",
+  "tier": "standard",
+  "category": "ui",
+  "version": "1.0.1",
+  "status": "active",
+  "owner": "박지훈",
+  "tags": [
+    "FAQ",
+    "펼침"
+  ],
+  "description": "질문을 누르면 답변이 펼쳐지는 목록.",
+  "context": "고객센터, 상품 상세 하단.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "질문",
+    "답변",
+    "펼침 표시"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 80,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "1672:3152",
+    "file": "UXUI Standard Patterns",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-04",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=1672-3152"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "고객센터, 상품 상세 하단.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/FaqAccordion",
+    "type": "COMPONENT",
+    "figma_file_version": "v1730",
+    "extracted_at": "2026-11-04",
+    "props": [
+      {
+        "name": "질문",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "답변",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "펼침 표시",
+        "type": "BOOLEAN",
+        "default": "false"
+      }
+    ],
+    "variants": [],
+    "tokens": {
+      "color": [
+        "color/text/secondary",
+        "color/bg/surface",
+        "color/brand/primary",
+        "color/status/danger"
+      ],
+      "spacing": [
+        "space/24",
+        "space/8"
+      ],
+      "radius": [
+        "radius/8"
+      ],
+      "typography": [
+        "type/caption/s",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [
+      {
+        "prop": "fill",
+        "value": "#FF5A36",
+        "layer": "배지"
+      }
+    ],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P01",
+      "range": "^1",
+      "screens": 2
+    },
+    {
+      "project": "P03",
+      "range": "^1",
+      "screens": 2
+    },
+    {
+      "project": "P02",
+      "range": "^1",
+      "screens": 2
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-06-02",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "87119ea"
+    },
+    {
+      "version": "1.0.1",
+      "level": "PATCH",
+      "date": "2026-08-01",
+      "author": "박지훈",
+      "summary": "설명·태그 보완",
+      "commit": "8811a03"
+    }
+  ]
+}

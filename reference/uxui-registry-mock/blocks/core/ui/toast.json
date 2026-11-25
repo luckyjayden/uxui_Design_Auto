@@ -1,0 +1,186 @@
+{
+  "id": "BLK-0006",
+  "key": "toast",
+  "name": "토스트",
+  "tier": "core",
+  "category": "ui",
+  "version": "1.1.0",
+  "status": "active",
+  "owner": "이수진",
+  "tags": [
+    "피드백",
+    "알림"
+  ],
+  "description": "작업 결과를 짧게 알리고 3초 뒤 사라지는 메시지.",
+  "context": "저장, 복사, 장바구니 담기 등 결과 확인.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "메시지",
+    "액션 링크"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 100,
+  "figma": {
+    "file_key": "Kc8Rz2LqUXUICore",
+    "node_id": "1744:6573",
+    "file": "UXUI Core Library",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-04",
+    "url": "https://www.figma.com/design/Kc8Rz2LqUXUICore/UXUI-Core-Library?node-id=1744-6573"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "저장, 복사, 장바구니 담기 등 결과 확인.",
+    "avoid": "사용자가 행동해야 하는 오류 안내에는 쓰지 않는다. 다이얼로그나 인라인 메시지를 쓴다.",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": "이수진"
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/Toast",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1853",
+    "extracted_at": "2026-11-04",
+    "props": [
+      {
+        "name": "메시지",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "액션 링크",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [
+      {
+        "name": "유형",
+        "values": [
+          "기본",
+          "오류"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/brand/primary",
+        "color/bg/subtle",
+        "color/status/danger",
+        "color/text/primary"
+      ],
+      "spacing": [
+        "space/8",
+        "space/12"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/caption/s",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "가로",
+      "gap": "space/8",
+      "padding": "space/12",
+      "width": "FILL",
+      "height": "HUG",
+      "position": "하단 오버레이",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [
+      {
+        "layer": "액션 링크",
+        "trigger": "탭",
+        "action": "화면 이동"
+      }
+    ],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/core",
+    "component": "Toast",
+    "path": "packages/core/src/Toast/Toast.tsx",
+    "props": {
+      "메시지": "message",
+      "액션 링크": "action"
+    }
+  },
+  "references": [
+    {
+      "project": "P08",
+      "range": "^1",
+      "screens": 4
+    },
+    {
+      "project": "P01",
+      "range": "^1",
+      "screens": 4
+    },
+    {
+      "project": "P03",
+      "range": "^1",
+      "screens": 5
+    },
+    {
+      "project": "P02",
+      "range": "^1",
+      "screens": 5
+    },
+    {
+      "project": "P05",
+      "range": "^1",
+      "screens": 2
+    },
+    {
+      "project": "P04",
+      "range": "^1",
+      "screens": 4
+    },
+    {
+      "project": "P07",
+      "range": "^1",
+      "screens": 3
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-02-25",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "bf437c4"
+    },
+    {
+      "version": "1.0.1",
+      "level": "PATCH",
+      "date": "2026-04-26",
+      "author": "이수진",
+      "summary": "설명·태그 보완",
+      "commit": "c0437dd"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-06-25",
+      "author": "이수진",
+      "summary": "피그마 원본 디자인 변경 반영",
+      "commit": "c70e5fa"
+    }
+  ]
+}

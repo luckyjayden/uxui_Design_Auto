@@ -1,0 +1,159 @@
+{
+  "id": "BLK-0016",
+  "key": "search-suggest",
+  "name": "검색 자동완성",
+  "tier": "standard",
+  "category": "ux",
+  "version": "1.1.1",
+  "status": "active",
+  "owner": "박지훈",
+  "tags": [
+    "검색",
+    "추천"
+  ],
+  "description": "입력 중 추천 검색어와 최근 검색어를 보여준다.",
+  "context": "통합 검색, 상품 검색.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "검색창",
+    "최근 검색어",
+    "추천 검색어",
+    "일치 강조"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 80,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "1573:6902",
+    "file": "UXUI Standard Patterns",
+    "page": "UX 패턴",
+    "synced_at": "2026-11-04",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=1573-6902"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "통합 검색, 상품 검색.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/SearchSuggest",
+    "type": "COMPONENT",
+    "figma_file_version": "v1915",
+    "extracted_at": "2026-11-04",
+    "props": [
+      {
+        "name": "검색창",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "최근 검색어",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "추천 검색어",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "일치 강조",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [],
+    "tokens": {
+      "color": [
+        "color/brand/primary",
+        "color/text/primary",
+        "color/status/danger",
+        "color/bg/surface"
+      ],
+      "spacing": [
+        "space/24",
+        "space/12"
+      ],
+      "radius": [
+        "radius/8"
+      ],
+      "typography": [
+        "type/caption/s",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0004",
+      "BLK-0012"
+    ],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P04",
+      "range": "^1",
+      "screens": 5
+    },
+    {
+      "project": "P05",
+      "range": "^1",
+      "screens": 3
+    },
+    {
+      "project": "P06",
+      "range": "^1",
+      "screens": 7
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-06-12",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "77ae2c9"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-08-01",
+      "author": "박지훈",
+      "summary": "'일치 강조' 슬롯 추가",
+      "commit": "10d1c7b"
+    },
+    {
+      "version": "1.1.1",
+      "level": "PATCH",
+      "date": "2026-09-20",
+      "author": "박지훈",
+      "summary": "설명·태그 보완",
+      "commit": "11d1c94"
+    }
+  ]
+}

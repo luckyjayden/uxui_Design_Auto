@@ -1,0 +1,205 @@
+{
+  "id": "BLK-0010",
+  "key": "payment-method",
+  "name": "결제 수단 선택",
+  "tier": "standard",
+  "category": "common",
+  "version": "1.4.2",
+  "status": "active",
+  "owner": "이수진",
+  "tags": [
+    "결제",
+    "주문"
+  ],
+  "description": "결제 수단을 고르고 수단별 혜택을 보여준다.",
+  "context": "주문서 결제 영역.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "카드",
+    "간편결제",
+    "계좌이체",
+    "무통장 입금",
+    "혜택 표시"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 90,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "1674:6396",
+    "file": "UXUI Standard Patterns",
+    "page": "공통 모듈",
+    "synced_at": "2026-11-05",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=1674-6396"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "주문서 결제 영역.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/PaymentMethod",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1766",
+    "extracted_at": "2026-11-05",
+    "props": [
+      {
+        "name": "카드",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "간편결제",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "계좌이체",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "무통장 입금",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "혜택 표시",
+        "type": "BOOLEAN",
+        "default": "false"
+      }
+    ],
+    "variants": [
+      {
+        "name": "상태",
+        "values": [
+          "기본",
+          "선택됨",
+          "사용 불가"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/bg/subtle",
+        "color/text/secondary",
+        "color/text/primary",
+        "color/bg/surface"
+      ],
+      "spacing": [
+        "space/12",
+        "space/24"
+      ],
+      "radius": [
+        "radius/8"
+      ],
+      "typography": [
+        "type/caption/s",
+        "type/title/m"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0003"
+    ],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P08",
+      "range": "^1",
+      "screens": 5
+    },
+    {
+      "project": "P06",
+      "range": "^1",
+      "screens": 4
+    },
+    {
+      "project": "P07",
+      "range": "^1",
+      "screens": 3
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-05-05",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "49442a2"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-06-02",
+      "author": "이수진",
+      "summary": "피그마 원본 디자인 변경 반영",
+      "commit": "4266c96"
+    },
+    {
+      "version": "1.2.0",
+      "level": "MINOR",
+      "date": "2026-06-30",
+      "author": "이수진",
+      "summary": "'계좌이체' 슬롯 추가",
+      "commit": "9f42ee9"
+    },
+    {
+      "version": "1.3.0",
+      "level": "MINOR",
+      "date": "2026-07-28",
+      "author": "이수진",
+      "summary": "'무통장 입금' 슬롯 추가",
+      "commit": "98b53fb"
+    },
+    {
+      "version": "1.4.0",
+      "level": "MINOR",
+      "date": "2026-08-25",
+      "author": "이수진",
+      "summary": "'혜택 표시' 슬롯 추가",
+      "commit": "f59164e"
+    },
+    {
+      "version": "1.4.1",
+      "level": "PATCH",
+      "date": "2026-09-22",
+      "author": "이수진",
+      "summary": "설명·태그 보완",
+      "commit": "f491634"
+    },
+    {
+      "version": "1.4.2",
+      "level": "PATCH",
+      "date": "2026-10-20",
+      "author": "이수진",
+      "summary": "혜택 문구 길이 제한 보완",
+      "commit": "f39161b"
+    }
+  ]
+}

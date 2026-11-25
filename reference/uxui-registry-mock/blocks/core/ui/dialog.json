@@ -1,0 +1,220 @@
+{
+  "id": "BLK-0005",
+  "key": "dialog",
+  "name": "다이얼로그",
+  "tier": "core",
+  "category": "ui",
+  "version": "2.0.1",
+  "status": "active",
+  "owner": "이수진",
+  "tags": [
+    "확인",
+    "중단"
+  ],
+  "description": "사용자의 확인이 필요한 행동을 중단시키고 결정을 받는 창.",
+  "context": "삭제, 결제 취소처럼 되돌릴 수 없는 행동 직전.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "제목",
+    "본문",
+    "주 버튼",
+    "보조 버튼"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 100,
+  "figma": {
+    "file_key": "Kc8Rz2LqUXUICore",
+    "node_id": "1871:3200",
+    "file": "UXUI Core Library",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-04",
+    "url": "https://www.figma.com/design/Kc8Rz2LqUXUICore/UXUI-Core-Library?node-id=1871-3200"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "삭제, 결제 취소처럼 되돌릴 수 없는 행동 직전.",
+    "avoid": "단순 결과 안내에는 쓰지 않는다. 토스트를 쓴다.",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": "이수진"
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/Dialog",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1988",
+    "extracted_at": "2026-11-04",
+    "props": [
+      {
+        "name": "제목",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "본문",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "주 버튼",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "보조 버튼",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      }
+    ],
+    "variants": [
+      {
+        "name": "유형",
+        "values": [
+          "확인",
+          "선택"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/text/primary",
+        "color/brand/primary",
+        "color/border/default",
+        "color/bg/subtle"
+      ],
+      "spacing": [
+        "space/8",
+        "space/16"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/caption/s",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/16",
+      "padding": "space/24",
+      "width": "FIXED 312",
+      "height": "HUG",
+      "position": "중앙 오버레이",
+      "autoLayout": true
+    },
+    "instances": [
+      "BLK-0003"
+    ],
+    "interactions": [
+      {
+        "layer": "주 버튼",
+        "trigger": "탭",
+        "action": "동작 실행"
+      },
+      {
+        "layer": "보조 버튼",
+        "trigger": "탭",
+        "action": "동작 실행"
+      }
+    ],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/core",
+    "component": "Dialog",
+    "path": "packages/core/src/Dialog/Dialog.tsx",
+    "props": {
+      "제목": "title",
+      "본문": "description",
+      "주 버튼": "primaryAction",
+      "보조 버튼": "secondaryAction"
+    }
+  },
+  "references": [
+    {
+      "project": "P08",
+      "range": "^2",
+      "screens": 6
+    },
+    {
+      "project": "P01",
+      "range": "^2",
+      "screens": 7
+    },
+    {
+      "project": "P02",
+      "range": "^2",
+      "screens": 5
+    },
+    {
+      "project": "P03",
+      "range": "^2",
+      "screens": 5
+    },
+    {
+      "project": "P04",
+      "range": "^2",
+      "screens": 2
+    },
+    {
+      "project": "P05",
+      "range": "^2",
+      "screens": 6
+    },
+    {
+      "project": "P06",
+      "range": "^2",
+      "screens": 3
+    },
+    {
+      "project": "P07",
+      "range": "^1",
+      "screens": 5
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-02-15",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "54aa4cc"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-04-11",
+      "author": "이수진",
+      "summary": "'레거시 제목' 슬롯 추가",
+      "commit": "ed2e842"
+    },
+    {
+      "version": "2.0.0",
+      "level": "MAJOR",
+      "date": "2026-06-05",
+      "author": "이수진",
+      "summary": "슬롯 구조 개편 ('레거시 제목' 제거)",
+      "commit": "58c8245"
+    },
+    {
+      "version": "2.0.1",
+      "level": "PATCH",
+      "date": "2026-07-30",
+      "author": "이수진",
+      "summary": "설명·태그 보완",
+      "commit": "59c825f"
+    }
+  ]
+}

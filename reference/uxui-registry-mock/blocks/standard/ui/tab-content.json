@@ -1,0 +1,168 @@
+{
+  "id": "BLK-0020",
+  "key": "tab-content",
+  "name": "탭 콘텐츠",
+  "tier": "standard",
+  "category": "ui",
+  "version": "2.1.0",
+  "status": "active",
+  "owner": "박지훈",
+  "tags": [
+    "탭",
+    "전환"
+  ],
+  "description": "같은 맥락의 콘텐츠를 탭으로 나눠 전환한다.",
+  "context": "상품 상세, 마이페이지.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "탭 목록",
+    "활성 표시",
+    "콘텐츠 영역"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 90,
+  "figma": {
+    "file_key": "Pt4mXnUXUIStd",
+    "node_id": "1553:8431",
+    "file": "UXUI Standard Patterns",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-03",
+    "url": "https://www.figma.com/design/Pt4mXnUXUIStd/UXUI-Standard-Patterns?node-id=1553-8431"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "상품 상세, 마이페이지.",
+    "avoid": "",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": null
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/TabContent",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1990",
+    "extracted_at": "2026-11-03",
+    "props": [
+      {
+        "name": "탭 목록",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "활성 표시",
+        "type": "BOOLEAN",
+        "default": "false"
+      },
+      {
+        "name": "콘텐츠 영역",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [
+      {
+        "name": "유형",
+        "values": [
+          "고정",
+          "스크롤"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/border/default",
+        "color/text/primary",
+        "color/status/danger",
+        "color/bg/surface"
+      ],
+      "spacing": [
+        "space/8",
+        "space/24"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/caption/s",
+        "type/title/m"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "connected": false
+  },
+  "references": [
+    {
+      "project": "P08",
+      "range": "^2",
+      "screens": 2
+    },
+    {
+      "project": "P05",
+      "range": "^2",
+      "screens": 3
+    },
+    {
+      "project": "P04",
+      "range": "^2",
+      "screens": 3
+    },
+    {
+      "project": "P07",
+      "range": "^2",
+      "screens": 7
+    },
+    {
+      "project": "P06",
+      "range": "^1",
+      "screens": 2
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-07-07",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "f3257d9"
+    },
+    {
+      "version": "2.0.0",
+      "level": "MAJOR",
+      "date": "2026-08-26",
+      "author": "이수진",
+      "summary": "슬롯 구조 개편 ('레거시 탭 목록' 제거)",
+      "commit": "335c09d"
+    },
+    {
+      "version": "2.1.0",
+      "level": "MINOR",
+      "date": "2026-10-15",
+      "author": "박지훈",
+      "summary": "'콘텐츠 영역' 슬롯 추가",
+      "commit": "4c7edb6"
+    }
+  ]
+}

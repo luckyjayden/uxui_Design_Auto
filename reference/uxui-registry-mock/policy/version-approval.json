@@ -1,0 +1,71 @@
+{
+  "scheme": "MAJOR.MINOR.PATCH",
+  "levels": {
+    "PATCH": {
+      "label": "Patch",
+      "meaning": "내용 보완, 화면 영향 없음",
+      "triggers": [
+        "설명·사용 맥락 수정",
+        "태그·플랫폼·접근성 표기 수정",
+        "동일 디자인의 피그마 노드 재매핑"
+      ],
+      "approval": {
+        "owner_or_admin": [],
+        "others": [
+          "approver"
+        ]
+      },
+      "notify": [
+        "approver(사후)"
+      ]
+    },
+    "MINOR": {
+      "label": "Minor",
+      "meaning": "화면이 바뀌지만 하위 호환",
+      "triggers": [
+        "슬롯·변형 추가",
+        "피그마 원본 디자인 변경 반영",
+        "블록명·분류 변경"
+      ],
+      "approval": {
+        "standard": [
+          "approver"
+        ],
+        "core": [
+          "approver",
+          "admin"
+        ]
+      },
+      "notify": [
+        "owner"
+      ]
+    },
+    "MAJOR": {
+      "label": "Major",
+      "meaning": "참조 중인 화면이 깨질 수 있는 비호환 변경",
+      "triggers": [
+        "슬롯 삭제·이름 변경",
+        "구조·동작 변경"
+      ],
+      "approval": {
+        "all": [
+          "approver",
+          "admin"
+        ]
+      },
+      "notify": [
+        "참조 프로젝트 전체"
+      ],
+      "grace_days": 90
+    }
+  },
+  "local_blocks": "프로젝트 블록(0.x)은 담당자가 자유롭게 수정, 승인 없음",
+  "rules": [
+    "변경 등급은 바뀐 필드로 시스템이 자동 판정하고, 작성자는 등급을 올릴 수만 있다(내릴 수 없음)",
+    "롤백은 과거 버전 내용을 복원한 새 버전으로 발행한다. 이력은 지우지 않는다",
+    "롤백은 결함 복구로 보고 Patch로 발행한다. 이전 Major 버전 내용으로 되돌릴 때만 Major로 발행한다",
+    "롤백은 관리자가 즉시 실행하고 승인자에게 사후 알림한다(장애 대응)",
+    "프로젝트는 Major 범위로 참조한다. ^2 는 2.x 를 자동 반영하고 3.0.0 은 직접 업그레이드한다",
+    "Major 발행 후 이전 Major 는 90일 동안 병행 유지한다"
+  ]
+}

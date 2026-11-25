@@ -1,0 +1,20 @@
+{
+  "target": {
+    "projects": 5,
+    "refs": 25
+  },
+  "weights": {
+    "projects": 35,
+    "refs": 20,
+    "stability": 20,
+    "a11y": 15,
+    "readiness": 10
+  },
+  "gates": [
+    "적용 프로젝트 4개 이상",
+    "접근성 검수 통과",
+    "최근 90일 Major 변경 없음"
+  ],
+  "threshold": 80,
+  "schedule": "매주 월요일 09:00 사용 데이터로 자동 산정"
+}

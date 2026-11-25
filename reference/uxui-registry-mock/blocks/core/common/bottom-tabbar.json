@@ -1,0 +1,203 @@
+{
+  "id": "BLK-0002",
+  "key": "bottom-tabbar",
+  "name": "하단 탭바",
+  "tier": "core",
+  "category": "common",
+  "version": "1.2.0",
+  "status": "active",
+  "owner": "이수진",
+  "tags": [
+    "내비게이션",
+    "하단",
+    "필수"
+  ],
+  "description": "앱의 1뎁스 메뉴를 전환하는 하단 고정 내비게이션. 탭은 3~5개.",
+  "context": "앱 메인 화면 공통. 웹에서는 사용하지 않는다.",
+  "platforms": [
+    "iOS",
+    "Android"
+  ],
+  "slots": [
+    "탭 아이콘",
+    "탭 레이블",
+    "배지",
+    "활성 표시"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 100,
+  "figma": {
+    "file_key": "Kc8Rz2LqUXUICore",
+    "node_id": "488:1091",
+    "file": "UXUI Core Library",
+    "page": "공통 모듈",
+    "synced_at": "2026-11-05",
+    "url": "https://www.figma.com/design/Kc8Rz2LqUXUICore/UXUI-Core-Library?node-id=488-1091"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "앱 메인 화면 공통. 웹에서는 사용하지 않는다.",
+    "avoid": "웹과 모달 흐름 안에서는 노출하지 않는다.",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": "이수진"
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/BottomTabbar",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1704",
+    "extracted_at": "2026-11-05",
+    "props": [
+      {
+        "name": "탭 아이콘",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "탭 레이블",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "배지",
+        "type": "BOOLEAN",
+        "default": "false"
+      },
+      {
+        "name": "활성 표시",
+        "type": "BOOLEAN",
+        "default": "false"
+      }
+    ],
+    "variants": [
+      {
+        "name": "탭 수",
+        "values": [
+          "3",
+          "4",
+          "5"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/text/primary",
+        "color/border/default",
+        "color/status/danger",
+        "color/text/secondary"
+      ],
+      "spacing": [
+        "space/16",
+        "space/12"
+      ],
+      "radius": [
+        "radius/8"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "가로 균등",
+      "gap": "space/0",
+      "padding": "space/8",
+      "width": "FILL",
+      "height": "FIXED 64",
+      "position": "하단 고정",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/core",
+    "component": "BottomTabBar",
+    "path": "packages/core/src/BottomTabBar/BottomTabBar.tsx",
+    "props": {
+      "탭 아이콘": "icon",
+      "탭 레이블": "label",
+      "배지": "badge",
+      "활성 표시": "active"
+    }
+  },
+  "references": [
+    {
+      "project": "P05",
+      "range": "^1",
+      "screens": 5
+    },
+    {
+      "project": "P04",
+      "range": "^1",
+      "screens": 2
+    },
+    {
+      "project": "P07",
+      "range": "^1",
+      "screens": 4
+    },
+    {
+      "project": "P06",
+      "range": "^1",
+      "screens": 3
+    },
+    {
+      "project": "P01",
+      "range": "^1",
+      "screens": 3
+    },
+    {
+      "project": "P03",
+      "range": "^1",
+      "screens": 7
+    },
+    {
+      "project": "P02",
+      "range": "^1",
+      "screens": 7
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-02-21",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "c17f364"
+    },
+    {
+      "version": "1.0.1",
+      "level": "PATCH",
+      "date": "2026-04-22",
+      "author": "이수진",
+      "summary": "설명·태그 보완",
+      "commit": "c27f37d"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-06-21",
+      "author": "이수진",
+      "summary": "'배지' 슬롯 추가",
+      "commit": "a7bd00e"
+    },
+    {
+      "version": "1.2.0",
+      "level": "MINOR",
+      "date": "2026-08-20",
+      "author": "이수진",
+      "summary": "'활성 표시' 슬롯 추가",
+      "commit": "6b30bff"
+    }
+  ]
+}

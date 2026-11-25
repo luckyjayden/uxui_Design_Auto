@@ -1,0 +1,219 @@
+{
+  "id": "BLK-0003",
+  "key": "button-group",
+  "name": "버튼 그룹",
+  "tier": "core",
+  "category": "ui",
+  "version": "2.1.1",
+  "status": "active",
+  "owner": "이수진",
+  "tags": [
+    "버튼",
+    "CTA"
+  ],
+  "description": "화면 하단 또는 콘텐츠 끝에 배치하는 주/보조 버튼 묶음.",
+  "context": "주 행동이 하나일 때는 단독 버튼, 선택지가 둘이면 좌보조·우주 배치.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "주 버튼",
+    "보조 버튼",
+    "비활성 상태"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 100,
+  "figma": {
+    "file_key": "Kc8Rz2LqUXUICore",
+    "node_id": "692:4796",
+    "file": "UXUI Core Library",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-05",
+    "url": "https://www.figma.com/design/Kc8Rz2LqUXUICore/UXUI-Core-Library?node-id=692-4796"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "주 행동이 하나일 때는 단독 버튼, 선택지가 둘이면 좌보조·우주 배치.",
+    "avoid": "주 행동이 3개 이상이면 버튼 그룹 대신 목록형 선택으로 바꾼다.",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": "이수진"
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/ButtonGroup",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1717",
+    "extracted_at": "2026-11-05",
+    "props": [
+      {
+        "name": "주 버튼",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "보조 버튼",
+        "type": "INSTANCE_SWAP",
+        "default": "기본 인스턴스"
+      },
+      {
+        "name": "비활성 상태",
+        "type": "BOOLEAN",
+        "default": "false"
+      }
+    ],
+    "variants": [
+      {
+        "name": "배치",
+        "values": [
+          "단독",
+          "좌우 2개",
+          "상하 2개"
+        ]
+      },
+      {
+        "name": "상태",
+        "values": [
+          "기본",
+          "비활성",
+          "로딩"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/bg/subtle",
+        "color/status/danger",
+        "color/brand/primary",
+        "color/bg/surface"
+      ],
+      "spacing": [
+        "space/24",
+        "space/12"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/caption/s",
+        "type/title/m"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "가로",
+      "gap": "space/8",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [
+      {
+        "layer": "주 버튼",
+        "trigger": "탭",
+        "action": "동작 실행"
+      },
+      {
+        "layer": "보조 버튼",
+        "trigger": "탭",
+        "action": "동작 실행"
+      }
+    ],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/core",
+    "component": "ButtonGroup",
+    "path": "packages/core/src/ButtonGroup/ButtonGroup.tsx",
+    "props": {
+      "주 버튼": "primaryAction",
+      "보조 버튼": "secondaryAction",
+      "비활성 상태": "disabled"
+    }
+  },
+  "references": [
+    {
+      "project": "P08",
+      "range": "^2",
+      "screens": 6
+    },
+    {
+      "project": "P02",
+      "range": "^2",
+      "screens": 7
+    },
+    {
+      "project": "P03",
+      "range": "^2",
+      "screens": 9
+    },
+    {
+      "project": "P01",
+      "range": "^2",
+      "screens": 6
+    },
+    {
+      "project": "P06",
+      "range": "^2",
+      "screens": 5
+    },
+    {
+      "project": "P07",
+      "range": "^2",
+      "screens": 12
+    },
+    {
+      "project": "P04",
+      "range": "^2",
+      "screens": 12
+    },
+    {
+      "project": "P05",
+      "range": "^1",
+      "screens": 7
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-03-12",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "edc7002"
+    },
+    {
+      "version": "2.0.0",
+      "level": "MAJOR",
+      "date": "2026-05-21",
+      "author": "이수진",
+      "summary": "슬롯 구조 개편 ('레거시 주 버튼' 제거)",
+      "commit": "1d60004"
+    },
+    {
+      "version": "2.1.0",
+      "level": "MINOR",
+      "date": "2026-07-30",
+      "author": "이수진",
+      "summary": "'비활성 상태' 슬롯 추가",
+      "commit": "839e946"
+    },
+    {
+      "version": "2.1.1",
+      "level": "PATCH",
+      "date": "2026-10-08",
+      "author": "이수진",
+      "summary": "설명·태그 보완",
+      "commit": "829e92d"
+    }
+  ]
+}

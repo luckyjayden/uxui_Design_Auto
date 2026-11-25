@@ -1,0 +1,224 @@
+{
+  "id": "BLK-0004",
+  "key": "form-field",
+  "name": "입력 폼 필드",
+  "tier": "core",
+  "category": "ui",
+  "version": "1.3.0",
+  "status": "active",
+  "owner": "이수진",
+  "tags": [
+    "입력",
+    "폼",
+    "검증"
+  ],
+  "description": "텍스트 입력과 실시간 검증 메시지를 포함한 기본 입력 필드.",
+  "context": "가입, 주문, 문의 등 모든 입력 화면.",
+  "platforms": [
+    "iOS",
+    "Android",
+    "Web"
+  ],
+  "slots": [
+    "레이블",
+    "입력창",
+    "도움말",
+    "오류 메시지",
+    "글자 수"
+  ],
+  "a11y": {
+    "reviewed": true
+  },
+  "docs_completeness": 100,
+  "figma": {
+    "file_key": "Kc8Rz2LqUXUICore",
+    "node_id": "1787:1688",
+    "file": "UXUI Core Library",
+    "page": "UI 패턴",
+    "synced_at": "2026-11-04",
+    "url": "https://www.figma.com/design/Kc8Rz2LqUXUICore/UXUI-Core-Library?node-id=1787-1688"
+  },
+  "guidance": {
+    "_source": "human",
+    "usage": "가입, 주문, 문의 등 모든 입력 화면.",
+    "avoid": "선택지가 정해진 값은 입력 필드 대신 선택 컨트롤을 쓴다.",
+    "ai_assisted": false,
+    "pending_ai_draft": false,
+    "confirmed_by": "이수진"
+  },
+  "spec": {
+    "_source": "figma-auto",
+    "_readonly": true,
+    "component": "Block/FormField",
+    "type": "COMPONENT_SET",
+    "figma_file_version": "v1735",
+    "extracted_at": "2026-11-04",
+    "props": [
+      {
+        "name": "레이블",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "입력창",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "도움말",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "오류 메시지",
+        "type": "TEXT",
+        "default": "텍스트"
+      },
+      {
+        "name": "글자 수",
+        "type": "TEXT",
+        "default": "텍스트"
+      }
+    ],
+    "variants": [
+      {
+        "name": "상태",
+        "values": [
+          "기본",
+          "포커스",
+          "오류",
+          "비활성"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": [
+        "color/text/primary",
+        "color/brand/primary",
+        "color/bg/surface",
+        "color/text/secondary"
+      ],
+      "spacing": [
+        "space/24",
+        "space/12"
+      ],
+      "radius": [
+        "radius/0"
+      ],
+      "typography": [
+        "type/title/m",
+        "type/body/m"
+      ]
+    },
+    "hardcoded": [],
+    "layout": {
+      "mode": "세로",
+      "gap": "space/12",
+      "padding": "space/16",
+      "width": "FILL",
+      "height": "HUG",
+      "autoLayout": true
+    },
+    "instances": [],
+    "interactions": [],
+    "readiness": 100
+  },
+  "code": {
+    "_source": "code-connect",
+    "framework": "React",
+    "package": "@uxui/core",
+    "component": "FormField",
+    "path": "packages/core/src/FormField/FormField.tsx",
+    "props": {
+      "레이블": "label",
+      "입력창": "value",
+      "도움말": "helperText",
+      "오류 메시지": "errorText",
+      "글자 수": "maxLength"
+    }
+  },
+  "references": [
+    {
+      "project": "P03",
+      "range": "^1",
+      "screens": 7
+    },
+    {
+      "project": "P02",
+      "range": "^1",
+      "screens": 10
+    },
+    {
+      "project": "P01",
+      "range": "^1",
+      "screens": 9
+    },
+    {
+      "project": "P07",
+      "range": "^1",
+      "screens": 5
+    },
+    {
+      "project": "P06",
+      "range": "^1",
+      "screens": 10
+    },
+    {
+      "project": "P05",
+      "range": "^1",
+      "screens": 4
+    },
+    {
+      "project": "P04",
+      "range": "^1",
+      "screens": 7
+    },
+    {
+      "project": "P08",
+      "range": "^1",
+      "screens": 6
+    }
+  ],
+  "history": [
+    {
+      "version": "1.0.0",
+      "level": "INIT",
+      "date": "2026-05-07",
+      "author": "이수진",
+      "summary": "최초 등록",
+      "commit": "f5bbde2"
+    },
+    {
+      "version": "1.1.0",
+      "level": "MINOR",
+      "date": "2026-06-16",
+      "author": "이수진",
+      "summary": "'도움말' 슬롯 추가",
+      "commit": "dc990c9"
+    },
+    {
+      "version": "1.2.0",
+      "level": "MINOR",
+      "date": "2026-07-26",
+      "author": "이수진",
+      "summary": "'오류 메시지' 슬롯 추가",
+      "commit": "4acd1ff"
+    },
+    {
+      "version": "1.2.1",
+      "level": "PATCH",
+      "date": "2026-09-04",
+      "author": "이수진",
+      "summary": "설명·태그 보완",
+      "commit": "4bcd218"
+    },
+    {
+      "version": "1.3.0",
+      "level": "MINOR",
+      "date": "2026-10-14",
+      "author": "이수진",
+      "summary": "'글자 수' 슬롯 추가",
+      "commit": "b1a984d"
+    }
+  ]
+}

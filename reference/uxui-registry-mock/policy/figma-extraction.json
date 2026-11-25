@@ -1,0 +1,68 @@
+{
+  "source": "Figma MCP server",
+  "calls": [
+    {
+      "tool": "get_metadata",
+      "reads": "노드 구조·레이어 이름"
+    },
+    {
+      "tool": "get_design_context",
+      "reads": "속성·변형·레이아웃·인터랙션"
+    },
+    {
+      "tool": "get_variable_defs",
+      "reads": "바인딩된 토큰·직접 입력 값"
+    },
+    {
+      "tool": "get_code_connect_map",
+      "reads": "코드 컴포넌트 매핑"
+    }
+  ],
+  "mapping": {
+    "component property (TEXT)": "slot, type TEXT",
+    "component property (BOOLEAN)": "slot, type BOOLEAN (표시 여부)",
+    "component property (INSTANCE_SWAP)": "slot, type INSTANCE_SWAP (교체 가능한 하위 요소)",
+    "variant property": "spec.variants",
+    "bound variables": "spec.tokens",
+    "unbound fills/strokes/sizes": "spec.hardcoded",
+    "auto layout": "spec.layout",
+    "nested library instances": "spec.instances → 블록 의존 관계",
+    "prototype reactions": "spec.interactions"
+  },
+  "readiness_checks": [
+    "컴포넌트 속성 정의",
+    "토큰 바인딩률 90% 이상",
+    "오토 레이아웃 사용",
+    "라이브러리 인스턴스 분리 없음",
+    "컴포넌트 이름 Block/PascalCase"
+  ],
+  "sync": {
+    "when": [
+      "등록",
+      "수동 재동기화",
+      "피그마 파일 버전 변경 감지(주기 수집)"
+    ],
+    "overwrite": [
+      "spec"
+    ],
+    "never_overwrite": [
+      "guidance",
+      "registry 필드"
+    ],
+    "on_change": "spec diff → 변경 등급 자동 판정 → 담당자 알림"
+  },
+  "version_rules": {
+    "속성 추가": "MINOR",
+    "속성 삭제": "MAJOR",
+    "속성 유형 변경": "MAJOR",
+    "토큰 추가·제거": "MINOR",
+    "직접 입력 값 변화": "PATCH"
+  },
+  "not_stored": [
+    "생성된 코드 (필요할 때 MCP로 생성)"
+  ],
+  "plan_notes": [
+    "REST API 변수 조회는 Enterprise 플랜 전용. 다른 플랜은 MCP 또는 플러그인 내보내기 사용",
+    "MCP 사용 범위는 좌석 유형에 따라 다름"
+  ]
+}
