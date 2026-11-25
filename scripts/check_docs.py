@@ -155,6 +155,20 @@ for fname, ids, key in [("requirements.json", req_ids, "REQ"), ("policies.json",
                 if fn not in fn_ids:
                     err(f"data/{fname} {item['id']}: 기능 정의서에 없는 기능 {fn}을 가리킵니다")
 
+# 4-1. 워크 플로우 항목
+wf = read(os.path.join(DOCS, "05-workflow.md"))
+wf_ids = re.findall(r"^\| (WF-\d{3}) \|", wf, re.M)
+dup = {i for i in wf_ids if wf_ids.count(i) > 1}
+if dup:
+    err(f"05-workflow.md: 중복된 ID {sorted(dup)}")
+for kind, known in [("REQ", set(req_ids)), ("POL", set(pol_ids)), ("FN", fn_ids)]:
+    for ref in sorted(set(re.findall(rf"{kind}-\d{{3}}", wf))):
+        if ref not in known and not ref.endswith("-000"):
+            err(f"05-workflow.md: 없는 항목 {ref}를 참조합니다")
+for ref in sorted(set(re.findall(r"WF-\d{3}", wf))):
+    if ref not in wf_ids and ref != "WF-000":
+        err(f"05-workflow.md: 없는 워크 플로우 항목 {ref}를 가리킵니다")
+
 # 5. 상대 링크
 for base, _, files in os.walk(ROOT):
     if ".git" in base.split(os.sep) or "uxui-registry-mock" in base and base.count(os.sep) > ROOT.count(os.sep) + 2:
