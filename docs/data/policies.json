@@ -1,6 +1,6 @@
 {
   "doc": "POL",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "items": [
     {
       "id": "POL-001",
@@ -182,9 +182,9 @@
       "title": "파일이 원본",
       "description": "Markdown과 JSON 파일이 원본이고, 화면은 이 파일을 읽어 보여 주는 뷰어다.",
       "group": "데이터와 ID",
-      "conditions": "화면에서 편집하면 파일에 되쓴다.",
+      "conditions": "편집은 뷰어가 아니라 GitHub과 세션에서 한다(POL-034).",
       "decision": "확정",
-      "source": "프로젝트 정의서 7절",
+      "source": "프로젝트 정의서 7절, 결정 기록 2026-11-25",
       "refs": [
         "REQ-005"
       ],
@@ -380,6 +380,22 @@
       "updated_at": "2026-11-25"
     },
     {
+      "id": "POL-034",
+      "title": "뷰어의 쓰기 범위",
+      "description": "뷰어는 저장소의 파일을 읽기만 한다. 문서 편집, 승인, 에이전트 실행은 뷰어 안에서 하지 않고 claude.ai/code 세션과 GitHub PR로 넘긴다.",
+      "group": "화면과 산출물",
+      "conditions": "뷰어의 실행 버튼(예약 작업 API 트리거)은 파일럿 뒤에 검토한다.",
+      "decision": "확정",
+      "source": "결정 기록 2026-11-25, 기능 정의서 3절·4절·7절",
+      "refs": [
+        "REQ-005",
+        "REQ-009",
+        "REQ-024"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-25"
+    },
+    {
       "id": "POL-027",
       "title": "내보내기 형식",
       "description": "유저 플로우는 JSON이 원본이고 React로 그려 PNG로 내보낸다. 화면설계서는 Figma 또는 PPTX로 내보낸다.",
@@ -441,9 +457,9 @@
       "title": "저장소와 승인 수단",
       "description": "프로젝트 데이터 저장소는 GitHub 저장소다. 문서 변경은 브랜치와 PR로 하고 PR 병합을 승인으로 본다.",
       "group": "운영",
-      "conditions": "GitHub 사용은 확정. PR 병합을 승인으로 쓰는 것은 웹 구동 검토안이며 확정 전이다.",
-      "decision": "검토안",
-      "source": "결정 기록 2026-11-25, 기능 정의서 7절 검토안",
+      "conditions": "문서별 승인 권한자는 GitHub 브랜치 보호 규칙으로 정한다. 권한자 지정은 미정.",
+      "decision": "확정",
+      "source": "결정 기록 2026-11-25, 기능 정의서 7절",
       "refs": [
         "REQ-022",
         "REQ-010",
