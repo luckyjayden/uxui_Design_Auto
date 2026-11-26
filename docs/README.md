@@ -14,8 +14,8 @@
 | WF | 워크 플로우 | [05-workflow.md](05-workflow.md) | 0.2.0 | 검토 필요 | REQ, POL | WF-000 |
 | IA | 정보 구조도 | [06-information-architecture.md](06-information-architecture.md) | 0.1.0 | 검토 필요 | UF, WF, FSD | STU-00, WU-000 |
 | SB | 화면설계서 | [07-screen-spec.md](07-screen-spec.md) | 0.4.0 | 검토 필요 | IA, POL, FSD | STU-00-A00 |
-| DATA | 데이터 규격 | [08-data-spec.md](08-data-spec.md) | 0.2.0 | 검토 필요 | POL, FSD | 없음 |
-| AGT | 에이전트 명세 | [09-agent-spec.md](09-agent-spec.md) | 0.2.0 | 검토 필요 | POL, FSD, DATA | 없음 |
+| DATA | 데이터 규격 | [08-data-spec.md](08-data-spec.md) | 0.3.0 | 검토 필요 | POL, FSD | 없음 |
+| AGT | 에이전트 명세 | [09-agent-spec.md](09-agent-spec.md) | 0.3.0 | 검토 필요 | POL, FSD, DATA | 없음 |
 | DEV | 개발 아키텍처 | [10-dev-architecture.md](10-dev-architecture.md) | 0.1.0 | 검토 필요 | FSD, IA, SB, DATA, AGT | 없음 |
 | DRM | 개발 로드맵 | [11-dev-roadmap.md](11-dev-roadmap.md) | 0.2.0 | 검토 필요 | RM, DEV, FSD, REQ | 없음 |
 | RM | 프로젝트 로드맵 | [roadmap.md](roadmap.md) | 0.5.0 | 검토 필요 | PRJ, REQ, POL, FSD | 없음 |
