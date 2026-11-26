@@ -1,0 +1,858 @@
+{
+  "doc": "WF",
+  "version": "0.1.0",
+  "items": [
+    {
+      "id": "WF-001",
+      "title": "프로젝트 폴더를 읽어 목록을 만든다",
+      "description": "projects/ 아래의 폴더마다 정의서와 상태 파일을 읽어 이름과 현재 진행 상태를 붙인 카드 목록을 만든다. 진행 상태는 아직 끝나지 않은 가장 앞선 단계로 삼는다.",
+      "step_type": "처리",
+      "input": [
+        "projects/",
+        "projects/<id>/project.json",
+        "projects/<id>/_meta/status.json"
+      ],
+      "output": [
+        "프로젝트 카드 목록(이름, 현재 진행 상태)"
+      ],
+      "state_change": null,
+      "user_step": "UF-001",
+      "refs": [
+        "UF-001",
+        "REQ-001",
+        "POL-004",
+        "POL-008"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-002",
+      "title": "승인된 화면설계서가 있는 프로젝트를 표시한다",
+      "description": "상태 파일의 SB 줄과 작업 단위 상태를 읽어 넘겨받을 수 있는 화면설계서가 있는 프로젝트를 구분해 보인다.",
+      "step_type": "처리",
+      "input": [
+        "projects/<id>/_meta/status.json의 SB 줄과 work_units"
+      ],
+      "output": [
+        "작업 단위별 상태가 붙은 프로젝트 목록"
+      ],
+      "state_change": null,
+      "user_step": "UF-002",
+      "refs": [
+        "UF-002",
+        "REQ-012",
+        "POL-005",
+        "POL-008"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-003",
+      "title": "화면 파일에서 쓰인 블록을 모은다",
+      "description": "화면 파일의 영역마다 적힌 블록 ID와 Major 버전 범위를 모아 블록 사용 목록을 만든다. 블록의 사본은 읽지 않는다.",
+      "step_type": "처리",
+      "input": [
+        "projects/<id>/screens/SCR-000.json"
+      ],
+      "output": [
+        "블록 ID와 버전 범위 목록"
+      ],
+      "state_change": null,
+      "user_step": "UF-003",
+      "refs": [
+        "UF-003",
+        "REQ-011",
+        "REQ-018",
+        "POL-016"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-004",
+      "title": "보일 프로젝트가 있는지 판정한다",
+      "description": "저장소 접근 권한과 목록 결과로 프로젝트를 보일 수 있는지 판정한다. 없으면 목록 자리에 안내 문구만 보인다.",
+      "step_type": "검증",
+      "input": [
+        "저장소 접근 권한",
+        "프로젝트 카드 목록"
+      ],
+      "output": [
+        "프로젝트 목록 또는 '프로젝트가 없습니다'"
+      ],
+      "state_change": null,
+      "user_step": "UF-004",
+      "refs": [
+        "UF-004",
+        "REQ-001",
+        "REQ-019",
+        "POL-008",
+        "POL-020"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-005",
+      "title": "고른 프로젝트의 진행 현황을 연다",
+      "description": "고른 프로젝트의 상태 파일을 읽어 진행 현황 화면 데이터를 만들고 보는 화면을 바꾼다. 저장소에는 아무것도 쓰지 않는다.",
+      "step_type": "상태 변경",
+      "input": [
+        "projects/<id>/_meta/status.json"
+      ],
+      "output": [
+        "진행 현황 화면 데이터"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 화면(React State)",
+        "from": "프로젝트 목록",
+        "to": "진행 현황"
+      },
+      "user_step": "UF-005",
+      "refs": [
+        "UF-005",
+        "REQ-001",
+        "REQ-015",
+        "POL-008",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-006",
+      "title": "일곱 단계에 상태를 하나씩 붙인다",
+      "description": "상태 파일의 문서별 상태를 일곱 단계에 붙인다. 플로우는 유저 플로우와 워크 플로우 중 뒤처진 쪽을 단계 상태로 삼고, 상태 줄이 없으면 '대기', 다섯 값에 없는 값은 '알 수 없음'으로 구분한다.",
+      "step_type": "처리",
+      "input": [
+        "projects/<id>/_meta/status.json",
+        "projects/<id>/project.json의 confirmed"
+      ],
+      "output": [
+        "일곱 단계와 단계별 상태",
+        "진행 중인 단계 표시"
+      ],
+      "state_change": null,
+      "user_step": "UF-006",
+      "refs": [
+        "UF-006",
+        "REQ-002",
+        "POL-005",
+        "POL-006"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-007",
+      "title": "무엇을 기다리는지 판정한다",
+      "description": "정의서 확정 여부, 문서 상태, 작업 단위 선택 여부로 확정 대기·승인 대기·선택 대기를 판정한다. 둘 이상이면 앞선 단계의 것을 먼저 보이고 나머지는 목록으로 둔다.",
+      "step_type": "검증",
+      "input": [
+        "일곱 단계와 단계별 상태",
+        "project.json의 confirmed",
+        "status.json의 work_units"
+      ],
+      "output": [
+        "확정 대기 | 승인 대기 | 선택 대기 | 대기 없음",
+        "기다리는 것의 목록"
+      ],
+      "state_change": null,
+      "user_step": "UF-007",
+      "refs": [
+        "UF-007",
+        "REQ-003",
+        "POL-007"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-008",
+      "title": "바깥으로 가는 링크 주소를 만든다",
+      "description": "고칠 자리는 GitHub의 해당 파일이나 PR로, 실행·수정 요청 자리는 세션으로 가는 주소를 만든다. 주소를 만들지 못하면 링크를 비활성으로 둔다.",
+      "step_type": "연동",
+      "input": [
+        "status.json의 pr",
+        "문서 파일 경로",
+        "단계 이름"
+      ],
+      "output": [
+        "GitHub 파일·PR 링크",
+        "세션 링크",
+        "비활성 링크와 안내 문구"
+      ],
+      "state_change": null,
+      "user_step": "UF-008",
+      "refs": [
+        "UF-008",
+        "REQ-004",
+        "REQ-016",
+        "POL-001",
+        "POL-002",
+        "POL-003"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-009",
+      "title": "고른 단계의 산출물 파일을 읽는다",
+      "description": "고른 단계의 Markdown과 JSON을 읽어 원본과 읽은 시각을 함께 둔다. 파일에 없는 값은 만들지 않는다.",
+      "step_type": "처리",
+      "input": [
+        "projects/<id>/<문서>.md",
+        "projects/<id>/<문서>.json"
+      ],
+      "output": [
+        "문서 원본",
+        "저장소를 읽은 시각"
+      ],
+      "state_change": null,
+      "user_step": "UF-009",
+      "refs": [
+        "UF-009",
+        "REQ-005",
+        "REQ-020",
+        "POL-004",
+        "POL-006"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-010",
+      "title": "파일이 있는지와 읽히는지 판정한다",
+      "description": "파일이 없으면 '비어 있음', 읽지 못하거나 JSON이 깨져 있으면 '읽지 못했습니다'로 판정하고 화면의 나머지는 그대로 둔다.",
+      "step_type": "검증",
+      "input": [
+        "문서 파일 경로",
+        "읽은 JSON"
+      ],
+      "output": [
+        "읽음 | 비어 있음 | 읽지 못함"
+      ],
+      "state_change": null,
+      "user_step": "UF-010",
+      "refs": [
+        "UF-010",
+        "REQ-020",
+        "POL-003",
+        "POL-004"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-011",
+      "title": "문서 코드로 보여 줄 화면을 정한다",
+      "description": "읽은 파일의 doc 값으로 항목 목록, 플로우 다이어그램, 화면설계서, 검증 결과, 변경 영향 가운데 어느 화면으로 보일지 정한다.",
+      "step_type": "상태 변경",
+      "input": [
+        "읽은 JSON의 doc 필드(REQ, POL, UF, WF, IA, SCR, QA)"
+      ],
+      "output": [
+        "보기 화면 종류"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 화면(React State)",
+        "from": "진행 현황",
+        "to": "고른 산출물의 보기 화면"
+      },
+      "user_step": "UF-011",
+      "refs": [
+        "UF-011",
+        "REQ-005",
+        "POL-006",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-012",
+      "title": "항목 목록을 만들고 출처를 구분한다",
+      "description": "items를 파일에 적힌 순서 그대로 항목 목록으로 만들고 origin이 ai면 AI 생성, human이면 사람 수정으로 구분한다. 항목이 없으면 '항목이 없습니다'를 보인다.",
+      "step_type": "처리",
+      "input": [
+        "<문서>.json의 items"
+      ],
+      "output": [
+        "항목 목록(ID, 본문, 출처 구분)"
+      ],
+      "state_change": null,
+      "user_step": "UF-012",
+      "refs": [
+        "UF-012",
+        "REQ-005",
+        "POL-005",
+        "POL-009"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-013",
+      "title": "상위 항목과 하위 항목을 모은다",
+      "description": "고른 항목의 refs로 상위 항목을, 저장소 전체 문서의 역참조 색인으로 하위 항목을 모은다. 한쪽이 비면 '연결된 항목이 없습니다'를 보인다.",
+      "step_type": "처리",
+      "input": [
+        "고른 항목의 refs",
+        "저장소 전체 문서의 refs 역색인"
+      ],
+      "output": [
+        "상위 항목 목록",
+        "하위 항목 목록"
+      ],
+      "state_change": null,
+      "user_step": "UF-013",
+      "refs": [
+        "UF-013",
+        "REQ-006",
+        "POL-010"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-014",
+      "title": "참조가 연결되어 있는지 판정한다",
+      "description": "참조한 ID를 저장소의 모든 문서에서 찾아 연결됨과 끊김으로 나눈다. 끊긴 참조는 누를 수 없게 두고 ID를 그대로 보인다.",
+      "step_type": "검증",
+      "input": [
+        "참조한 ID 목록",
+        "저장소 전체 항목 ID"
+      ],
+      "output": [
+        "연결됨 | 끊김",
+        "끊긴 참조 안내 문구"
+      ],
+      "state_change": null,
+      "user_step": "UF-014",
+      "refs": [
+        "UF-014",
+        "REQ-006",
+        "REQ-013",
+        "POL-010",
+        "POL-011"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-015",
+      "title": "플로우 JSON으로 다이어그램 모델을 만든다",
+      "description": "유저 플로우와 워크 플로우의 단계와 연결을 JSON 그대로 노드와 선으로 옮긴다. 단계가 하나도 없으면 '비어 있음'을 보인다.",
+      "step_type": "처리",
+      "input": [
+        "projects/<id>/user-flow.json",
+        "projects/<id>/workflow.json"
+      ],
+      "output": [
+        "단계 노드와 연결선",
+        "분기의 조건 표시"
+      ],
+      "state_change": null,
+      "user_step": "UF-015",
+      "refs": [
+        "UF-015",
+        "REQ-007",
+        "POL-012"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-016",
+      "title": "분기의 정책을 정책 항목에 잇는다",
+      "description": "분기 연결의 policy를 정책 항목에 이어 ID를 보이고, 누르면 그 정책으로 옮겨 간다. policy가 없는 연결은 '정책 없음'으로 구분한다.",
+      "step_type": "상태 변경",
+      "input": [
+        "user-flow.json의 next.policy",
+        "projects/<id>/policies.json"
+      ],
+      "output": [
+        "분기별 정책 ID 표시",
+        "'정책 없음' 구분"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 항목(React State)",
+        "from": "플로우 다이어그램",
+        "to": "정책 항목"
+      },
+      "user_step": "UF-016",
+      "refs": [
+        "UF-016",
+        "REQ-007",
+        "POL-010",
+        "POL-012"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-017",
+      "title": "보고 있는 다이어그램을 PNG로 만든다",
+      "description": "화면에 그려진 그대로를 PNG 파일 하나로 만든다. 접거나 숨긴 부분도 보이던 모양 그대로 담는다.",
+      "step_type": "처리",
+      "input": [
+        "화면에 그려진 유저 플로우 다이어그램"
+      ],
+      "output": [
+        "PNG 파일"
+      ],
+      "state_change": null,
+      "user_step": "UF-017",
+      "refs": [
+        "UF-017",
+        "REQ-008",
+        "REQ-021",
+        "POL-013",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-018",
+      "title": "PNG 내보내기 결과를 판정한다",
+      "description": "PNG를 만들어 내려보냈는지 판정한다. 실패하면 '내보내지 못했습니다'를 보이고 다시 시도할 수 있게 두며, 다이어그램이 비어 있으면 내보내기를 누를 수 없게 둔다.",
+      "step_type": "검증",
+      "input": [
+        "PNG 파일",
+        "다이어그램 노드 수"
+      ],
+      "output": [
+        "내려받음 | 내보내지 못함 | 내보낼 것 없음"
+      ],
+      "state_change": null,
+      "user_step": "UF-018",
+      "refs": [
+        "UF-018",
+        "REQ-008",
+        "POL-013",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-019",
+      "title": "화면 파일의 영역을 React 블록으로 그린다",
+      "description": "화면 파일의 areas를 블록 컴포넌트로 그리고 state 초기값으로 인터랙션을 준비한다. 블록을 그리지 못한 영역에는 블록 ID와 안내를 보이고 나머지는 그대로 그린다.",
+      "step_type": "처리",
+      "input": [
+        "projects/<id>/screens/SCR-000.json",
+        "UI 블록 컴포넌트"
+      ],
+      "output": [
+        "그려진 화면",
+        "영역 목록",
+        "화면 state 초기값"
+      ],
+      "state_change": null,
+      "user_step": "UF-019",
+      "refs": [
+        "UF-019",
+        "REQ-009",
+        "REQ-017",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-020",
+      "title": "고른 영역의 정책·디스크립션·예외를 꺼낸다",
+      "description": "고른 영역의 policies, description, exceptions를 꺼내 정책 본문과 함께 옆 패널에 둔다. 비어 있으면 '걸린 정책이 없습니다', '적힌 예외가 없습니다'를 보인다.",
+      "step_type": "상태 변경",
+      "input": [
+        "영역의 policies·description·exceptions",
+        "projects/<id>/policies.json",
+        "projects/<id>/requirements.json"
+      ],
+      "output": [
+        "영역 패널 내용",
+        "요구사항·정책으로 가는 이동"
+      ],
+      "state_change": {
+        "target": "고른 영역(React State)",
+        "from": "고르지 않음",
+        "to": "고른 영역 ID"
+      },
+      "user_step": "UF-020",
+      "refs": [
+        "UF-020",
+        "REQ-010",
+        "POL-014",
+        "POL-015"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-021",
+      "title": "블록 ID를 라이브러리와 등록 요청에 맞춰 본다",
+      "description": "영역이 참조한 블록 ID와 Major 버전 범위를 블록 레지스트리와 등록 요청 목록에 맞춰 보고 어디에도 없으면 '알 수 없는 블록'으로 구분한다.",
+      "step_type": "연동",
+      "input": [
+        "영역의 block.id와 block.version",
+        "블록 레지스트리",
+        "등록 요청(BRQ) 목록"
+      ],
+      "output": [
+        "라이브러리 블록 | 등록 요청 중 | 알 수 없는 블록",
+        "등록 요청 번호"
+      ],
+      "state_change": null,
+      "user_step": "UF-021",
+      "refs": [
+        "UF-021",
+        "REQ-011",
+        "REQ-018",
+        "POL-016"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-022",
+      "title": "화면과 디스크립션을 PPTX로 만든다",
+      "description": "그려진 화면 이미지와 영역별 디스크립션을 화면 한 장에 장표 한 장으로 담아 PPTX 파일 하나를 만든다. 그리지 못한 영역은 비우지 않고 표시해 담는다.",
+      "step_type": "처리",
+      "input": [
+        "그려진 화면",
+        "영역별 디스크립션"
+      ],
+      "output": [
+        "PPTX 파일"
+      ],
+      "state_change": null,
+      "user_step": "UF-022",
+      "refs": [
+        "UF-022",
+        "REQ-012",
+        "REQ-021",
+        "POL-017",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-023",
+      "title": "PPTX 내보내기 결과를 판정한다",
+      "description": "PPTX를 만들어 내려보냈는지 판정한다. 실패하면 다시 시도할 수 있게 두고, 내보낼 것이 없으면 내보내기를 보이지 않는다.",
+      "step_type": "검증",
+      "input": [
+        "PPTX 파일",
+        "화면 수"
+      ],
+      "output": [
+        "내려받음 | 내보내지 못함 | 내보낼 것 없음"
+      ],
+      "state_change": null,
+      "user_step": "UF-023",
+      "refs": [
+        "UF-023",
+        "REQ-012",
+        "POL-017",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-024",
+      "title": "검증 파일을 읽어 규칙별 결과를 만든다",
+      "description": "검증 파일에서 규칙마다 통과와 실패, 실패 항목 ID, 요구사항 반영률을 읽어 목록으로 만든다. 뷰어가 다시 판정하지 않는다.",
+      "step_type": "처리",
+      "input": [
+        "projects/<id>/validation.json"
+      ],
+      "output": [
+        "규칙별 통과·실패",
+        "실패 항목 ID 목록",
+        "요구사항 반영률"
+      ],
+      "state_change": null,
+      "user_step": "UF-024",
+      "refs": [
+        "UF-024",
+        "REQ-013",
+        "REQ-020",
+        "POL-018"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-025",
+      "title": "검증 결과와 실패 항목이 있는지 판정한다",
+      "description": "검증 파일이 없으면 '검증 결과가 없습니다', 있으면 실패한 규칙이 있는지로 갈린다.",
+      "step_type": "검증",
+      "input": [
+        "규칙별 통과·실패"
+      ],
+      "output": [
+        "실패 있음 | 모두 통과 | 결과 없음"
+      ],
+      "state_change": null,
+      "user_step": "UF-025",
+      "refs": [
+        "UF-025",
+        "REQ-013",
+        "POL-018"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-026",
+      "title": "실패 항목을 해당 항목이나 화면에 잇는다",
+      "description": "실패 항목의 ID를 저장소의 문서 항목이나 화면에 이어 이동할 곳을 만든다. 저장소에 없는 ID는 끊긴 참조로 보이고 이동하지 않는다.",
+      "step_type": "상태 변경",
+      "input": [
+        "validation.json의 targets",
+        "저장소 전체 항목 ID"
+      ],
+      "output": [
+        "이동할 항목 또는 끊긴 참조"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 항목(React State)",
+        "from": "검증 결과 목록",
+        "to": "실패 항목의 문서 항목 또는 화면"
+      },
+      "user_step": "UF-026",
+      "refs": [
+        "UF-026",
+        "REQ-013",
+        "POL-011",
+        "POL-018"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-027",
+      "title": "변경과 영향·판정을 목록으로 만든다",
+      "description": "변경 파일에서 바뀐 항목과 이전 값·새 값, 영향받는 산출물과 판정을 읽어 목록으로 만든다. 판정은 '수정 필요'와 '검토 필요' 둘이며 뷰어가 다시 판정하지 않는다.",
+      "step_type": "처리",
+      "input": [
+        "projects/<id>/_meta/changes.json"
+      ],
+      "output": [
+        "변경 목록",
+        "영향받는 산출물과 판정"
+      ],
+      "state_change": null,
+      "user_step": "UF-027",
+      "refs": [
+        "UF-027",
+        "REQ-014",
+        "REQ-020",
+        "POL-019"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-028",
+      "title": "따라간 참조 경로를 화면 상태로만 남긴다",
+      "description": "참조를 따라 옮겨 간 자취를 화면 상태로만 들고 있다가 화면을 떠나면 버린다. 저장소에는 아무것도 쓰지 않는다.",
+      "step_type": "상태 변경",
+      "input": [
+        "옮겨 간 항목 ID"
+      ],
+      "output": [
+        "화면 안의 이동 자취"
+      ],
+      "state_change": {
+        "target": "따라간 항목 경로(React State)",
+        "from": "이전 항목",
+        "to": "지금 보는 항목"
+      },
+      "user_step": "UF-028",
+      "refs": [
+        "UF-028",
+        "REQ-005",
+        "REQ-006",
+        "REQ-015",
+        "POL-010",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-029",
+      "title": "만든 PNG를 내려받기로 넘긴다",
+      "description": "만든 PNG를 브라우저의 내려받기로 넘긴다. 저장소에 파일을 남기지 않는다.",
+      "step_type": "연동",
+      "input": [
+        "PNG 파일"
+      ],
+      "output": [
+        "내려받은 PNG"
+      ],
+      "state_change": null,
+      "user_step": "UF-029",
+      "refs": [
+        "UF-029",
+        "REQ-008",
+        "REQ-015",
+        "POL-013",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-030",
+      "title": "만든 PPTX를 내려받기로 넘긴다",
+      "description": "만든 PPTX를 브라우저의 내려받기로 넘긴다. 저장소에 파일을 남기지 않는다.",
+      "step_type": "연동",
+      "input": [
+        "PPTX 파일"
+      ],
+      "output": [
+        "내려받은 PPTX"
+      ],
+      "state_change": null,
+      "user_step": "UF-030",
+      "refs": [
+        "UF-030",
+        "REQ-012",
+        "REQ-015",
+        "POL-017",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-031",
+      "title": "고칠 곳 목록에 바깥으로 가는 링크를 붙인다",
+      "description": "검증 실패 항목과 변경으로 영향받는 항목을 모아 각각 GitHub과 세션으로 가는 링크를 붙인다. 고치는 일은 뷰어 밖에서 한다.",
+      "step_type": "연동",
+      "input": [
+        "실패 항목 목록",
+        "영향받는 항목과 판정"
+      ],
+      "output": [
+        "고칠 곳 목록",
+        "GitHub·세션 링크"
+      ],
+      "state_change": null,
+      "user_step": "UF-031",
+      "refs": [
+        "UF-031",
+        "REQ-013",
+        "REQ-014",
+        "POL-003",
+        "POL-018",
+        "POL-019"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-032",
+      "title": "링크를 새 탭으로 열고 화면을 그대로 둔다",
+      "description": "바깥으로 가는 링크를 새 탭에서 열고 뷰어의 현재 화면과 화면 상태를 그대로 둔다. 주소를 만들지 못한 링크는 비활성으로 둔다.",
+      "step_type": "연동",
+      "input": [
+        "GitHub·세션 링크 주소"
+      ],
+      "output": [
+        "새 탭",
+        "그대로 남은 뷰어 화면"
+      ],
+      "state_change": null,
+      "user_step": "UF-032",
+      "refs": [
+        "UF-032",
+        "REQ-004",
+        "REQ-015",
+        "POL-001",
+        "POL-003"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-033",
+      "title": "볼 수 있는 프로젝트가 없다고 보인다",
+      "description": "목록이 비었으면 '프로젝트가 없습니다'를, 저장소를 읽을 권한이 없으면 '볼 수 있는 프로젝트가 없습니다'를 목록 자리에 보인다.",
+      "step_type": "처리",
+      "input": [
+        "빈 프로젝트 목록",
+        "저장소 접근 권한"
+      ],
+      "output": [
+        "'프로젝트가 없습니다' 또는 '볼 수 있는 프로젝트가 없습니다'"
+      ],
+      "state_change": null,
+      "user_step": "UF-033",
+      "refs": [
+        "UF-033",
+        "REQ-001",
+        "REQ-019",
+        "POL-008",
+        "POL-020"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-034",
+      "title": "아직 만들어지지 않았다고 보인다",
+      "description": "파일이 없는 단계는 '비어 있음'을 보이고, GitHub 링크 자리에는 '아직 만들어지지 않았습니다'를 보인다. 임의의 값을 채우지 않는다.",
+      "step_type": "처리",
+      "input": [
+        "없는 문서의 파일 경로"
+      ],
+      "output": [
+        "'비어 있음' 표시",
+        "비활성 GitHub 링크와 안내 문구"
+      ],
+      "state_change": null,
+      "user_step": "UF-034",
+      "refs": [
+        "UF-034",
+        "REQ-005",
+        "REQ-020",
+        "POL-003",
+        "POL-004"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-035",
+      "title": "읽지 못했다고 보이고 나머지는 그대로 그린다",
+      "description": "파일을 읽지 못하면 그 자리에 경로와 함께 '읽지 못했습니다'를, JSON이 깨져 있으면 항목 목록 자리에만 '읽을 수 없습니다'를 보인다. 화면의 나머지는 그대로 그린다.",
+      "step_type": "처리",
+      "input": [
+        "읽지 못한 파일 경로",
+        "깨진 JSON"
+      ],
+      "output": [
+        "'읽지 못했습니다'와 경로",
+        "그대로 그려진 나머지 화면"
+      ],
+      "state_change": null,
+      "user_step": "UF-035",
+      "refs": [
+        "UF-035",
+        "REQ-020",
+        "POL-004"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    }
+  ]
+}
