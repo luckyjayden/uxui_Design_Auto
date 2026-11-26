@@ -136,6 +136,34 @@ approved = json.dumps({"doc": "STATUS", "version": "0.1.0",
 step("상태를 '승인'으로 → 막힘 (POL-002)",
      hook(P + "/_meta/status.json", approved), 2)
 
+wu_approved = json.dumps({"doc": "STATUS", "version": "0.1.0",
+                          "items": [{"doc": "SB", "state": "검토 필요",
+                                     "work_units": [{"id": "WU-001", "state": "승인"}]}]},
+                         ensure_ascii=False)
+step("작업 단위를 '승인'으로 → 막힘 (POL-002)",
+     hook(P + "/_meta/status.json", wu_approved), 2)
+
+# 사람이 한 번 승인한 뒤에도 총괄이 status.json을 쓸 수 있어야 한다.
+# 결과만 보고 막으면 여기서 파이프라인이 선다 (2026-11-26에 실제로 섰다)
+w("_meta/status.json", {"doc": "STATUS", "version": "0.1.0", "items": [
+    {"doc": "IA", "state": "승인", "approved_by": "사람", "pr": 4},
+    {"doc": "SB", "state": "대기", "work_units": [{"id": "WU-001", "state": "승인"}]}]})
+keep = json.dumps({"doc": "STATUS", "version": "0.1.0", "items": [
+    {"doc": "IA", "state": "승인", "approved_by": "사람", "pr": 4},
+    {"doc": "SB", "state": "생성 중", "work_units": [{"id": "WU-001", "state": "승인"}]}]},
+    ensure_ascii=False)
+step("이미 승인된 것을 둔 채 다른 줄 고치기 → 통과",
+     hook(P + "/_meta/status.json", keep), 0)
+
+add = json.dumps({"doc": "STATUS", "version": "0.1.0", "items": [
+    {"doc": "IA", "state": "승인", "approved_by": "사람", "pr": 4},
+    {"doc": "SB", "state": "승인", "work_units": [{"id": "WU-001", "state": "승인"}]}]},
+    ensure_ascii=False)
+step("이미 승인된 것 + 새 승인 하나 → 막힘",
+     hook(P + "/_meta/status.json", add), 2)
+
+status()
+
 w("policies.json", {"doc": "POL", "version": "0.1.0",
                     "items": [{"id": "POL-001", "title": "t", "origin": "human"},
                               {"id": "POL-002", "title": "t", "origin": "ai"}]})
@@ -155,7 +183,7 @@ step("항목 ID 지우기 → 막힘 (POL-014)",
 shutil.rmtree(P, ignore_errors=True)
 print()
 if ok[0]:
-    print("전체 통과: 자물쇠 19건과 먼저 있던 규칙 4건이 모두 기대대로 동작합니다.")
+    print("전체 통과: 자물쇠 19건과 먼저 있던 규칙 8건이 모두 기대대로 동작합니다.")
     raise SystemExit(0)
 print("실패한 항목이 있습니다.")
 raise SystemExit(1)

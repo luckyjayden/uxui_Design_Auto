@@ -68,6 +68,24 @@ def new_content(tool, ti, path):
     return None
 
 
+def approved_set(text):
+    """status.json 내용에서 '승인'인 문서 코드와 작업 단위 ID를 꺼낸다. 못 읽으면 None."""
+    try:
+        rows = json.loads(text).get("items", [])
+    except (ValueError, AttributeError):
+        return None
+    out = set()
+    for x in rows:
+        if not isinstance(x, dict):
+            continue
+        if x.get("state") == "승인":
+            out.add(x.get("doc"))
+        for w in x.get("work_units", []) or []:
+            if isinstance(w, dict) and w.get("state") == "승인":
+                out.add(w.get("id"))
+    return out
+
+
 def items_of(text):
     """JSON 본문에서 {id: 항목} 사전을 꺼낸다. 항목 배열이 아니면 None."""
     try:
@@ -194,18 +212,26 @@ def main():
         sys.exit(0)                      # 결과를 알 수 없으면 막지 않는다
 
     # 2. 상태를 승인으로 바꾸기
+    #
+    # 쓰기 전에 없던 '승인'이 생길 때만 막는다. 결과만 보고 막으면 사람이 한 번 승인한
+    # 뒤로 총괄이 status.json에 아무것도 쓸 수 없다. 다음 단계를 '생성 중'으로 바꾸는
+    # 것까지 막혀 파이프라인이 그 자리에서 선다. 2026-11-26에 실제로 그렇게 섰다.
     if r.endswith("_meta/status.json"):
-        try:
-            rows = json.loads(after).get("items", [])
-        except ValueError:
-            sys.exit(0)
-        bad = [x.get("doc") for x in rows if x.get("state") == "승인"]
-        for x in rows:
-            bad += [w.get("id") for w in x.get("work_units", []) if w.get("state") == "승인"]
+        now = approved_set(after)
+        if now is None:
+            sys.exit(0)                  # 읽을 수 없으면 막지 않는다
+        was = set()
+        if os.path.exists(path):
+            try:
+                was = approved_set(open(path, encoding="utf8").read()) or set()
+            except (IOError, UnicodeDecodeError):
+                was = set()
+        bad = sorted(str(b) for b in (now - was) if b)
         if bad:
             deny("문서 상태를 '승인'으로 바꿀 수 없습니다: %s\n"
                  "승인은 사람이 PR을 병합할 때만 일어납니다. 생성이 끝났으면 '검토 필요'로 두고 "
-                 "PR을 여십시오. (POL-002)" % ", ".join(str(b) for b in bad if b))
+                 "PR을 여십시오. (POL-002)\n"
+                 "이미 '승인'인 것을 그대로 둔 쓰기는 막지 않습니다." % ", ".join(bad))
         sys.exit(0)
 
     if not os.path.exists(path):
