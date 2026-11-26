@@ -1,0 +1,56 @@
+{
+  "doc": "STATUS",
+  "version": "0.1.0",
+  "items": [
+    {
+      "doc": "REQ",
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
+    },
+    {
+      "doc": "POL",
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
+    },
+    {
+      "doc": "UF",
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
+    },
+    {
+      "doc": "WF",
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
+    },
+    {
+      "doc": "IA",
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
+    },
+    {
+      "doc": "QA",
+      "state": "대기",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
+    },
+    {
+      "doc": "SB",
+      "state": "대기",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null,
+      "work_units": []
+    }
+  ]
+}

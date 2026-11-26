@@ -1,6 +1,6 @@
 {
   "doc": "UF",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "items": [
     {
       "id": "UF-001",
@@ -15,7 +15,7 @@
           "policy": "POL-008"
         }
       ],
-      "screen": null,
+      "screen": "SCR-001",
       "refs": [
         "REQ-001",
         "POL-008",
@@ -37,7 +37,7 @@
           "policy": "POL-008"
         }
       ],
-      "screen": null,
+      "screen": "SCR-001",
       "refs": [
         "REQ-012",
         "POL-005",
@@ -59,7 +59,7 @@
           "policy": "POL-008"
         }
       ],
-      "screen": null,
+      "screen": "SCR-001",
       "refs": [
         "REQ-011",
         "POL-008",
@@ -109,7 +109,7 @@
           "policy": "POL-008"
         }
       ],
-      "screen": null,
+      "screen": "SCR-001",
       "refs": [
         "REQ-001",
         "REQ-002",
@@ -131,7 +131,7 @@
           "policy": "POL-006"
         }
       ],
-      "screen": null,
+      "screen": "SCR-002",
       "refs": [
         "REQ-002",
         "POL-005",
@@ -184,7 +184,7 @@
           "policy": "POL-003"
         }
       ],
-      "screen": null,
+      "screen": "SCR-002",
       "refs": [
         "REQ-004",
         "REQ-016",
@@ -208,7 +208,7 @@
           "policy": "POL-006"
         }
       ],
-      "screen": null,
+      "screen": "SCR-002",
       "refs": [
         "REQ-005",
         "POL-004",
@@ -309,7 +309,7 @@
           "policy": "POL-009"
         }
       ],
-      "screen": null,
+      "screen": "SCR-003",
       "refs": [
         "REQ-005",
         "POL-005",
@@ -331,7 +331,7 @@
           "policy": "POL-010"
         }
       ],
-      "screen": null,
+      "screen": "SCR-003",
       "refs": [
         "REQ-006",
         "POL-010"
@@ -385,7 +385,7 @@
           "policy": "POL-012"
         }
       ],
-      "screen": null,
+      "screen": "SCR-004",
       "refs": [
         "REQ-007",
         "POL-012"
@@ -406,7 +406,7 @@
           "policy": "POL-012"
         }
       ],
-      "screen": null,
+      "screen": "SCR-004",
       "refs": [
         "REQ-007",
         "POL-010",
@@ -428,7 +428,7 @@
           "policy": "POL-013"
         }
       ],
-      "screen": null,
+      "screen": "SCR-004",
       "refs": [
         "REQ-008",
         "REQ-021",
@@ -482,7 +482,7 @@
           "policy": "POL-014"
         }
       ],
-      "screen": null,
+      "screen": "SCR-005",
       "refs": [
         "REQ-009",
         "REQ-017",
@@ -504,7 +504,7 @@
           "policy": "POL-015"
         }
       ],
-      "screen": null,
+      "screen": "SCR-005",
       "refs": [
         "REQ-010",
         "POL-015"
@@ -557,7 +557,7 @@
           "policy": "POL-017"
         }
       ],
-      "screen": null,
+      "screen": "SCR-005",
       "refs": [
         "REQ-012",
         "REQ-021",
@@ -612,7 +612,7 @@
           "policy": "POL-018"
         }
       ],
-      "screen": null,
+      "screen": "SCR-006",
       "refs": [
         "REQ-013",
         "POL-018"
@@ -664,7 +664,7 @@
           "policy": "POL-018"
         }
       ],
-      "screen": null,
+      "screen": "SCR-006",
       "refs": [
         "REQ-013",
         "POL-011",
@@ -684,12 +684,19 @@
           "to": "UF-031",
           "condition": "영향받는 항목과 판정을 다 확인한다",
           "policy": "POL-019"
+        },
+        {
+          "to": "UF-012",
+          "condition": "영향받는 항목을 눌러 그 항목으로 간다",
+          "policy": "POL-019"
         }
       ],
-      "screen": null,
+      "screen": "SCR-007",
       "refs": [
         "REQ-014",
-        "POL-019"
+        "REQ-006",
+        "POL-019",
+        "POL-010"
       ],
       "origin": "ai",
       "updated_at": "2026-11-26"
@@ -701,7 +708,7 @@
       "step_type": "완료",
       "actor": "기획자",
       "next": [],
-      "screen": null,
+      "screen": "SCR-003",
       "refs": [
         "REQ-005",
         "REQ-006",
@@ -718,7 +725,7 @@
       "step_type": "완료",
       "actor": "기획자",
       "next": [],
-      "screen": null,
+      "screen": "SCR-004",
       "refs": [
         "REQ-008",
         "POL-013",
@@ -734,7 +741,7 @@
       "step_type": "완료",
       "actor": "개발·QA 담당자",
       "next": [],
-      "screen": null,
+      "screen": "SCR-005",
       "refs": [
         "REQ-012",
         "POL-017"
@@ -749,7 +756,7 @@
       "step_type": "완료",
       "actor": "기획자",
       "next": [],
-      "screen": null,
+      "screen": "SCR-007",
       "refs": [
         "REQ-013",
         "REQ-014",
