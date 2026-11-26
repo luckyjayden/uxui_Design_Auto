@@ -192,6 +192,39 @@
       "result": "완료",
       "attempt": 1,
       "note": "WU-002 문서와 플로우 보기(SCR-003 영역 6개, SCR-004 영역 7개). STORYBOARD.md 0.3.0. 기존 블록 5종을 쓰고 등록 요청 4건(BRQ-0007~0010)을 새로 냈습니다. BRQ-0001~0006은 자리마다 견준 끝에 맞는 것이 없어 재사용하지 않았고 근거를 6절에 표로 적었습니다. BRQ-0008은 SCR-003-A04와 SCR-004-A04가 함께 씁니다. WU-001에서 알림 줄을 가를 때 쓴 기준표를 그대로 대었더니 모든 칸이 같아 가르지 않았습니다. 사람 확인이 필요합니다. WU-001 산출물과 선행 문서는 고치지 않았고 총괄이 직접 대조했습니다."
+    },
+    {
+      "run_id": "RUN-009",
+      "agent": "screen",
+      "session": "feee3262-0820-4a54-a173-4993b979b9bb",
+      "work_units": [
+        "WU-003"
+      ],
+      "started_at": "2026-11-26T17:21:19+09:00",
+      "finished_at": "2026-11-26T17:38:00+09:00",
+      "read": [
+        "projects/ux-ai-studio/PRD.md",
+        "projects/ux-ai-studio/requirements.json",
+        "projects/ux-ai-studio/POLICY.md",
+        "projects/ux-ai-studio/policies.json",
+        "projects/ux-ai-studio/USER-FLOW.md",
+        "projects/ux-ai-studio/user-flow.json",
+        "projects/ux-ai-studio/WORKFLOW.md",
+        "projects/ux-ai-studio/workflow.json",
+        "projects/ux-ai-studio/IA.md",
+        "projects/ux-ai-studio/ia.json",
+        "projects/ux-ai-studio/STORYBOARD.md",
+        "projects/ux-ai-studio/screens/",
+        "docs/08-data-spec.md",
+        "reference/uxui-registry-mock/blocks/"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/screens/SCR-005.json",
+        "projects/ux-ai-studio/STORYBOARD.md"
+      ],
+      "result": "완료",
+      "attempt": 1,
+      "note": "WU-003 화면설계서 보기(SCR-005, 영역 9개, state 키 13개). STORYBOARD.md 0.4.0. 라이브러리 블록은 새로 쓴 것이 없고 앞 작업 단위가 쓴 넷을 받아 썼습니다. 등록 요청은 새로 셋(BRQ-0011 와이어프레임, BRQ-0012 디스크립션·예외 패널, BRQ-0013 블록 참조 목록), 재사용 둘(BRQ-0008 참조 패널, BRQ-0010 내보내기 상태 줄). 새 요청이 6 → 4 → 3으로 줄었습니다. 누적 영역 33개 중 등록 요청 16개, 요청 13건. BRQ-0008은 이제 영역 셋이, BRQ-0010은 둘이 함께 씁니다. 가르지 않은 근거와 BRQ-0012·0013을 BRQ-0008에 얹지 않은 근거를 7절에 표로 적었습니다. 사람 확인이 필요합니다. 앞 작업 단위 산출물과 선행 문서는 변경 0줄이며 총괄이 직접 대조했습니다."
     }
   ]
 }
