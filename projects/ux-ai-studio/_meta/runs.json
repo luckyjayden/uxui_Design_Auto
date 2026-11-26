@@ -98,6 +98,37 @@
       "result": "완료",
       "attempt": 1,
       "note": "화면 7개(SCR-001~007), 작업 단위 4개(WU-001~004). user-flow.json은 screen 필드 22개만 채웠고 다른 필드와 version은 건드리지 않았습니다. 분기 9개와 이탈 4개는 null로 두었습니다. 실행 도중 user-flow.json을 다른 세션(uxiu-design-auto-d5)과 나눠 쓰는 합의가 있었습니다."
+    },
+    {
+      "run_id": "RUN-006",
+      "agent": "screen",
+      "session": "feee3262-0820-4a54-a173-4993b979b9bb",
+      "work_units": ["WU-001"],
+      "started_at": "2026-11-26T16:04:04+09:00",
+      "finished_at": "2026-11-26T16:11:00+09:00",
+      "read": [
+        "projects/ux-ai-studio/PRD.md",
+        "projects/ux-ai-studio/requirements.json",
+        "projects/ux-ai-studio/POLICY.md",
+        "projects/ux-ai-studio/policies.json",
+        "projects/ux-ai-studio/USER-FLOW.md",
+        "projects/ux-ai-studio/user-flow.json",
+        "projects/ux-ai-studio/WORKFLOW.md",
+        "projects/ux-ai-studio/workflow.json",
+        "projects/ux-ai-studio/IA.md",
+        "projects/ux-ai-studio/ia.json",
+        "docs/07-screen-spec.md",
+        "docs/08-data-spec.md",
+        "reference/uxui-registry-mock/blocks/"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/screens/SCR-001.json",
+        "projects/ux-ai-studio/screens/SCR-002.json",
+        "projects/ux-ai-studio/STORYBOARD.md"
+      ],
+      "result": "완료",
+      "attempt": 1,
+      "note": "자물쇠를 쓰는 첫 실행입니다. SB를 '생성 중'으로 쥐고 session을 적었습니다. 에이전트가 세 파일을 다 쓴 뒤 보고 직전에 API 오류(절전 진입)로 끊겼습니다. 산출물은 온전하고 완료 게이트를 통과해, 총괄이 참조 무결성·예외·interactions의 set·props 키·등록 요청 번호를 직접 검수하고 채택했습니다. 영역 11개(SCR-001 넷, SCR-002 일곱), 기존 블록 4종, 등록 요청 5건."
     }
   ]
 }

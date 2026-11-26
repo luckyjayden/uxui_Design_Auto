@@ -46,11 +46,32 @@
     },
     {
       "doc": "SB",
-      "state": "대기",
+      "state": "검토 필요",
       "approved_by": null,
       "approved_at": null,
       "pr": null,
-      "work_units": []
+      "work_units": [
+        {
+          "id": "WU-001",
+          "title": "프로젝트와 진행 현황",
+          "state": "검토 필요"
+        },
+        {
+          "id": "WU-002",
+          "title": "문서와 플로우 보기",
+          "state": "대기"
+        },
+        {
+          "id": "WU-003",
+          "title": "화면설계서 보기",
+          "state": "대기"
+        },
+        {
+          "id": "WU-004",
+          "title": "검증과 변경 영향",
+          "state": "대기"
+        }
+      ]
     }
   ]
 }
