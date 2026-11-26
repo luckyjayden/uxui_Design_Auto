@@ -1,0 +1,838 @@
+{
+  "doc": "UF",
+  "version": "0.2.0",
+  "items": [
+    {
+      "id": "UF-001",
+      "title": "기획자가 뷰어에 들어온다",
+      "description": "기획자가 UX AI Studio를 열면 볼 수 있는 프로젝트의 목록이 먼저 보인다.",
+      "step_type": "진입",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-004",
+          "condition": "프로젝트 목록을 연다",
+          "policy": "POL-008"
+        }
+      ],
+      "screen": "SCR-001",
+      "refs": [
+        "REQ-001",
+        "POL-008",
+        "POL-020"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-002",
+      "title": "개발·QA 담당자가 산출물을 받으러 들어온다",
+      "description": "개발·QA 담당자가 승인된 화면설계서를 넘겨받으려고 뷰어를 연다.",
+      "step_type": "진입",
+      "actor": "개발·QA 담당자",
+      "next": [
+        {
+          "to": "UF-004",
+          "condition": "승인된 화면설계서가 있는 프로젝트를 찾는다",
+          "policy": "POL-008"
+        }
+      ],
+      "screen": "SCR-001",
+      "refs": [
+        "REQ-012",
+        "POL-005",
+        "POL-008"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-003",
+      "title": "UI 블록 담당자가 블록 사용 현황을 보러 들어온다",
+      "description": "UI 블록 담당자가 화면이 어떤 블록을 썼고 등록 요청이 무엇인지 확인하려고 뷰어를 연다.",
+      "step_type": "진입",
+      "actor": "UI 블록 담당자",
+      "next": [
+        {
+          "to": "UF-004",
+          "condition": "블록을 쓴 프로젝트를 찾는다",
+          "policy": "POL-008"
+        }
+      ],
+      "screen": "SCR-001",
+      "refs": [
+        "REQ-011",
+        "POL-008",
+        "POL-016"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-004",
+      "title": "볼 수 있는 프로젝트가 있는가",
+      "description": "저장소를 읽을 권한과 프로젝트 폴더에 따라 목록을 보일 수 있는지가 갈린다.",
+      "step_type": "분기",
+      "actor": "기획자, 개발·QA 담당자, UI 블록 담당자",
+      "next": [
+        {
+          "to": "UF-005",
+          "condition": "볼 수 있는 프로젝트가 하나 이상 있다",
+          "policy": "POL-008"
+        },
+        {
+          "to": "UF-033",
+          "condition": "저장소를 읽을 권한이 없거나 볼 수 있는 프로젝트가 하나도 없다",
+          "policy": "POL-020"
+        }
+      ],
+      "screen": null,
+      "refs": [
+        "REQ-001",
+        "REQ-019",
+        "POL-008",
+        "POL-020"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-005",
+      "title": "프로젝트를 골라 진행 현황으로 들어간다",
+      "description": "목록에서 이름과 현재 진행 상태를 보고 프로젝트 하나를 고른다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-006",
+          "condition": "프로젝트를 고른다",
+          "policy": "POL-008"
+        }
+      ],
+      "screen": "SCR-001",
+      "refs": [
+        "REQ-001",
+        "REQ-002",
+        "POL-008"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-006",
+      "title": "일곱 단계의 진행 상태를 본다",
+      "description": "정의서·요구사항·정책·플로우·정보 구조도·화면설계서·검증의 상태와 지금 진행 중인 단계를 한 화면에서 읽는다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-007",
+          "condition": "단계별 상태를 다 읽는다",
+          "policy": "POL-006"
+        }
+      ],
+      "screen": "SCR-002",
+      "refs": [
+        "REQ-002",
+        "POL-005",
+        "POL-006"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-007",
+      "title": "사람을 기다리는 것이 있는가",
+      "description": "확정 대기·승인 대기·선택 대기가 있는지에 따라 다음에 할 일이 갈린다.",
+      "step_type": "분기",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-008",
+          "condition": "확정 대기·승인 대기·선택 대기 중 하나가 있다",
+          "policy": "POL-007"
+        },
+        {
+          "to": "UF-009",
+          "condition": "대기 없음",
+          "policy": "POL-007"
+        }
+      ],
+      "screen": null,
+      "refs": [
+        "REQ-003",
+        "POL-007"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-008",
+      "title": "기다리는 자리의 링크를 연다",
+      "description": "고칠 것은 GitHub으로, 실행이나 수정 요청은 세션으로 가는 링크를 누른다. 링크는 새 탭에서 열리고 뷰어의 화면은 그대로 남는다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-032",
+          "condition": "세션이나 GitHub에서 이어서 한다",
+          "policy": "POL-003"
+        },
+        {
+          "to": "UF-009",
+          "condition": "링크만 열어 두고 뷰어에서 계속 본다",
+          "policy": "POL-003"
+        }
+      ],
+      "screen": "SCR-002",
+      "refs": [
+        "REQ-004",
+        "REQ-016",
+        "POL-001",
+        "POL-002",
+        "POL-003"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-009",
+      "title": "볼 산출물을 고른다",
+      "description": "진행 현황의 단계에서 읽을 산출물 하나를 고른다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-010",
+          "condition": "단계 하나를 고른다",
+          "policy": "POL-006"
+        }
+      ],
+      "screen": "SCR-002",
+      "refs": [
+        "REQ-005",
+        "POL-004",
+        "POL-006"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-010",
+      "title": "그 산출물을 읽을 수 있는가",
+      "description": "고른 단계의 파일이 있는지, 읽히는지에 따라 갈린다. 뷰어는 파일에 없는 값을 만들지 않는다.",
+      "step_type": "분기",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-011",
+          "condition": "파일을 읽었다",
+          "policy": "POL-004"
+        },
+        {
+          "to": "UF-034",
+          "condition": "그 단계의 파일이 아직 없어 '비어 있음'으로 보인다",
+          "policy": "POL-004"
+        },
+        {
+          "to": "UF-035",
+          "condition": "파일을 읽지 못했거나 JSON이 깨져 있다",
+          "policy": "POL-004"
+        }
+      ],
+      "screen": null,
+      "refs": [
+        "REQ-005",
+        "REQ-020",
+        "POL-003",
+        "POL-004"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-011",
+      "title": "어떤 산출물인가",
+      "description": "산출물의 종류에 따라 보는 화면이 갈린다.",
+      "step_type": "분기",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-012",
+          "condition": "요구사항·정책·정보 구조도처럼 항목 목록으로 읽는 문서",
+          "policy": "POL-009"
+        },
+        {
+          "to": "UF-015",
+          "condition": "유저 플로우와 워크 플로우",
+          "policy": "POL-012"
+        },
+        {
+          "to": "UF-019",
+          "condition": "화면설계서",
+          "policy": "POL-014"
+        },
+        {
+          "to": "UF-024",
+          "condition": "검증 결과",
+          "policy": "POL-018"
+        },
+        {
+          "to": "UF-027",
+          "condition": "변경 영향",
+          "policy": "POL-019"
+        }
+      ],
+      "screen": null,
+      "refs": [
+        "REQ-005",
+        "POL-006",
+        "POL-009",
+        "POL-012",
+        "POL-014",
+        "POL-018",
+        "POL-019"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-012",
+      "title": "문서를 항목 단위로 읽는다",
+      "description": "항목마다 ID와 본문을 읽고 AI가 만든 것인지 사람이 고친 것인지 구분해 본다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-013",
+          "condition": "항목 하나를 고른다",
+          "policy": "POL-009"
+        }
+      ],
+      "screen": "SCR-003",
+      "refs": [
+        "REQ-005",
+        "POL-005",
+        "POL-009"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-013",
+      "title": "항목의 상위·하위 참조를 본다",
+      "description": "고른 항목이 참조하는 상위 항목과 그 항목을 참조하는 하위 항목을 함께 본다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-014",
+          "condition": "참조 목록에서 하나를 고른다",
+          "policy": "POL-010"
+        }
+      ],
+      "screen": "SCR-003",
+      "refs": [
+        "REQ-006",
+        "POL-010"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-014",
+      "title": "고른 참조가 연결되어 있는가",
+      "description": "참조한 ID가 저장소에 있는지에 따라 이동할 수 있는지가 갈린다.",
+      "step_type": "분기",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-013",
+          "condition": "연결됨. 그 항목으로 옮겨 가 다시 참조를 본다",
+          "policy": "POL-011"
+        },
+        {
+          "to": "UF-012",
+          "condition": "끊김. 이동하지 않고 문서로 돌아와 다른 항목을 읽는다",
+          "policy": "POL-011"
+        },
+        {
+          "to": "UF-028",
+          "condition": "연결된 항목이 없어 더 따라갈 곳이 없다",
+          "policy": "POL-010"
+        }
+      ],
+      "screen": null,
+      "refs": [
+        "REQ-006",
+        "REQ-013",
+        "POL-010",
+        "POL-011"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-015",
+      "title": "플로우 다이어그램을 본다",
+      "description": "유저 플로우와 워크 플로우를 저장소의 JSON 그대로 그린 다이어그램으로 본다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-016",
+          "condition": "분기에 붙은 정책 ID를 본다",
+          "policy": "POL-012"
+        }
+      ],
+      "screen": "SCR-004",
+      "refs": [
+        "REQ-007",
+        "POL-012"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-016",
+      "title": "분기에 걸린 정책으로 옮겨 간다",
+      "description": "분기 연결에 적힌 조건과 정책 ID를 보고, 정책 ID를 눌러 그 정책 항목으로 간다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-017",
+          "condition": "정책을 확인하고 다이어그램으로 돌아온다",
+          "policy": "POL-012"
+        }
+      ],
+      "screen": "SCR-004",
+      "refs": [
+        "REQ-007",
+        "POL-010",
+        "POL-012"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-017",
+      "title": "유저 플로우 PNG 내보내기를 누른다",
+      "description": "보고 있는 유저 플로우 다이어그램을 PNG로 내려받는다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-018",
+          "condition": "내보내기를 누른다",
+          "policy": "POL-013"
+        }
+      ],
+      "screen": "SCR-004",
+      "refs": [
+        "REQ-008",
+        "REQ-021",
+        "POL-013",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-018",
+      "title": "PNG가 내려받아졌는가",
+      "description": "내보내기 결과에 따라 갈린다.",
+      "step_type": "분기",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-029",
+          "condition": "PNG 파일 하나가 내려받아졌다",
+          "policy": "POL-013"
+        },
+        {
+          "to": "UF-017",
+          "condition": "내보내지 못해 다시 시도한다",
+          "policy": "POL-013"
+        },
+        {
+          "to": "UF-015",
+          "condition": "다이어그램이 비어 있어 내보내기를 누를 수 없다",
+          "policy": "POL-013"
+        }
+      ],
+      "screen": null,
+      "refs": [
+        "REQ-008",
+        "POL-013"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-019",
+      "title": "화면설계서를 동작하는 화면으로 본다",
+      "description": "화면설계서 JSON으로 그린 화면을 눌러 보며 인터랙션을 확인한다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-020",
+          "condition": "영역 하나를 고른다",
+          "policy": "POL-014"
+        }
+      ],
+      "screen": "SCR-005",
+      "refs": [
+        "REQ-009",
+        "REQ-017",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-020",
+      "title": "영역의 정책·디스크립션·예외를 함께 읽는다",
+      "description": "고른 영역에 걸린 정책과 디스크립션, 예외를 화면과 나란히 읽고 ID를 눌러 그 항목으로 간다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-021",
+          "condition": "영역이 쓴 블록을 본다",
+          "policy": "POL-015"
+        }
+      ],
+      "screen": "SCR-005",
+      "refs": [
+        "REQ-010",
+        "POL-015"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-021",
+      "title": "영역이 쓴 블록이 어떤 것인가",
+      "description": "영역이 참조한 블록이 라이브러리의 것인지, 등록 요청 중인지, 알 수 없는 것인지에 따라 갈린다.",
+      "step_type": "분기",
+      "actor": "UI 블록 담당자",
+      "next": [
+        {
+          "to": "UF-022",
+          "condition": "라이브러리에 있는 블록이다",
+          "policy": "POL-016"
+        },
+        {
+          "to": "UF-022",
+          "condition": "등록 요청 중인 블록이라 요청 번호를 함께 본다",
+          "policy": "POL-016"
+        },
+        {
+          "to": "UF-032",
+          "condition": "라이브러리에도 등록 요청에도 없는 알 수 없는 블록이라 세션에 알린다",
+          "policy": "POL-016"
+        }
+      ],
+      "screen": null,
+      "refs": [
+        "REQ-011",
+        "REQ-018",
+        "POL-016"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-022",
+      "title": "화면설계서 PPTX 내보내기를 누른다",
+      "description": "화면설계서를 PPTX로 내보내 개발·QA에 넘긴다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-023",
+          "condition": "내보내기를 누른다",
+          "policy": "POL-017"
+        }
+      ],
+      "screen": "SCR-005",
+      "refs": [
+        "REQ-012",
+        "REQ-021",
+        "POL-017",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-023",
+      "title": "PPTX가 내려받아졌는가",
+      "description": "내보내기 결과에 따라 갈린다.",
+      "step_type": "분기",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-030",
+          "condition": "PPTX 파일 하나가 내려받아졌다",
+          "policy": "POL-017"
+        },
+        {
+          "to": "UF-022",
+          "condition": "내보내지 못해 다시 시도한다",
+          "policy": "POL-017"
+        },
+        {
+          "to": "UF-019",
+          "condition": "내보낼 수 있는 것이 없어 내보내기가 보이지 않는다",
+          "policy": "POL-021"
+        }
+      ],
+      "screen": null,
+      "refs": [
+        "REQ-012",
+        "POL-017",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-024",
+      "title": "검증 결과 목록을 본다",
+      "description": "검증 규칙마다 통과와 실패를, 실패한 항목의 ID를 목록으로 본다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-025",
+          "condition": "규칙별 결과를 다 읽는다",
+          "policy": "POL-018"
+        }
+      ],
+      "screen": "SCR-006",
+      "refs": [
+        "REQ-013",
+        "POL-018"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-025",
+      "title": "실패한 항목이 있는가",
+      "description": "검증 결과에 따라 다음에 볼 것이 갈린다.",
+      "step_type": "분기",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-026",
+          "condition": "실패한 규칙과 항목이 있다",
+          "policy": "POL-018"
+        },
+        {
+          "to": "UF-027",
+          "condition": "규칙이 모두 통과여서 변경 영향을 본다",
+          "policy": "POL-018"
+        },
+        {
+          "to": "UF-006",
+          "condition": "검증을 아직 돌리지 않아 '검증 결과가 없습니다'로 보인다",
+          "policy": "POL-018"
+        }
+      ],
+      "screen": null,
+      "refs": [
+        "REQ-013",
+        "POL-018"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-026",
+      "title": "실패 항목으로 옮겨 간다",
+      "description": "실패한 항목을 눌러 해당 문서 항목이나 화면으로 간다. 끊긴 참조는 누를 수 없다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-027",
+          "condition": "고칠 곳을 확인한다",
+          "policy": "POL-018"
+        }
+      ],
+      "screen": "SCR-006",
+      "refs": [
+        "REQ-013",
+        "POL-011",
+        "POL-018"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-027",
+      "title": "변경 영향 목록에서 판정을 본다",
+      "description": "무엇이 바뀌었고 그 때문에 어디가 수정 필요·검토 필요인지 목록으로 본다.",
+      "step_type": "선택",
+      "actor": "기획자",
+      "next": [
+        {
+          "to": "UF-031",
+          "condition": "영향받는 항목과 판정을 다 확인한다",
+          "policy": "POL-019"
+        },
+        {
+          "to": "UF-012",
+          "condition": "영향받는 항목을 눌러 그 항목으로 간다",
+          "policy": "POL-019"
+        }
+      ],
+      "screen": "SCR-007",
+      "refs": [
+        "REQ-014",
+        "REQ-006",
+        "POL-019",
+        "POL-010"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-028",
+      "title": "참조 확인을 마친다",
+      "description": "항목과 그 상위·하위 참조를 다 따라가 보고 문서 사이의 연결을 확인한 상태로 끝난다.",
+      "step_type": "완료",
+      "actor": "기획자",
+      "next": [],
+      "screen": "SCR-003",
+      "refs": [
+        "REQ-005",
+        "REQ-006",
+        "POL-009",
+        "POL-010"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-029",
+      "title": "PNG를 받아 다른 도구에서 쓴다",
+      "description": "내려받은 유저 플로우 PNG를 뷰어 밖의 문서나 발표 자료에 쓴다.",
+      "step_type": "완료",
+      "actor": "기획자",
+      "next": [],
+      "screen": "SCR-004",
+      "refs": [
+        "REQ-008",
+        "POL-013",
+        "POL-021"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-030",
+      "title": "PPTX를 받아 개발·QA에 넘긴다",
+      "description": "내려받은 화면설계서 PPTX를 개발과 테스트에 쓴다.",
+      "step_type": "완료",
+      "actor": "개발·QA 담당자",
+      "next": [],
+      "screen": "SCR-005",
+      "refs": [
+        "REQ-012",
+        "POL-017"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-031",
+      "title": "고쳐야 할 곳을 추려 낸다",
+      "description": "검증 실패와 변경 영향에서 고쳐야 할 항목을 추려, 세션이나 GitHub에서 할 일을 정한 상태로 끝난다.",
+      "step_type": "완료",
+      "actor": "기획자",
+      "next": [],
+      "screen": "SCR-007",
+      "refs": [
+        "REQ-013",
+        "REQ-014",
+        "POL-018",
+        "POL-019"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-032",
+      "title": "뷰어 밖에서 고치거나 승인한다",
+      "description": "편집·승인·실행은 뷰어 안에서 하지 않는다. 사용자가 링크를 따라 세션이나 GitHub으로 옮겨 가면 뷰어의 흐름은 여기서 끝난다.",
+      "step_type": "이탈",
+      "actor": "기획자",
+      "next": [],
+      "screen": null,
+      "refs": [
+        "REQ-004",
+        "REQ-015",
+        "REQ-016",
+        "POL-001",
+        "POL-002",
+        "POL-003"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-033",
+      "title": "볼 수 있는 프로젝트가 없어 떠난다",
+      "description": "저장소를 읽을 권한이 없거나 프로젝트가 하나도 없어 '볼 수 있는 프로젝트가 없습니다'만 보고 나간다.",
+      "step_type": "이탈",
+      "actor": "기획자, 개발·QA 담당자, UI 블록 담당자",
+      "next": [],
+      "screen": null,
+      "refs": [
+        "REQ-001",
+        "REQ-019",
+        "POL-008",
+        "POL-020"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-034",
+      "title": "아직 만들어지지 않은 단계라 보기를 멈춘다",
+      "description": "고른 단계의 파일이 아직 없어 '비어 있음'과 '아직 만들어지지 않았습니다'만 보고 그 산출물 보기를 멈춘다.",
+      "step_type": "이탈",
+      "actor": "기획자",
+      "next": [],
+      "screen": null,
+      "refs": [
+        "REQ-005",
+        "REQ-020",
+        "POL-003",
+        "POL-004"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    },
+    {
+      "id": "UF-035",
+      "title": "파일을 읽지 못해 보기를 멈춘다",
+      "description": "파일을 읽지 못했거나 JSON이 깨져 '읽지 못했습니다'를 보고 그 산출물 보기를 멈춘다. 화면의 나머지는 그대로 남는다.",
+      "step_type": "이탈",
+      "actor": "기획자",
+      "next": [],
+      "screen": null,
+      "refs": [
+        "REQ-020",
+        "POL-004"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-26"
+    }
+  ]
+}
