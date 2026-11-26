@@ -4,38 +4,38 @@
   "items": [
     {
       "doc": "REQ",
-      "state": "검토 필요",
-      "approved_by": null,
-      "approved_at": null,
-      "pr": null
+      "state": "승인",
+      "approved_by": "luckyjayden",
+      "approved_at": "2026-11-26",
+      "pr": 4
     },
     {
       "doc": "POL",
-      "state": "검토 필요",
-      "approved_by": null,
-      "approved_at": null,
-      "pr": null
+      "state": "승인",
+      "approved_by": "luckyjayden",
+      "approved_at": "2026-11-26",
+      "pr": 4
     },
     {
       "doc": "UF",
-      "state": "검토 필요",
-      "approved_by": null,
-      "approved_at": null,
-      "pr": null
+      "state": "승인",
+      "approved_by": "luckyjayden",
+      "approved_at": "2026-11-26",
+      "pr": 4
     },
     {
       "doc": "WF",
-      "state": "검토 필요",
-      "approved_by": null,
-      "approved_at": null,
-      "pr": null
+      "state": "승인",
+      "approved_by": "luckyjayden",
+      "approved_at": "2026-11-26",
+      "pr": 4
     },
     {
       "doc": "IA",
-      "state": "검토 필요",
-      "approved_by": null,
-      "approved_at": null,
-      "pr": null
+      "state": "승인",
+      "approved_by": "luckyjayden",
+      "approved_at": "2026-11-26",
+      "pr": 4
     },
     {
       "doc": "QA",
