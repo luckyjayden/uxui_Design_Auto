@@ -1,7 +1,7 @@
 .slot {
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-4);
   overflow: hidden;
 }
 
@@ -66,7 +66,7 @@
   margin: 0;
   padding: var(--space-16);
   border: 1px dashed var(--color-border-default);
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-4);
   color: var(--color-text-secondary);
   font-size: var(--type-caption-s-size);
 }
@@ -92,7 +92,7 @@
   flex-shrink: 0;
   padding: 2px var(--space-8);
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-4);
   background: var(--color-bg-surface);
   font: inherit;
   font-size: var(--type-caption-s-size);

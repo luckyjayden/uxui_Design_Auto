@@ -1,0 +1,102 @@
+{
+  "doc": "UI",
+  "version": "0.1.0",
+  "figma": {
+    "file_key": "6sNGJRUgMlVSCDuym6e08z",
+    "file_name": "UX AI Studio 블록",
+    "page": "block",
+    "synced_at": "2026-11-27",
+    "url": "https://www.figma.com/design/6sNGJRUgMlVSCDuym6e08z/?node-id=1-2"
+  },
+  "note": "뷰어가 쓰는 블록의 목록이다. 데이터 규격 5절이 예고한 blocks.json이며 파이프라인 v2의 07 UI Implementation이 한 줄씩 채운다. 1차는 레지스트리를 기다리지 않고 뷰어가 직접 만든다(DEV 8절). path·props·block_id·version을 적어 두면 나중에 레지스트리의 코드 연결 정보로 그대로 올라간다.",
+  "items": [
+    {
+      "block_id": "BLK-0001",
+      "name": "글로벌 헤더",
+      "version": "2.2.0",
+      "range": "^2",
+      "source": "library",
+      "state": "검토 필요",
+      "component": "GlobalHeader",
+      "path": "viewer/src/blocks/GlobalHeader/GlobalHeader.tsx",
+      "figma_node": "1:242",
+      "props": [
+        "logo",
+        "title",
+        "showBack",
+        "showSearch",
+        "actions",
+        "actionsHref",
+        "readAt",
+        "onRefresh",
+        "onBack",
+        "onSearch"
+      ],
+      "areas": [
+        "SCR-001-A01",
+        "SCR-002-A01",
+        "SCR-003-A01",
+        "SCR-004-A01",
+        "SCR-005-A01",
+        "SCR-006-A01",
+        "SCR-007-A01"
+      ],
+      "assets": [
+        "viewer/src/assets/icons/chevron-left.svg",
+        "viewer/src/assets/icons/search.svg",
+        "viewer/src/assets/icons/clock.svg",
+        "viewer/src/assets/icons/refresh.svg",
+        "viewer/src/assets/icons/alert-circle.svg",
+        "viewer/src/assets/icons/external-link.svg"
+      ],
+      "note": "레지스트리는 2.1.0이고 BRQ-0016이 readAt·onRefresh를 더해 2.2.0이 됐다. Figma의 컴포넌트 설명도 2.2.0으로 적혀 있다. Minor라 화면이 적어 둔 ^2 안이고 영역의 block.id는 BLK-0001 그대로다. actionsHref와 onSearch 둘은 설계 props에 없는 제안이다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "block_id": "BRQ-0011",
+      "name": "와이어프레임",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "Wireframe",
+      "path": "viewer/src/render/Wireframe.tsx",
+      "figma_node": "5:470",
+      "props": [
+        "areas",
+        "selectedAreaId",
+        "onSelectArea",
+        "previewState",
+        "onPreviewStateChange",
+        "unrenderedMessage",
+        "emptyMessage"
+      ],
+      "areas": ["SCR-005-A03"],
+      "assets": [],
+      "note": "블록이라기보다 렌더러다. 블록 ID → 컴포넌트 대응표를 드는 유일한 자리라 blocks/가 아니라 render/에 둔다. 어느 계층에 둘지는 아직 미정 사항이다(COV 3.5절). 디자인은 아직 대조하지 않았다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    }
+  ],
+  "pending": [
+    { "block_id": "BLK-0020", "name": "탭 콘텐츠", "figma_node": "1:286", "priority": "P0", "task": "A-3" },
+    { "block_id": "BLK-0003", "name": "버튼 그룹", "figma_node": "1:293", "priority": "P0", "task": "A-4" },
+    { "block_id": "BLK-0012", "name": "빈 상태", "figma_node": "1:311", "priority": "P0", "task": "A-5" },
+    { "block_id": "BRQ-0008", "name": "항목 참조 패널", "figma_node": "4:361", "priority": "P0", "task": "A-6", "shares": ["BRQ-0013", "BRQ-0015"] },
+    { "block_id": "BRQ-0013", "name": "블록 참조 목록", "figma_node": "4:361", "priority": "P0", "task": "A-7", "shares_with": "BRQ-0008" },
+    { "block_id": "BRQ-0012", "name": "영역 디스크립션·예외 패널", "figma_node": "5:358", "priority": "P0", "task": "A-8" },
+    { "block_id": "BRQ-0010", "name": "내보내기 상태 줄", "figma_node": "4:408", "priority": "P0", "task": "A-9" },
+    { "block_id": "BRQ-0002", "name": "요약 수치", "figma_node": "6:587", "priority": "P1", "task": "A-10" },
+    { "block_id": "BRQ-0007", "name": "문서 항목 목록", "figma_node": "8:801", "priority": "P1", "task": "A-11", "shares": ["BRQ-0014"] },
+    { "block_id": "BRQ-0014", "name": "판정 결과 목록", "figma_node": "8:801", "priority": "P1", "task": "A-12", "shares_with": "BRQ-0007" },
+    { "block_id": "BRQ-0001", "name": "프로젝트 카드 목록", "figma_node": "6:486", "priority": "P1", "task": "A-13" },
+    { "block_id": "BRQ-0004", "name": "단계 요약 카드", "figma_node": "7:681", "priority": "P1", "task": "A-14" },
+    { "block_id": "BRQ-0003", "name": "일곱 단계 진행 표시", "figma_node": "6:737", "priority": "P1", "task": "A-15" },
+    { "block_id": "BRQ-0005", "name": "대기 알림 줄", "figma_node": "7:744", "priority": "P1", "task": "A-16" },
+    { "block_id": "BRQ-0006", "name": "변경 영향 알림 줄", "figma_node": "7:782", "priority": "P1", "task": "A-17" },
+    { "block_id": "BRQ-0015", "name": "고칠 곳 목록", "figma_node": "4:361", "priority": "P1", "task": "A-18", "shares_with": "BRQ-0008" },
+    { "block_id": "BRQ-0009", "name": "플로우 다이어그램", "figma_node": "9:849", "priority": "P1", "task": "A-19" },
+    { "block_id": "BLK-0013", "name": "무한 스크롤 목록", "figma_node": null, "priority": "P2", "task": "A-20", "note": "MVP 밖. 디자인에도 없다" }
+  ]
+}

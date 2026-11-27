@@ -1,50 +1,74 @@
-/* 블록 레지스트리의 spec.tokens 이름을 CSS 변수로 그대로 받는다(DEV 4절).
+/* 디자인 토큰. **값은 Figma에서 왔다.**
  *
+ *   파일  6sNGJRUgMlVSCDuym6e08z  (UX AI Studio 블록)
+ *   읽은 날  2026-11-27
+ *
+ * Figma의 변수 이름이 이미 CSS 변수 꼴(`--color-bg-surface`)이라 그대로 받는다.
  * 블록 컴포넌트는 색·여백·타이포에 값을 직접 적지 않고 이 변수만 쓴다.
- * 변수 이름은 레지스트리의 토큰 이름에서 `/`를 `-`로 바꾼 것이다.
- *   color/bg/surface  →  --color-bg-surface
  *
- * 값은 아직 정해진 것이 없어 **임시로 둔 제안**이다. 레지스트리의 토큰은
- * 이름만 있고 값이 없으며, 디자인 토큰의 실제 값은 Figma에서 와야 한다.
- */
+ * A-0에서는 레지스트리 목업의 토큰 *이름*만 있고 값이 없어 임시로 지어냈다.
+ * 이제 실제 값으로 바꿨다. 늘어난 것은 icon·inverse·disabled·border-strong과
+ * 상태 색의 subtle 짝, 그리고 space-4·radius-4·type/label/m이다. */
 
 :root {
-  /* color — 레지스트리에 쓰인 7개 */
-  --color-brand-primary: #2f5bd7;
-  --color-status-danger: #c0392b;
-  --color-bg-surface: #ffffff;
-  --color-bg-subtle: #f4f6f9;
-  --color-text-primary: #16191f;
-  --color-text-secondary: #5c6676;
-  --color-border-default: #d9dee7;
+  /* ---- color ---- */
+  /* 단색 체계다. brand-primary가 text-primary와 같은 먹색이다. */
+  --color-brand-primary: #1a1a1a;
 
-  /* spacing — 4개 */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #5c5c5c;
+  --color-text-disabled: #a3a3a3;
+  --color-text-inverse: #ffffff;
+
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f5f5f5;
+
+  --color-border-default: #e3e3e3;
+  --color-border-strong: #1a1a1a;
+
+  --color-icon-default: #1a1a1a;
+  --color-icon-muted: #8a8a8a;
+
+  /* 상태 색은 짙은 것과 옅은 것이 짝이다. 옅은 것은 배지와 알림 줄의 바탕이다. */
+  --color-status-info: #2759c4;
+  --color-status-info-subtle: #eaf0fb;
+  --color-status-warning: #9a5b00;
+  --color-status-warning-subtle: #fdf3e1;
+  --color-status-success: #1f7a4d;
+  --color-status-success-subtle: #e8f4ee;
+  --color-status-danger: #c2372b;
+  --color-status-danger-subtle: #fbedeb;
+
+  /* ---- spacing ---- */
+  --space-4: 4px;
   --space-8: 8px;
   --space-12: 12px;
   --space-16: 16px;
   --space-24: 24px;
 
-  /* radius — 2개 */
-  --radius-0: 0;
-  --radius-8: 8px;
+  /* ---- radius ---- */
+  --radius-4: 4px;
 
-  /* typography — 3개 */
-  --type-title-m-size: 18px;
-  --type-title-m-weight: 650;
-  --type-title-m-line: 1.4;
+  /* ---- typography ---- */
+  --font-sans: "Noto Sans KR", "Pretendard", "Apple SD Gothic Neo", system-ui,
+    -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, "Roboto Mono", monospace;
 
-  --type-body-m-size: 15px;
+  --type-title-m-size: 16px;
+  --type-title-m-weight: 700;
+  --type-title-m-line: 1.45;
+
+  --type-label-m-size: 13px;
+  --type-label-m-weight: 500;
+  --type-label-m-line: 1.4;
+
+  --type-body-m-size: 14px;
   --type-body-m-weight: 400;
-  --type-body-m-line: 1.6;
+  --type-body-m-line: 1.55;
 
   --type-caption-s-size: 12px;
   --type-caption-s-weight: 400;
-  --type-caption-s-line: 1.5;
-
-  /* 레지스트리에 없지만 뷰어가 쓰는 것. 블록 바깥의 틀에만 쓴다. */
-  --font-sans: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui,
-    -apple-system, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", Menlo, "Roboto Mono", monospace;
+  --type-caption-s-line: 1.45;
 }
 
 * {

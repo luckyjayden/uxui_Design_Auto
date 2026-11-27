@@ -51,8 +51,9 @@ describe("GlobalHeader — 레지스트리 props를 그대로 받는다 (POL-026
 
 describe("GlobalHeader — 읽은 시점과 새로고침 (BRQ-0016, POL-004)", () => {
   it("읽은 시점을 날짜와 시각까지 보인다", () => {
+    // 디자인의 꼴: `11.27 15:20 읽음` (Figma node 1:253)
     render(<GlobalHeader readAt="2026-11-27T09:30:00+09:00" />);
-    expect(query.getByText(/읽은 시점 2026-11-27 \d\d:\d\d/)).toBeInTheDocument();
+    expect(query.getByText(/11\.27 \d\d:\d\d 읽음/)).toBeInTheDocument();
   });
 
   it("읽은 시점이 비어 있으면 시각을 지어내지 않는다", () => {
@@ -63,7 +64,7 @@ describe("GlobalHeader — 읽은 시점과 새로고침 (BRQ-0016, POL-004)", (
   it("읽은 시점이 비어 있어도 새로고침은 누를 수 있다", () => {
     const onRefresh = vi.fn();
     render(<GlobalHeader readAt={null} onRefresh={onRefresh} />);
-    const b = query.getByText("새로고침");
+    const b = query.getByLabelText("새로고침");
     expect(b).toBeEnabled();
     fireEvent.click(b);
     expect(onRefresh).toHaveBeenCalledTimes(1);
@@ -72,7 +73,7 @@ describe("GlobalHeader — 읽은 시점과 새로고침 (BRQ-0016, POL-004)", (
   it("새로고침은 읽은 시점을 지금으로 바꾼다", () => {
     const onRefresh = vi.fn();
     render(<GlobalHeader readAt="2026-01-01T00:00:00Z" onRefresh={onRefresh} />);
-    fireEvent.click(query.getByText("새로고침"));
+    fireEvent.click(query.getByLabelText("새로고침"));
     const passed = onRefresh.mock.calls[0][0] as string;
     expect(new Date(passed).getTime()).toBeGreaterThan(new Date("2026-01-01").getTime());
   });
@@ -82,10 +83,10 @@ describe("GlobalHeader — 읽은 시점과 새로고침 (BRQ-0016, POL-004)", (
       throw new Error("읽지 못함");
     });
     render(<GlobalHeader readAt="2026-11-27T09:30:00+09:00" onRefresh={onRefresh} />);
-    fireEvent.click(query.getByText("새로고침"));
+    fireEvent.click(query.getByLabelText("새로고침"));
     expect(query.getByText("다시 읽지 못했습니다")).toBeInTheDocument();
     // 앞서 읽은 시점이 그대로 남는다
-    expect(query.getByText(/읽은 시점 2026-11-27/)).toBeInTheDocument();
+    expect(query.getByText(/11\.27 \d\d:\d\d 읽음/)).toBeInTheDocument();
   });
 
   it("망가진 시각은 '없음'으로 본다. 지어내지 않는다", () => {
@@ -122,5 +123,49 @@ describe("GlobalHeader — 검색", () => {
     render(<GlobalHeader showSearch onSearch={onSearch} />);
     fireEvent.change(query.getByLabelText("검색"), { target: { value: "ux" } });
     expect(onSearch).toHaveBeenCalledWith("ux");
+  });
+});
+
+describe("GlobalHeader — Figma 디자인과 맞는지", () => {
+  it("로고와 화면 이름 사이에 구분선을 둔다", () => {
+    const { container } = render(<GlobalHeader logo="UX AI Studio" title="프로젝트" />);
+    expect(container.querySelector('[class*="divider"]')).toBeInTheDocument();
+  });
+
+  it("로고만 있으면 구분선을 두지 않는다", () => {
+    const { container } = render(<GlobalHeader logo="UX AI Studio" />);
+    expect(container.querySelector('[class*="divider"]')).not.toBeInTheDocument();
+  });
+
+  it("아이콘을 Figma에서 받은 자산으로 쓴다", () => {
+    const { container } = render(<GlobalHeader showBack showSearch actions="저장소 열기" />);
+    const srcs = [...container.querySelectorAll("img")].map((i) => i.getAttribute("src") ?? "");
+
+    // 뒤로가기·검색·시계·새로고침 넷. Vite가 작은 SVG를 data URI로 인라인하므로
+    // 파일 이름이 아니라 그림의 path로 가린다.
+    expect(srcs).toHaveLength(4);
+    expect(srcs.every((s) => s.startsWith("data:image/svg+xml"))).toBe(true);
+
+    // 임시 Figma 주소가 남아 있으면 안 된다. 7일이면 끊긴다.
+    expect(srcs.every((s) => !s.includes("figma.com"))).toBe(true);
+
+    const joined = srcs.join(" ");
+    expect(joined).toContain("M10%2012L6%208L10%204"); // chevron-left
+    expect(joined).toContain("M14%2014L11.1%2011.1"); // search
+    expect(joined).toContain("M7%203.5V7L9.33333%208.16667"); // clock
+    expect(joined).toContain("M15.3333%202.66667V6.66667H11.3333"); // refresh
+  });
+
+  it("아이콘 크기를 디자인대로 둔다", () => {
+    const { container } = render(<GlobalHeader showBack />);
+    const back = container.querySelector('[aria-label="뒤로가기"] img');
+    expect(back).toHaveAttribute("width", "16");
+    const clockImg = container.querySelector('[class*="readAt"] img');
+    expect(clockImg).toHaveAttribute("width", "14");
+  });
+
+  it("검색 자리표는 디자인의 글을 쓴다", () => {
+    render(<GlobalHeader showSearch />);
+    expect(query.getByPlaceholderText("프로젝트 이름 검색")).toBeInTheDocument();
   });
 });
