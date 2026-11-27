@@ -34,6 +34,19 @@ except ImportError:                       # 스크립트가 없으면 자물쇠�
 
 GENERATING = "생성 중"
 
+# viewer/ 아래 경로 → 문서 코드. 앞에서부터 맞는 것을 쓰고, 맞는 것이 없으면 UI다.
+# 파이프라인 v2 2절이 코드에도 자물쇠를 걸기로 정했다. 01~06이 문서마다 거는 것과 같은
+# 자리이며, 되풀이 단위만 다르다 — 07은 블록마다, 08은 화면 전체다.
+VIEWER_DOCS = [
+    ("render.json", "RND"),
+    ("impl-validation.json", "IQA"),
+    ("IMPL-QA-REPORT.md", "IQA"),
+    ("PROTOTYPE-REVIEW.md", "PRV"),
+    ("src/render/", "RND"),
+    ("src/screens/", "RND"),
+    ("src/data/", "RND"),
+]
+
 
 def deny(msg):
     sys.stderr.write("쓰기가 막혔습니다.\n%s\n" % msg)
@@ -111,13 +124,43 @@ def read_json(*parts):
         return None
 
 
+def pilot_project():
+    """뷰어가 어느 프로젝트의 산출물인가.
+
+    파일럿이 하나인 동안만 답할 수 있다(PV2 9절). 둘 이상이면 모른다고 답하고 자물쇠를
+    걸지 않는다. 틀린 프로젝트의 상태를 보고 막는 것보다 안 막는 것이 낫다.
+    """
+    pid = os.environ.get("UXIU_PILOT")      # 시험이 가짜 프로젝트를 가리킬 때 쓴다
+    if pid:
+        return pid
+    d = os.path.join(ROOT, "projects")
+    try:
+        ps = [x for x in os.listdir(d)
+              if os.path.isdir(os.path.join(d, x)) and not x.startswith((".", "_"))]
+    except OSError:
+        return None
+    return ps[0] if len(ps) == 1 else None
+
+
 def target_doc(r):
-    """projects/ 아래 경로가 어느 문서에 속하는지 (프로젝트 ID, 문서 코드)로 돌려준다.
+    """경로가 어느 문서에 속하는지 (프로젝트 ID, 문서 코드)로 돌려준다.
 
     문서가 아니면 문서 코드가 None이다. `_meta/`는 총괄의 상태 파일이라 자물쇠를 걸지 않는다.
     정의서(PROJECT.md, project.json)는 사람이 쓰는 것이라 뺀다.
+
+    `viewer/` 아래는 07~10이 만드는 코드다. 프로젝트 폴더 바깥이지만 파일럿 프로젝트의
+    산출물로 본다(PV2 2절). 문서 코드는 그 파일을 만드는 단계를 따라 갈린다.
     """
     parts = r.split("/")
+    if parts[0] == "viewer" and len(parts) > 1:
+        pid = pilot_project()
+        if not pid:
+            return None, None
+        rest = "/".join(parts[1:])
+        for prefix, doc in VIEWER_DOCS:
+            if rest == prefix or rest.startswith(prefix):
+                return pid, doc
+        return pid, "UI"
     if len(parts) < 3 or parts[0] != "projects":
         return None, None
     pid, rest = parts[1], "/".join(parts[2:])

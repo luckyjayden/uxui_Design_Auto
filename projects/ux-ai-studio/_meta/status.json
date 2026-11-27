@@ -84,6 +84,34 @@
           "pr": 12
         }
       ]
+    },
+    {
+      "doc": "UI",
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
+    },
+    {
+      "doc": "RND",
+      "state": "대기",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
+    },
+    {
+      "doc": "IQA",
+      "state": "대기",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
+    },
+    {
+      "doc": "PRV",
+      "state": "대기",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
     }
   ]
 }

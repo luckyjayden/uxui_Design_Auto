@@ -1,7 +1,7 @@
 ---
 doc: DATA
 title: 데이터 규격
-version: 0.3.2
+version: 0.3.3
 status: 검토 필요
 owner: 김태훈
 updated: 2026-11-27
@@ -42,6 +42,19 @@ projects/<project-id>/
 └── _meta/              status.json, runs.json, changes.json
 ```
 
+07~10이 만드는 것은 코드라 프로젝트 폴더 바깥의 `viewer/`에 둡니다([파이프라인 v2](PIPELINE_V2.md) 2절). **소속은 프로젝트이고 자리만 다릅니다.** 상태와 자물쇠는 아래 네 문서 코드로 걸립니다.
+
+```
+viewer/
+├── blocks.json             UI   07이 만든 블록 목록
+├── render.json             RND  08이 그린 화면과 걸린 이동
+├── IMPL-QA-REPORT.md       IQA  impl-validation.json
+├── PROTOTYPE-REVIEW.md     PRV  사람이 써 보고 적는 판정
+└── src/blocks|render|…     블록은 UI, 렌더러·화면·데이터는 RND
+```
+
+`blocks.json`과 `render.json`은 ID가 붙는 항목 문서가 아니라 **상태 파일**이라(`_meta/`의 것들과 같은 자리) Markdown 짝을 두지 않습니다. 뷰어가 어느 프로젝트의 산출물인지는 **파일럿이 하나인 동안만** 답할 수 있습니다(PV2 9절).
+
 저장소 전체에는 다음을 둡니다. 프로젝트 폴더 바깥이며 모든 프로젝트가 함께 씁니다.
 
 | 경로 | 내용 |
@@ -49,7 +62,8 @@ projects/<project-id>/
 | `schemas/*.schema.json` | 이 문서가 정한 JSON Schema 파일 |
 | `templates/PROJECT.md` | 사람이 쓰는 프로젝트 정의서 양식 |
 | `scripts/` | 검증 스크립트 (7절)와 승인 기록 스크립트 (5절) |
-| `.claude/agents/` | 전문 에이전트 명세 6개 ([에이전트 명세](09-agent-spec.md)) |
+| `.claude/agents/` | 전문 에이전트 명세 10개 ([에이전트 명세](09-agent-spec.md), [파이프라인 v2](PIPELINE_V2.md)) |
+| `viewer/` | 파일럿 프로젝트의 뷰어 코드 (위) |
 | `CLAUDE.md` | 총괄 규칙 |
 
 `project-id`는 소문자, 숫자, 붙임표만 쓰고 한 번 정하면 바꾸지 않습니다. (제안)
@@ -77,7 +91,7 @@ ID가 붙는 모든 항목은 아래 여섯 필드를 갖습니다(POL-015).
 
 | 필드 | 형 | 내용 |
 | --- | --- | --- |
-| `doc` | string | 문서 코드 (`REQ`, `POL`, `UF`, `WF`, `IA`, `SCR`, `QA`) |
+| `doc` | string | 문서 코드 (`REQ`, `POL`, `UF`, `WF`, `IA`, `SCR`, `QA`, `UI`, `RND`, `IQA`, `PRV`) |
 | `version` | string | 짝이 되는 Markdown 머리말의 `version`과 같아야 합니다. |
 | `items` | object[] | 항목 배열 |
 
@@ -95,6 +109,11 @@ POL-014의 형식입니다. 번호는 1부터 차례로 붙이고 비는 번호�
 | `SCR-000-A00` | 화면 영역 | 화면 ID + `-A` + 두 자리 | 05 Screen |
 | `WU` | 화면설계서 작업 단위 | `WU-000` | 04 IA |
 | `QA` | 검증 규칙 | `QA-00` | 06 QA |
+| `IQ` | 구현 검증 규칙 | `IQ-00` | 09 Implementation QA |
+| `BLK` | 라이브러리 블록 | `BLK-0000` | 블록 레지스트리가 붙입니다 |
+| `BRQ` | 블록 등록 요청 | `BRQ-0000` | 05 Screen이 붙이고 07이 씁니다 |
+
+`QA`와 `IQ`는 **번호대를 나눠 쓰지 않고 접두어로 가릅니다.** 둘 다 `validation.json`과 같은 스키마를 쓰지만 다른 파일이고, 06이 판정한 일곱과 09가 판정한 여덟이 한 화면에 섞이면 구분되지 않기 때문입니다. (2026-11-27 확정)
 | `BLK` | UI 블록 | `BLK-0000` | 블록 레지스트리 |
 | `BRQ` | 블록 등록 요청 | `BRQ-0000` | 블록 레지스트리 |
 | `FN` | 이 시스템의 기능 | `FN-000` | 기능 정의서 |
@@ -226,7 +245,7 @@ props 키를 코드 이름으로 정한 이유는 화면설계서 JSON을 React�
 
 | 필드 | 형 | 내용 |
 | --- | --- | --- |
-| `doc` | string | `REQ`, `POL`, `UF`, `WF`, `IA`, `SB`, `QA` |
+| `doc` | string | `REQ`, `POL`, `UF`, `WF`, `IA`, `SB`, `QA`, `UI`, `RND`, `IQA`, `PRV` |
 | `state` | string | 기능 정의서 6절의 다섯 가지 중 하나 |
 | `approved_by` | string \| null | 승인한 사람. PR을 병합한 GitHub 사용자입니다. |
 | `approved_at` | string \| null | 승인한 날 |
@@ -329,3 +348,4 @@ PR이 병합될 때의 판과 지금 저장소의 판이 다르면 알립니다.
 | 0.3.0 | 2026-11-26 | runs.json에 `session`을 더하고 `result`에 `진행 중`을 더함. 끝나지 않은 실행이 문서의 주인이라는 규칙을 적음 |
 | 0.3.1 | 2026-11-27 | 1절에 이 문서의 POL 번호가 시스템 정책서 번호라는 것과, 프로젝트 문서로 그대로 옮겨 적지 않는다는 것을 적음 |
 | 0.3.2 | 2026-11-27 | 5절에 승인 기록 스크립트 `record_approval.py`를 적음. 예고만 해 두었던 것이 생겼습니다 |
+| 0.3.3 | 2026-11-27 | 07~10이 만드는 문서 코드 넷(`UI`·`RND`·`IQA`·`PRV`)과 그 자리를 2절에 적음. ID 규칙에 `IQ`·`BLK`·`BRQ`를 더하고 `QA`와 번호대를 나누지 않는 까닭을 적음 |
