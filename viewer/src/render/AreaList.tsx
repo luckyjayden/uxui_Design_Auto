@@ -26,6 +26,11 @@ export interface AreaListProps {
   emptyMessage?: string;
   /** 아직 못 그린 자리가 몇인지 알려 줄지. 블록을 채우는 동안만 쓴다. */
   showProgress?: boolean;
+  /**
+   * 영역마다 덧씌울 props. 화면 사이를 옮기는 핸들러가 여기로 들어온다.
+   * 진짜 화면만 넘긴다. 미리보기는 넘기지 않아 눌러도 화면이 바뀌지 않는다.
+   */
+  overridesFor?: (area: Area) => Record<string, unknown> | undefined;
 }
 
 export function AreaList({
@@ -38,6 +43,7 @@ export function AreaList({
   unrenderedMessage = "블록을 그리지 못했습니다",
   emptyMessage = "영역이 없습니다",
   showProgress = false,
+  overridesFor,
 }: AreaListProps) {
   if (areas.length === 0) {
     return <p className={styles.empty}>{emptyMessage}</p>;
@@ -63,6 +69,7 @@ export function AreaList({
           selected={area.id === selectedAreaId}
           onSelect={() => onSelectArea?.(area.id)}
           unrenderedMessage={unrenderedMessage}
+          overrides={overridesFor?.(area)}
         />
       ))}
     </div>

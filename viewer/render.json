@@ -1,0 +1,341 @@
+{
+  "doc": "RND",
+  "version": "0.1.0",
+  "note": "화면 일곱 장에 무엇이 그려졌고 무엇이 비었는지 적는다. 파이프라인 v2의 08 Wireframe Rendering이 만든다. areas_rendered + areas_unrendered는 화면 파일의 areas와 수도 차례도 같아야 하고, transitions_wired는 ia.json의 transitions를 글자 그대로 옮긴 것이다. 여기에 적은 것이 참인지는 viewer/src/screens/ScreenView.test.tsx(그린 영역)와 viewer/src/screens/transitions.test.tsx(걸린 길)가 눌러 보며 지킨다.",
+  "entry": {
+    "router": "viewer/src/router.tsx",
+    "data": "viewer/src/data/load.ts",
+    "renderer": "viewer/src/render/AreaList.tsx",
+    "wiring": "viewer/src/screens/transitions.ts",
+    "note": "화면은 파일 경로를 직접 알지 않는다. 저장소로 가는 길은 data/load.ts 하나뿐이다(DEV 9절). 뷰어는 읽기만 한다(POL-034)."
+  },
+  "coverage": {
+    "screens": 7,
+    "areas": 48,
+    "rendered": 48,
+    "unrendered": 0,
+    "transitions": 21,
+    "note": "영역 48개가 모두 블록으로 그려져 07로 돌려보낼 자리가 없다. 이동 21건이 모두 눌리는 자리를 갖는다."
+  },
+  "deferred": [
+    {
+      "id": "RND-D1",
+      "target": "SCR-002-A03",
+      "owner_agent": "screen",
+      "detail": "화면 파일이 `metrics`로 `stages`를 가리키는데 디스크립션은 '끝난 단계 수·검토 중 단계 수·만들어진 문서 수'의 셋을 말한다. 한 state 키가 A03의 수치와 A04의 단계 목록을 함께 맡을 수 없다. 고치지 않고 넘긴다."
+    },
+    {
+      "id": "RND-D2",
+      "target": "SCR-004-A04",
+      "owner_agent": "screen",
+      "detail": "디스크립션은 'A03에서 고른 분기 노드의 연결'을 보이라 하는데 `groups`가 가리키는 `edges`는 A03의 다이어그램이 전부를 필요로 하는 키다. 지금은 연결 전부를 보인다. 고른 노드의 것만 보이려면 화면 파일에 키가 하나 더 있어야 한다."
+    },
+    {
+      "id": "RND-D3",
+      "target": "SCR-002-A04",
+      "owner_agent": "screen",
+      "detail": "인터랙션에 '플로우 단계를 펼친다'(set: expandedStage)가 있으나 props에 `onExpand`가 없어 펼칠 자리가 서지 않는다. 블록(BRQ-0003)에는 `onExpand`가 있다."
+    },
+    {
+      "id": "RND-D4",
+      "target": "SCR-002-A02",
+      "owner_agent": "screen",
+      "detail": "`onAction`이 `openPullRequest`를 가리키는데 그것은 state 키가 아니라 일의 이름이다. 저장소에 PR 주소가 없어 핸들러를 만들지 않았다(POL-004). 'PR 열기'를 세우려면 주소가 어디서 오는지 설계가 정해야 한다."
+    },
+    {
+      "id": "RND-D5",
+      "target": "SCR-006-A06",
+      "owner_agent": "screen",
+      "detail": "디스크립션은 '줄을 누르면 SCR-005로 가서 그 블록을 쓴 영역을 고른 채로 연다'고 하는데 ia.json의 transitions에 그 이동이 없다. ia.json에 없는 길을 걸지 않았다."
+    },
+    {
+      "id": "RND-D6",
+      "target": "SCR-003-A04",
+      "owner_agent": "ia",
+      "detail": "디스크립션은 'REQ·POL·IA 항목이면 같은 화면 안에서 옮긴다'고 하는데 IA 항목의 ID는 SCR-000이고 ia.json은 'SCR 항목을 누르면 SCR-005로 간다'고 한다. ia.json을 따랐다. 둘 중 어느 쪽이 맞는지 정해야 한다."
+    }
+  ],
+  "items": [
+    {
+      "screen_id": "SCR-001",
+      "title": "프로젝트 목록",
+      "component": "viewer/src/screens/ScreenView.tsx",
+      "path": "/:projectId",
+      "areas_rendered": [
+        "SCR-001-A01",
+        "SCR-001-A02",
+        "SCR-001-A03",
+        "SCR-001-A04"
+      ],
+      "areas_unrendered": [],
+      "transitions_wired": [
+        {
+          "to": "SCR-002",
+          "trigger": "프로젝트 카드를 누른다",
+          "area": "SCR-001-A02",
+          "block": "BRQ-0001",
+          "prop": "onSelect"
+        }
+      ],
+      "note": "영역 넷을 적힌 차례대로 그린다. A01은 폭을 다 쓰고 나머지는 가운데로 모으지만 차례는 바뀌지 않는다. 프로젝트 카드를 누르면 그 카드의 프로젝트 ID가 다음 주소의 프로젝트가 된다."
+    },
+    {
+      "screen_id": "SCR-002",
+      "title": "프로젝트 진행 현황",
+      "component": "viewer/src/screens/ScreenView.tsx",
+      "path": "/:projectId/SCR-002",
+      "areas_rendered": [
+        "SCR-002-A01",
+        "SCR-002-A02",
+        "SCR-002-A03",
+        "SCR-002-A04",
+        "SCR-002-A05",
+        "SCR-002-A06",
+        "SCR-002-A07"
+      ],
+      "areas_unrendered": [],
+      "transitions_wired": [
+        {
+          "to": "SCR-001",
+          "trigger": "상단의 프로젝트 이름을 눌러 목록으로 돌아간다",
+          "area": "SCR-002-A01",
+          "block": "BLK-0001",
+          "prop": "onBack"
+        },
+        {
+          "to": "SCR-003",
+          "trigger": "요구사항·정책·정보 구조도 같은 문서 단계 카드의 '문서 보기'를 누른다",
+          "area": "SCR-002-A05",
+          "block": "BRQ-0004",
+          "prop": "links"
+        },
+        {
+          "to": "SCR-004",
+          "trigger": "플로우 단계 카드를 누른다",
+          "area": "SCR-002-A05",
+          "block": "BRQ-0004",
+          "prop": "links"
+        },
+        {
+          "to": "SCR-005",
+          "trigger": "화면설계서 단계 카드를 누른다",
+          "area": "SCR-002-A05",
+          "block": "BRQ-0004",
+          "prop": "links"
+        },
+        {
+          "to": "SCR-006",
+          "trigger": "검증 단계 카드를 누른다",
+          "area": "SCR-002-A05",
+          "block": "BRQ-0004",
+          "prop": "links"
+        },
+        {
+          "to": "SCR-007",
+          "trigger": "변경 영향 알림을 누른다",
+          "area": "SCR-002-A07",
+          "block": "BRQ-0006",
+          "prop": "onAction"
+        }
+      ],
+      "note": "A03(요약 수치)은 화면 파일이 `metrics`로 `stages`를 가리키는데 `stages`에 셀 값이 없어 '셀 수 있는 것이 없습니다'가 선다. 뷰어가 수를 지어내지 않은 결과다(POL-004). 설계와 어긋나 보이는 자리로 05에 넘긴다. A06(열려 있는 PR)은 PR 조회가 MVP 밖이라 빈 목록이다."
+    },
+    {
+      "screen_id": "SCR-003",
+      "title": "문서 보기",
+      "component": "viewer/src/screens/ScreenView.tsx",
+      "path": "/:projectId/SCR-003",
+      "areas_rendered": [
+        "SCR-003-A01",
+        "SCR-003-A02",
+        "SCR-003-A03",
+        "SCR-003-A04",
+        "SCR-003-A05",
+        "SCR-003-A06"
+      ],
+      "areas_unrendered": [],
+      "transitions_wired": [
+        {
+          "to": "SCR-004",
+          "trigger": "참조 패널의 유저 플로우·워크 플로우 항목을 누른다",
+          "area": "SCR-003-A04",
+          "block": "BRQ-0008",
+          "prop": "onSelect"
+        },
+        {
+          "to": "SCR-005",
+          "trigger": "참조 패널의 화면(SCR) 항목을 누른다",
+          "area": "SCR-003-A04",
+          "block": "BRQ-0008",
+          "prop": "onSelect"
+        },
+        {
+          "to": "SCR-002",
+          "trigger": "헤더의 뒤로가기를 눌러 진행 현황으로 돌아간다",
+          "area": "SCR-003-A01",
+          "block": "BLK-0001",
+          "prop": "onBack"
+        }
+      ],
+      "note": "A04의 줄을 누르면 ID의 종류가 갈 곳을 정한다. REQ·POL은 이 화면 안에서 옮기고 UF·WF는 SCR-004로, SCR은 SCR-005로 나간다. 저장소에 없는 ID는 끊긴 참조라 누를 수 없다(POL-011)."
+    },
+    {
+      "screen_id": "SCR-004",
+      "title": "플로우 미리보기",
+      "component": "viewer/src/screens/ScreenView.tsx",
+      "path": "/:projectId/SCR-004",
+      "areas_rendered": [
+        "SCR-004-A01",
+        "SCR-004-A02",
+        "SCR-004-A03",
+        "SCR-004-A04",
+        "SCR-004-A05",
+        "SCR-004-A06",
+        "SCR-004-A07"
+      ],
+      "areas_unrendered": [],
+      "transitions_wired": [
+        {
+          "to": "SCR-003",
+          "trigger": "분기에 걸린 정책 ID를 누른다",
+          "area": "SCR-004-A04",
+          "block": "BRQ-0008",
+          "prop": "onSelect"
+        },
+        {
+          "to": "SCR-002",
+          "trigger": "헤더의 뒤로가기를 눌러 진행 현황으로 돌아간다",
+          "area": "SCR-004-A01",
+          "block": "BLK-0001",
+          "prop": "onBack"
+        }
+      ],
+      "note": "A03과 A04가 화면 파일에서 둘 다 `edges`를 가리킨다. 한 객체가 다이어그램의 선과 참조 줄의 두 모양을 함께 들도록 채웠고 값은 모두 플로우 JSON의 것이다. 그래서 A04는 '고른 분기 노드의 연결'이 아니라 연결 전부를 보인다 — 디스크립션과 어긋나는 자리로 05에 넘긴다. 워크 플로우에는 `next`가 하나도 없어 탭을 바꾸면 선이 없고 A04는 '정책 없음'이 선다."
+    },
+    {
+      "screen_id": "SCR-005",
+      "title": "화면설계서 뷰어",
+      "component": "viewer/src/screens/ScreenView.tsx",
+      "path": "/:projectId/SCR-005",
+      "areas_rendered": [
+        "SCR-005-A01",
+        "SCR-005-A02",
+        "SCR-005-A03",
+        "SCR-005-A04",
+        "SCR-005-A05",
+        "SCR-005-A06",
+        "SCR-005-A07",
+        "SCR-005-A08",
+        "SCR-005-A09"
+      ],
+      "areas_unrendered": [],
+      "transitions_wired": [
+        {
+          "to": "SCR-003",
+          "trigger": "영역에 걸린 정책·요구사항 ID를 누른다",
+          "area": "SCR-005-A05",
+          "block": "BRQ-0008",
+          "prop": "onSelect"
+        },
+        {
+          "to": "SCR-002",
+          "trigger": "헤더의 뒤로가기를 눌러 진행 현황으로 돌아간다",
+          "area": "SCR-005-A01",
+          "block": "BLK-0001",
+          "prop": "onBack"
+        }
+      ],
+      "note": "A03은 와이어프레임이라 제 안에서 다른 화면을 한 겹 더 그린다. 안쪽은 미리보기라 길을 걸지 않는다 — 눌러도 뷰어가 그 화면으로 떠나지 않는다. A02의 탭이 바뀌면 안쪽이 그 화면의 영역을 적힌 차례대로 다시 그린다."
+    },
+    {
+      "screen_id": "SCR-006",
+      "title": "검증 결과",
+      "component": "viewer/src/screens/ScreenView.tsx",
+      "path": "/:projectId/SCR-006",
+      "areas_rendered": [
+        "SCR-006-A01",
+        "SCR-006-A02",
+        "SCR-006-A03",
+        "SCR-006-A04",
+        "SCR-006-A05",
+        "SCR-006-A06",
+        "SCR-006-A07",
+        "SCR-006-A08"
+      ],
+      "areas_unrendered": [],
+      "transitions_wired": [
+        {
+          "to": "SCR-003",
+          "trigger": "실패 항목의 문서 항목 ID를 누른다",
+          "area": "SCR-006-A05",
+          "block": "BRQ-0008",
+          "prop": "onSelect"
+        },
+        {
+          "to": "SCR-005",
+          "trigger": "실패 항목의 화면 ID를 누른다",
+          "area": "SCR-006-A05",
+          "block": "BRQ-0008",
+          "prop": "onSelect"
+        },
+        {
+          "to": "SCR-007",
+          "trigger": "변경 영향 보기를 누른다",
+          "area": "SCR-006-A08",
+          "block": "BRQ-0006",
+          "prop": "onAction"
+        },
+        {
+          "to": "SCR-002",
+          "trigger": "검증 결과가 없어 진행 현황으로 돌아간다",
+          "area": "SCR-006-A07",
+          "block": "BLK-0012",
+          "prop": "onAction"
+        },
+        {
+          "to": "SCR-002",
+          "trigger": "헤더의 뒤로가기를 눌러 진행 현황으로 돌아간다",
+          "area": "SCR-006-A01",
+          "block": "BLK-0001",
+          "prop": "onBack"
+        }
+      ],
+      "note": "SCR-002로 가는 길이 둘이다. A07(빈 상태)이 돌려보내는 길과 A01의 뒤로가기로 떠나는 길은 trigger가 달라 두 길로 걸었다. A06(등록 요청 블록 목록)은 validation.json의 QA-07에 묶음이 비어 있어 '쓴 블록이 없습니다'가 선다. 뷰어가 레지스트리를 다시 뒤져 판정하지 않는다(POL-004)."
+    },
+    {
+      "screen_id": "SCR-007",
+      "title": "변경 영향",
+      "component": "viewer/src/screens/ScreenView.tsx",
+      "path": "/:projectId/SCR-007",
+      "areas_rendered": [
+        "SCR-007-A01",
+        "SCR-007-A02",
+        "SCR-007-A03",
+        "SCR-007-A04",
+        "SCR-007-A05",
+        "SCR-007-A06",
+        "SCR-007-A07"
+      ],
+      "areas_unrendered": [],
+      "transitions_wired": [
+        {
+          "to": "SCR-003",
+          "trigger": "영향받는 항목의 ID를 누른다",
+          "area": "SCR-007-A04",
+          "block": "BRQ-0008",
+          "prop": "onSelect"
+        },
+        {
+          "to": "SCR-002",
+          "trigger": "헤더의 뒤로가기를 눌러 진행 현황으로 돌아간다",
+          "area": "SCR-007-A01",
+          "block": "BLK-0001",
+          "prop": "onBack"
+        }
+      ],
+      "note": "A05(고칠 곳 목록)의 'GitHub에서 고치기'·'세션에서 수정 요청'은 저장소에 주소가 없어 서지 않는다(POL-004). A02~A05는 _meta/changes.json이 비어 있어 비어 있다 — 변경 기록이 없다는 사실 그대로다."
+    }
+  ],
+  "origin": "ai",
+  "updated_at": "2026-11-27"
+}

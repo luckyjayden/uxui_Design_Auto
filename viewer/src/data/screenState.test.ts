@@ -28,7 +28,6 @@ describe("buildState — 화면 파일의 키를 하나도 빠뜨리지 않는�
     }
     // 화면 파일에 자리가 없어 더한 것들. 늘어나면 설계에 되돌려야 한다.
     expect([...extra].sort()).toEqual([
-      "branchPolicies",
       "currentIndex",
       "waitingOthers",
       "waitingTitle",

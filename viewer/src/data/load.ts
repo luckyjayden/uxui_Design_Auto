@@ -124,6 +124,30 @@ export function screenIds(projectId: string): string[] {
     .map((x) => x.id);
 }
 
+/** 화면 사이의 이동 하나. `ia.json`이 정한다. */
+export interface Transition {
+  /** 떠나는 화면. */
+  from: string;
+  /** 닿는 화면. */
+  to: string;
+  /** 사람이 하는 짓. `trigger`가 다르면 같은 곳으로 가도 다른 길이다. */
+  trigger: string;
+}
+
+/** `ia.json`의 이동 전부. 화면 항목 안에 들어 있는 것을 펼친다.
+ *
+ * 라우팅을 거는 쪽(`src/screens/transitions.ts`)이 이것을 읽어 제가 건 길이
+ * 저장소에 적힌 것과 같은지 스스로 맞대어 본다. 길을 여기서 만들지 않는다. */
+export function transitions(projectId: string): Transition[] {
+  return items(projectId, "IA").flatMap((s) =>
+    ((s as { transitions?: { to: string; trigger: string }[] }).transitions ?? []).map((t) => ({
+      from: s.id,
+      to: t.to,
+      trigger: t.trigger,
+    })),
+  );
+}
+
 /** 작업 단위 목록. `ia.json`의 `work_units`. */
 export function workUnits(projectId: string): WorkUnit[] {
   const ia = read<{ work_units?: WorkUnit[] }>(projectId, "ia.json");
