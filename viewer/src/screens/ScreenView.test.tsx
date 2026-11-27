@@ -3,6 +3,7 @@ import { render, screen as query } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { ScreenView } from "./ScreenView";
 import { screen as loadScreen } from "../data/load";
+import { lookup } from "../render/blockRegistry";
 
 function at(screenId: string) {
   return render(
@@ -30,8 +31,13 @@ describe("ScreenView — 렌더러를 부르는 껍데기", () => {
 
   it("그래도 못 그린 자리와 남은 수는 보인다", () => {
     at("SCR-001");
-    expect(query.getAllByText("블록을 그리지 못했습니다")).toHaveLength(4);
-    expect(query.getByText(/나머지 4개는 블록이 아직 없습니다/)).toBeInTheDocument();
+    const n = loadScreen("ux-ai-studio", "SCR-001")!.areas.filter(
+      (a) => !lookup(a.block.id),
+    ).length;
+    expect(query.getAllByText("블록을 그리지 못했습니다")).toHaveLength(n);
+    expect(
+      query.getByText(new RegExp(`나머지 ${n}개는 블록이 아직 없습니다`)),
+    ).toBeInTheDocument();
   });
 
   it("SCR-005의 A03은 와이어프레임이라 그 안에서만 장치가 켜진다", () => {

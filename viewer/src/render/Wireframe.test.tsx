@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen as query, fireEvent } from "@testing-library/react";
 import { Wireframe } from "./Wireframe";
-import { registered } from "./blockRegistry";
+import { lookup, registered } from "./blockRegistry";
 import { screen, screenIds, type Area } from "../data/load";
 
 /* A-1의 완료 조건이다.
@@ -13,6 +13,9 @@ import { screen, screenIds, type Area } from "../data/load";
 
 const P = "ux-ai-studio";
 const areasOf = (id: string): Area[] => screen(P, id)!.areas;
+
+/** 아직 블록이 없는 영역. 블록을 만들수록 줄어든다. */
+const unrenderedOf = (id: string) => areasOf(id).filter((a) => !lookup(a.block.id));
 
 function draw(id: string, extra: Partial<Parameters<typeof Wireframe>[0]> = {}) {
   return render(
@@ -27,16 +30,24 @@ function draw(id: string, extra: Partial<Parameters<typeof Wireframe>[0]> = {}) 
 }
 
 describe("Wireframe (BRQ-0011) — 블록이 없어도 선다", () => {
-  it("지금 만들어 둔 블록은 와이어프레임 하나뿐이다", () => {
-    // A-2부터 한 줄씩 는다. 이 수가 곧 진도다.
-    expect(registered()).toEqual(["BRQ-0011"]);
+  it("지금까지 만든 블록 — 이 줄이 진도다", () => {
+    // 블록을 만들 때마다 한 줄씩 는다. 수를 세는 다른 시험들은 이것을 보고
+    // 저절로 따라오므로 손댈 필요가 없다.
+    expect(registered()).toEqual(["BLK-0001", "BRQ-0011"]);
   });
 
-  it("SCR-001의 영역 넷이 모두 안내로 그려진다 — 쓰는 블록이 아직 없다", () => {
+  it("SCR-001에서 블록이 없는 자리마다 안내가 뜬다", () => {
     const { container } = draw("SCR-001");
-    const slots = container.querySelectorAll("[data-area-id]");
-    expect(slots).toHaveLength(4);
-    expect(query.getAllByText("블록을 그리지 못했습니다")).toHaveLength(4);
+    expect(container.querySelectorAll("[data-area-id]")).toHaveLength(4);
+    const missing = unrenderedOf("SCR-001");
+    expect(missing.length).toBeGreaterThan(0); // 아직 다 만들지 않았다
+    expect(query.getAllByText("블록을 그리지 못했습니다")).toHaveLength(missing.length);
+  });
+
+  it("블록이 있는 자리는 블록으로 그린다", () => {
+    const { container } = draw("SCR-001");
+    const header = container.querySelector('[data-area-id="SCR-001-A01"]');
+    expect(header).toHaveAttribute("data-rendered", "true");
   });
 
   it("화면 일곱 장의 영역 48개가 하나도 빠지지 않는다", () => {
@@ -152,7 +163,10 @@ describe("Wireframe — 예외", () => {
 
   it("못 그린 영역이 있으면 몇 개가 남았는지 보인다", () => {
     draw("SCR-001");
-    expect(query.getByText(/나머지 4개는 블록이 아직 없습니다/)).toBeInTheDocument();
+    const n = unrenderedOf("SCR-001").length;
+    expect(
+      query.getByText(new RegExp(`나머지 ${n}개는 블록이 아직 없습니다`)),
+    ).toBeInTheDocument();
   });
 });
 

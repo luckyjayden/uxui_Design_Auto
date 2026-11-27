@@ -1,24 +1,15 @@
-import { Outlet, useParams } from "react-router-dom";
-import { READ_AT } from "./data/load";
+import { Outlet } from "react-router-dom";
 import styles from "./Shell.module.css";
 
-/* 틀이다. 블록이 아니다.
+/* 틀이다. 화면 바깥의 자리만 잡는다.
  *
- * 글로벌 헤더(BLK-0001)는 A-2에서 블록으로 만든다. 여기서는 그 자리를 잡아
- * 두기만 한다. 블록이 서면 이 자리를 블록으로 바꾼다. */
+ * 헤더는 **화면의 영역**이지 틀의 것이 아니다. 일곱 화면의 A01이 모두
+ * BLK-0001을 가리키므로 ScreenView가 다른 영역과 같은 방식으로 그린다.
+ * A-0에서는 블록이 없어 여기에 자리만 잡아 두었는데 A-2에서 블록이 생겨 치웠다. */
 export function Shell() {
-  const { projectId } = useParams();
   return (
     <div className={styles.shell}>
-      <div className={styles.placeholder}>
-        <span className={styles.blockId}>BLK-0001</span>
-        <span>글로벌 헤더 — 아직 만들지 않았습니다 (A-2)</span>
-        <span className={styles.readAt}>읽은 시점 {READ_AT.slice(0, 16).replace("T", " ")}</span>
-      </div>
-      <main className={styles.main}>
-        <p className={styles.crumb}>{projectId}</p>
-        <Outlet />
-      </main>
+      <Outlet />
     </div>
   );
 }
