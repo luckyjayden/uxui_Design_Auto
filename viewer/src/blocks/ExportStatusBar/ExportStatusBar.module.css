@@ -1,0 +1,68 @@
+/* Figma node 4:408. 상태마다 바탕과 글 색이 달라진다. */
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--radius-4);
+}
+
+.idle { background: var(--color-bg-subtle); }
+.exporting { background: var(--color-status-info-subtle); }
+.done { background: var(--color-status-success-subtle); }
+.failed { background: var(--color-status-danger-subtle); }
+
+.icon {
+  flex-shrink: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  white-space: nowrap;
+}
+
+.idle .title { color: var(--color-text-secondary); }
+.exporting .title { color: var(--color-status-info); }
+.done .title { color: var(--color-status-success); }
+.failed .title { color: var(--color-status-danger); }
+
+.message {
+  margin: 0;
+  font-size: var(--type-caption-s-size);
+  line-height: var(--type-caption-s-line);
+  color: var(--color-text-secondary);
+}
+
+.retry {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  padding: var(--space-8) var(--space-16);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-4);
+  background: var(--color-bg-surface);
+  font-family: inherit;
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.retry:hover {
+  background: var(--color-bg-subtle);
+}

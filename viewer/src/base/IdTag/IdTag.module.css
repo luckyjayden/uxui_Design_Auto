@@ -1,0 +1,18 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 1px var(--space-4);
+  border-radius: var(--radius-4);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--type-code-s-size);
+  line-height: var(--type-code-s-line);
+  white-space: nowrap;
+}
+
+.broken {
+  background: var(--color-status-danger-subtle);
+  color: var(--color-status-danger);
+}

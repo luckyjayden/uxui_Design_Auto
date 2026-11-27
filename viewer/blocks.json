@@ -1,6 +1,6 @@
 {
   "doc": "UI",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "figma": {
     "file_key": "6sNGJRUgMlVSCDuym6e08z",
     "file_name": "UX AI Studio 블록",
@@ -72,31 +72,334 @@
         "unrenderedMessage",
         "emptyMessage"
       ],
-      "areas": ["SCR-005-A03"],
+      "areas": [
+        "SCR-005-A03"
+      ],
       "assets": [],
       "note": "블록이라기보다 렌더러다. 블록 ID → 컴포넌트 대응표를 드는 유일한 자리라 blocks/가 아니라 render/에 둔다. 어느 계층에 둘지는 아직 미정 사항이다(COV 3.5절). 디자인은 아직 대조하지 않았다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "block_id": "BLK-0020",
+      "name": "탭 콘텐츠",
+      "version": "2.1.0",
+      "range": "^2",
+      "source": "library",
+      "state": "검토 필요",
+      "component": "TabContent",
+      "path": "viewer/src/blocks/TabContent/TabContent.tsx",
+      "figma_node": "1:286",
+      "props": [
+        "tabs",
+        "activeTabId",
+        "onTabChange",
+        "emptyMessage"
+      ],
+      "areas": [
+        "SCR-003-A02",
+        "SCR-004-A02",
+        "SCR-005-A02"
+      ],
+      "assets": [],
+      "note": "prop 이름은 2026-11-27 D-3에서 확정했다. 레지스트리가 connected:false라 비어 있던 자리다. 탭마다 상태 배지가 붙고 아직 만들어지지 않은 문서는 누를 수 없다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "block_id": "BLK-0003",
+      "name": "버튼 그룹",
+      "version": "2.1.1",
+      "range": "^2",
+      "source": "library",
+      "state": "검토 필요",
+      "component": "ButtonGroup",
+      "path": "viewer/src/blocks/ButtonGroup/ButtonGroup.tsx",
+      "figma_node": "1:293",
+      "props": [
+        "primaryAction",
+        "secondaryAction",
+        "disabled",
+        "primaryHref",
+        "secondaryHref",
+        "disabledMessage"
+      ],
+      "areas": [
+        "SCR-001-A04",
+        "SCR-003-A06",
+        "SCR-004-A05",
+        "SCR-005-A07",
+        "SCR-007-A07"
+      ],
+      "assets": [],
+      "note": "바깥으로 나가는 링크 둘. 주소를 만들지 못하면 비활성으로 두고 까닭을 적는다. primaryHref·secondaryHref·disabledMessage 셋은 설계 props에 없는 제안이다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "block_id": "BLK-0012",
+      "name": "빈 상태",
+      "version": "1.2.1",
+      "range": "^1",
+      "source": "library",
+      "state": "검토 필요",
+      "component": "EmptyState",
+      "path": "viewer/src/blocks/EmptyState/EmptyState.tsx",
+      "figma_node": "1:311",
+      "props": [
+        "illustration",
+        "title",
+        "description",
+        "action",
+        "actionHref",
+        "onAction"
+      ],
+      "areas": [
+        "SCR-001-A03",
+        "SCR-003-A05",
+        "SCR-004-A06",
+        "SCR-005-A09",
+        "SCR-006-A07",
+        "SCR-007-A06"
+      ],
+      "assets": [],
+      "note": "illustration 이름으로 그림을 고른다. Figma가 다섯을 짝지었는데 화면 파일이 쓰는 '빈 다이어그램'이 거기 없어 Layers로 받았다. 확인이 필요하다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "block_id": "BRQ-0008",
+      "name": "항목 참조 패널",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "RefList",
+      "path": "viewer/src/blocks/RefList/RefList.tsx",
+      "figma_node": "4:361",
+      "props": [
+        "groups",
+        "onSelect",
+        "selectedId",
+        "emptyMessage"
+      ],
+      "areas": [
+        "SCR-003-A04",
+        "SCR-004-A04",
+        "SCR-005-A05",
+        "SCR-006-A05",
+        "SCR-007-A04"
+      ],
+      "assets": [],
+      "note": "BRQ-0013·BRQ-0015와 컴포넌트를 공유한다(D-4). BRQ 번호는 그대로 두었고 화면 파일의 block.id도 바뀌지 않았다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "block_id": "BRQ-0013",
+      "name": "블록 참조 목록",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "RefList",
+      "path": "viewer/src/blocks/RefList/RefList.tsx",
+      "figma_node": "4:361",
+      "props": [
+        "groups",
+        "onSelect",
+        "showBlockStatus",
+        "showVersionRange",
+        "emptyMessage"
+      ],
+      "areas": [
+        "SCR-005-A06",
+        "SCR-006-A06"
+      ],
+      "assets": [],
+      "note": "BRQ-0008과 같은 컴포넌트에 Variant로 얹었다(D-4).",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "block_id": "BRQ-0015",
+      "name": "고칠 곳 목록",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "RefList",
+      "path": "viewer/src/blocks/RefList/RefList.tsx",
+      "figma_node": "4:361",
+      "props": [
+        "groups",
+        "onOpenRepo",
+        "onOpenSession",
+        "showVerdict",
+        "emptyMessage"
+      ],
+      "areas": [
+        "SCR-007-A05"
+      ],
+      "assets": [],
+      "note": "P1인데 BRQ-0008과 컴포넌트를 공유해 함께 섰다(D-4). 줄마다 바깥 링크 둘이 붙는다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "block_id": "BRQ-0012",
+      "name": "영역 디스크립션·예외 패널",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "AreaDetailPanel",
+      "path": "viewer/src/blocks/AreaDetailPanel/AreaDetailPanel.tsx",
+      "figma_node": "5:358",
+      "props": [
+        "sections",
+        "sectionLabels",
+        "emptyMessages"
+      ],
+      "areas": [
+        "SCR-005-A04"
+      ],
+      "assets": [],
+      "note": "props 셋이 자리로 짝지어진다. 화면설계서 11절이 넘긴 '글자 그대로의 배열'이 이 자리다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "block_id": "BRQ-0010",
+      "name": "내보내기 상태 줄",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "ExportStatusBar",
+      "path": "viewer/src/blocks/ExportStatusBar/ExportStatusBar.tsx",
+      "figma_node": "4:408",
+      "props": [
+        "tone",
+        "status",
+        "message",
+        "retryLabel",
+        "onRetry"
+      ],
+      "areas": [
+        "SCR-004-A07",
+        "SCR-005-A08"
+      ],
+      "assets": [],
+      "note": "네 상태(대기·내보내는 중·완료·실패). 실패해도 화면의 값을 비우지 않고 다시 시도만 둔다. 알림 줄(BRQ-0005·0006)과 props가 달라 따로 둔다.",
       "origin": "ai",
       "updated_at": "2026-11-27"
     }
   ],
   "pending": [
-    { "block_id": "BLK-0020", "name": "탭 콘텐츠", "figma_node": "1:286", "priority": "P0", "task": "A-3" },
-    { "block_id": "BLK-0003", "name": "버튼 그룹", "figma_node": "1:293", "priority": "P0", "task": "A-4" },
-    { "block_id": "BLK-0012", "name": "빈 상태", "figma_node": "1:311", "priority": "P0", "task": "A-5" },
-    { "block_id": "BRQ-0008", "name": "항목 참조 패널", "figma_node": "4:361", "priority": "P0", "task": "A-6", "shares": ["BRQ-0013", "BRQ-0015"] },
-    { "block_id": "BRQ-0013", "name": "블록 참조 목록", "figma_node": "4:361", "priority": "P0", "task": "A-7", "shares_with": "BRQ-0008" },
-    { "block_id": "BRQ-0012", "name": "영역 디스크립션·예외 패널", "figma_node": "5:358", "priority": "P0", "task": "A-8" },
-    { "block_id": "BRQ-0010", "name": "내보내기 상태 줄", "figma_node": "4:408", "priority": "P0", "task": "A-9" },
-    { "block_id": "BRQ-0002", "name": "요약 수치", "figma_node": "6:587", "priority": "P1", "task": "A-10" },
-    { "block_id": "BRQ-0007", "name": "문서 항목 목록", "figma_node": "8:801", "priority": "P1", "task": "A-11", "shares": ["BRQ-0014"] },
-    { "block_id": "BRQ-0014", "name": "판정 결과 목록", "figma_node": "8:801", "priority": "P1", "task": "A-12", "shares_with": "BRQ-0007" },
-    { "block_id": "BRQ-0001", "name": "프로젝트 카드 목록", "figma_node": "6:486", "priority": "P1", "task": "A-13" },
-    { "block_id": "BRQ-0004", "name": "단계 요약 카드", "figma_node": "7:681", "priority": "P1", "task": "A-14" },
-    { "block_id": "BRQ-0003", "name": "일곱 단계 진행 표시", "figma_node": "6:737", "priority": "P1", "task": "A-15" },
-    { "block_id": "BRQ-0005", "name": "대기 알림 줄", "figma_node": "7:744", "priority": "P1", "task": "A-16" },
-    { "block_id": "BRQ-0006", "name": "변경 영향 알림 줄", "figma_node": "7:782", "priority": "P1", "task": "A-17" },
-    { "block_id": "BRQ-0015", "name": "고칠 곳 목록", "figma_node": "4:361", "priority": "P1", "task": "A-18", "shares_with": "BRQ-0008" },
-    { "block_id": "BRQ-0009", "name": "플로우 다이어그램", "figma_node": "9:849", "priority": "P1", "task": "A-19" },
-    { "block_id": "BLK-0013", "name": "무한 스크롤 목록", "figma_node": null, "priority": "P2", "task": "A-20", "note": "MVP 밖. 디자인에도 없다" }
-  ]
+    {
+      "block_id": "BRQ-0002",
+      "name": "요약 수치",
+      "figma_node": "6:587",
+      "priority": "P1",
+      "task": "A-10"
+    },
+    {
+      "block_id": "BRQ-0007",
+      "name": "문서 항목 목록",
+      "figma_node": "8:801",
+      "priority": "P1",
+      "task": "A-11",
+      "shares": [
+        "BRQ-0014"
+      ]
+    },
+    {
+      "block_id": "BRQ-0014",
+      "name": "판정 결과 목록",
+      "figma_node": "8:801",
+      "priority": "P1",
+      "task": "A-12",
+      "shares_with": "BRQ-0007"
+    },
+    {
+      "block_id": "BRQ-0001",
+      "name": "프로젝트 카드 목록",
+      "figma_node": "6:486",
+      "priority": "P1",
+      "task": "A-13"
+    },
+    {
+      "block_id": "BRQ-0004",
+      "name": "단계 요약 카드",
+      "figma_node": "7:681",
+      "priority": "P1",
+      "task": "A-14"
+    },
+    {
+      "block_id": "BRQ-0003",
+      "name": "일곱 단계 진행 표시",
+      "figma_node": "6:737",
+      "priority": "P1",
+      "task": "A-15"
+    },
+    {
+      "block_id": "BRQ-0005",
+      "name": "대기 알림 줄",
+      "figma_node": "7:744",
+      "priority": "P1",
+      "task": "A-16"
+    },
+    {
+      "block_id": "BRQ-0006",
+      "name": "변경 영향 알림 줄",
+      "figma_node": "7:782",
+      "priority": "P1",
+      "task": "A-17"
+    },
+    {
+      "block_id": "BRQ-0009",
+      "name": "플로우 다이어그램",
+      "figma_node": "9:849",
+      "priority": "P1",
+      "task": "A-19"
+    },
+    {
+      "block_id": "BLK-0013",
+      "name": "무한 스크롤 목록",
+      "figma_node": null,
+      "priority": "P2",
+      "task": "A-20",
+      "note": "MVP 밖. 디자인에도 없다"
+    }
+  ],
+  "base_components": {
+    "note": "블록이 아니라 블록이 쓰는 화면 요소다. src/base/ 아래 둔다.",
+    "items": [
+      {
+        "name": "Badge",
+        "figma_node": "1:157",
+        "path": "viewer/src/base/Badge/Badge.tsx",
+        "note": "상태 배지. 색만이 아니라 글자로 상태를 적는다."
+      },
+      {
+        "name": "IdTag",
+        "figma_node": "1:170",
+        "path": "viewer/src/base/IdTag/IdTag.tsx",
+        "note": "산출물 ID. Broken은 끊긴 참조."
+      },
+      {
+        "name": "SectionHeader",
+        "figma_node": "1:175",
+        "path": "viewer/src/base/SectionHeader/SectionHeader.tsx",
+        "note": "묶음 머리와 개수."
+      },
+      {
+        "name": "RefRow",
+        "figma_node": "1:212",
+        "path": "viewer/src/base/RefRow/RefRow.tsx",
+        "note": "참조 목록 한 줄. 세 블록이 공유한다."
+      }
+    ]
+  }
 }
