@@ -19,11 +19,11 @@
 | DEV | 개발 아키텍처 | [10-dev-architecture.md](10-dev-architecture.md) | 0.1.0 | 검토 필요 | FSD, IA, SB, DATA, AGT | 없음 |
 | DRM | 개발 로드맵 | [11-dev-roadmap.md](11-dev-roadmap.md) | 0.2.0 | 검토 필요 | RM, DEV, FSD, REQ | 없음 |
 | RM | 프로젝트 로드맵 | [roadmap.md](roadmap.md) | 0.5.0 | 검토 필요 | PRJ, REQ, POL, FSD | 없음 |
-| DEC | 결정 기록 | [decisions.md](decisions.md) | 0.8.0 | 검토 필요 | 없음 | 없음 |
+| DEC | 결정 기록 | [decisions.md](decisions.md) | 0.9.0 | 검토 필요 | 없음 | 없음 |
 | GAP | MVP 간극 분석 | [MVP_GAP_ANALYSIS.md](MVP_GAP_ANALYSIS.md) | 0.2.0 | 검토 필요 | DEV, DRM, SB, DATA, AGT | 없음 |
 | COV | UI 블록 커버리지 | [UI_BLOCK_COVERAGE.md](UI_BLOCK_COVERAGE.md) | 0.2.0 | 검토 필요 | GAP, SB, DATA, DEV | 없음 |
 | PV2 | 파이프라인 v2 | [PIPELINE_V2.md](PIPELINE_V2.md) | 0.2.0 | 검토 필요 | GAP, AGT, DATA, DEV, COV | 없음 |
-| IMP | MVP 구현 계획 | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | 0.2.0 | 검토 필요 | GAP, COV, PV2, DEV, DRM | 없음 |
+| IMP | MVP 구현 계획 | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | 0.3.0 | 검토 필요 | GAP, COV, PV2, DEV, DRM | 없음 |
 | ACC | MVP 수용 기준 | [MVP_ACCEPTANCE_CRITERIA.md](MVP_ACCEPTANCE_CRITERIA.md) | 0.1.0 | 검토 필요 | IMP, DRM, FSD, COV, PV2 | 없음 |
 
 상태의 뜻과 버전 규칙은 [CONTRIBUTING.md](../CONTRIBUTING.md)에 있습니다.
