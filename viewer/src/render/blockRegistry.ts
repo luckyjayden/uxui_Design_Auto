@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import { GlobalHeader } from "../blocks/GlobalHeader/GlobalHeader";
 import { Wireframe } from "./Wireframe";
 
 /* 블록 ID → 컴포넌트 대응표.
@@ -22,7 +23,9 @@ const REGISTRY: Record<string, BlockComponent> = {
   // 와이어프레임이 한 겹 더 선다. 안쪽은 고른 화면의 영역을 그린다.
   "BRQ-0011": Wireframe,
 
-  // A-2  BLK-0001: GlobalHeader,
+  // A-2. 일곱 화면이 모두 쓴다. BRQ-0016으로 '읽은 시점'과 '새로고침'을 더했다.
+  "BLK-0001": GlobalHeader,
+
   // A-3  BLK-0020: TabContent,
   // A-4  BLK-0003: ButtonGroup,
   // A-5  BLK-0012: EmptyState,
