@@ -103,7 +103,9 @@ export function GlobalHeader({
         )}
         {logo && <span className={styles.logo}>{logo}</span>}
         {logo && title && <span className={styles.divider} aria-hidden="true" />}
-        {title && <h1 className={styles.title}>{title}</h1>}
+        {/* 디자인에서 이 자리는 label/m 글이지 문서 제목이 아니다. h1로 두면
+            와이어프레임이 다른 화면의 헤더를 그릴 때 h1이 겹친다. */}
+        {title && <span className={styles.title}>{title}</span>}
       </div>
 
       <div className={styles.right}>
