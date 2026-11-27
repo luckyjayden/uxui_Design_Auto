@@ -1,7 +1,7 @@
 ---
 doc: DATA
 title: 데이터 규격
-version: 0.3.1
+version: 0.3.2
 status: 검토 필요
 owner: 김태훈
 updated: 2026-11-27
@@ -48,7 +48,7 @@ projects/<project-id>/
 | --- | --- |
 | `schemas/*.schema.json` | 이 문서가 정한 JSON Schema 파일 |
 | `templates/PROJECT.md` | 사람이 쓰는 프로젝트 정의서 양식 |
-| `scripts/` | 검증 스크립트 (7절) |
+| `scripts/` | 검증 스크립트 (7절)와 승인 기록 스크립트 (5절) |
 | `.claude/agents/` | 전문 에이전트 명세 6개 ([에이전트 명세](09-agent-spec.md)) |
 | `CLAUDE.md` | 총괄 규칙 |
 
@@ -232,7 +232,16 @@ props 키를 코드 이름으로 정한 이유는 화면설계서 JSON을 React�
 | `approved_at` | string \| null | 승인한 날 |
 | `pr` | number \| null | 승인 근거가 된 PR 번호 |
 
-에이전트는 `state`를 `승인`으로 쓸 수 없습니다(POL-002). 승인 세 필드는 PR 병합 뒤 스크립트가 채웁니다.
+에이전트는 `state`를 `승인`으로 쓸 수 없습니다(POL-002). 승인 세 필드는 PR 병합 뒤 `scripts/record_approval.py`가 채웁니다. 사람이 돌립니다.
+
+```
+python3 scripts/record_approval.py <project-id> --pr 12          # 미리 보기
+python3 scripts/record_approval.py <project-id> --pr 12 --write  # 적기
+```
+
+이 스크립트는 **승인을 만들지 않고 이미 일어난 승인을 옮겨 적습니다.** 세 필드의 근거를 모두 GitHub에서 읽기 때문입니다. `approved_by`는 PR을 병합한 사용자이지 스크립트를 돌린 사람이 아니고, 병합되지 않은 PR을 주면 거절합니다. 어느 문서를 승인하는지는 PR이 건드린 파일에서 가리고, 화면설계서는 건드린 화면 파일에서 작업 단위를 가립니다. 짝이 되는 Markdown 머리말의 `status`도 함께 맞춥니다.
+
+PR이 병합될 때의 판과 지금 저장소의 판이 다르면 알립니다. **PR이 승인한 것은 병합될 때의 판**이므로, 그 뒤에 문서가 또 바뀌었다면 지금 판은 아직 승인된 것이 아닙니다.
 
 화면설계서(`SB`)는 작업 단위별 상태를 함께 갖습니다(POL-038). `SB` 줄의 `work_units` 배열에 작업 단위마다 `{ id: "WU-000", state, approved_by, approved_at, pr }`를 둡니다. 정보 구조도가 승인되면 작업 단위마다 `대기`로 등록하고, `SB`의 `state`는 모든 작업 단위가 승인되어야 `승인`이 됩니다.
 
@@ -319,3 +328,4 @@ props 키를 코드 이름으로 정한 이유는 화면설계서 JSON을 React�
 | 0.2.0 | 2026-11-25 | 작업 단위(WU-000)를 추가. ia.json의 work_units, status.json의 작업 단위별 상태, runs.json의 대상 작업 단위, 검사 항목 |
 | 0.3.0 | 2026-11-26 | runs.json에 `session`을 더하고 `result`에 `진행 중`을 더함. 끝나지 않은 실행이 문서의 주인이라는 규칙을 적음 |
 | 0.3.1 | 2026-11-27 | 1절에 이 문서의 POL 번호가 시스템 정책서 번호라는 것과, 프로젝트 문서로 그대로 옮겨 적지 않는다는 것을 적음 |
+| 0.3.2 | 2026-11-27 | 5절에 승인 기록 스크립트 `record_approval.py`를 적음. 예고만 해 두었던 것이 생겼습니다 |
