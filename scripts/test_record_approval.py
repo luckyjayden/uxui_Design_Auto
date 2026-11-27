@@ -180,6 +180,38 @@ md("STORYBOARD.md")
 say("못 가리고 --work-unit도 없으면 rc=1",
     run(["_smoke", "--pr", "42", "--doc", "SB"], dict(PR, files=["projects/_smoke/STORYBOARD.md"])), 1)
 
+# ---------------------------------------------------------------- 머리말만 어긋난 경우
+
+print("\n--- status.json은 승인인데 머리말이 안 따라온 경우 ---")
+
+status(POL="검토 필요")
+md("POLICY.md")
+run(["_smoke", "--pr", "42", "--doc", "POL", "--write"])
+# status.json만 두고 머리말을 되돌린다. 손으로 고치다 한쪽만 바뀐 상태다.
+md("POLICY.md", status="검토 필요")
+say("머리말 안 따라옴 → 적을 것 있음", run(["_smoke", "--pr", "42", "--doc", "POL"]), 0)
+say("  미리 보기는 안 고침",
+    "status: 검토 필요" in io.open(P + "/POLICY.md", encoding="utf8").read(), True)
+say("--write로 머리말만", run(["_smoke", "--pr", "42", "--doc", "POL", "--write"]), 0)
+say("  머리말이 승인", "status: 승인" in io.open(P + "/POLICY.md", encoding="utf8").read(), True)
+row = read("POL")
+say("  status.json은 그대로", (row["state"], row["pr"]), ("승인", 42))
+say("둘 다 맞으면 적을 것 없음 rc=1", run(["_smoke", "--pr", "42", "--doc", "POL"]), 1)
+
+status(sb_state="승인", wu=wus(("WU-001", "승인")))
+json_path = P + "/_meta/status.json"
+d = json.load(open(json_path, encoding="utf8"))
+for r in d["items"]:
+    if r["doc"] == "SB":
+        r["pr"] = 42
+        r["work_units"][0]["pr"] = 42
+io.open(json_path, "w", encoding="utf8").write(json.dumps(d, ensure_ascii=False, indent=2) + "\n")
+md("STORYBOARD.md", status="검토 필요")
+ia(("WU-001", ["SCR-001"]))
+say("SB도 머리말만 맞춤", run(["_smoke", "--pr", "42", "--doc", "SB", "--write",
+                         "--work-unit", "WU-001"]), 0)
+say("  머리말이 승인", "status: 승인" in io.open(P + "/STORYBOARD.md", encoding="utf8").read(), True)
+
 # ---------------------------------------------------------------- 어느 문서인가
 
 print("\n--- PR이 건드린 파일에서 문서를 가린다 ---")

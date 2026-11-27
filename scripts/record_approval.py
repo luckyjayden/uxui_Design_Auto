@@ -113,6 +113,15 @@ def work_units_in(p, paths):
                   if touched & set(w.get("screens") or []))
 
 
+def md_unsynced(p, doc):
+    """status.json은 '승인'인데 짝이 되는 Markdown 머리말이 따라오지 않았는지 본다."""
+    md_name = DOC_FILES[doc][1]
+    if not p.exists(md_name):
+        return False
+    meta = front_matter(open(p.file(md_name), encoding="utf8").read())
+    return bool(meta) and meta.get("status") != APPROVED
+
+
 def version_now(p, doc):
     """지금 저장소에 있는 그 문서의 판. 모르면 None."""
     md_name = DOC_FILES[doc][1]
@@ -163,6 +172,12 @@ def plan_for(p, doc, pr, work_units):
 
     if doc != "SB":
         if state == APPROVED and row.get("pr") == pr["number"]:
+            # status.json은 이미 승인인데 머리말이 안 따라온 경우가 있다. 그때는 머리말만 맞춘다.
+            if md_unsynced(p, doc):
+                return ({"doc": doc, "set": None, "work_units": [], "sync": True},
+                        notes + ["%s는 이미 PR #%s로 승인돼 있는데 %s의 머리말이 따라오지 "
+                                 "않았습니다. 머리말만 맞춥니다"
+                                 % (doc, pr["number"], DOC_FILES[doc][1])])
             return None, notes + ["%s는 이미 PR #%s로 승인돼 있습니다" % (doc, pr["number"])]
         return {"doc": doc, "set": stamp, "work_units": []}, notes
 
@@ -189,6 +204,10 @@ def plan_for(p, doc, pr, work_units):
             if not (rows[known.index(w)].get("state") == APPROVED
                     and rows[known.index(w)].get("pr") == pr["number"])]
     if not todo:
+        if row.get("state") == APPROVED and md_unsynced(p, "SB"):
+            return ({"doc": "SB", "set": None, "work_units": [], "sync": True},
+                    notes + ["작업 단위가 이미 PR #%s로 승인돼 있는데 STORYBOARD.md의 머리말이 "
+                             "따라오지 않았습니다. 머리말만 맞춥니다" % pr["number"]])
         return None, notes + ["작업 단위가 이미 PR #%s로 승인돼 있습니다" % pr["number"]]
 
     after = {w["id"]: (APPROVED if w["id"] in todo else w.get("state")) for w in rows}
@@ -222,7 +241,7 @@ def apply(p, plans, pr):
     # 머리말의 status도 맞춘다. 둘이 어긋나면 저장소만 읽는 쪽이 승인 여부를 가리지 못한다
     synced = []
     for plan in plans:
-        if not plan["set"]:
+        if not plan["set"] and not plan.get("sync"):
             continue
         md_name = DOC_FILES[plan["doc"]][1]
         if not p.exists(md_name):
@@ -298,13 +317,18 @@ def main():
         if plan["set"]:
             print("  %-8s state=승인  approved_by=%s  approved_at=%s  pr=%d"
                   % (plan["doc"], pr["by"], pr["at"], pr["number"]))
+        elif plan.get("sync"):
+            print("  %-8s %s의 머리말 status=승인 (status.json은 이미 승인)"
+                  % (plan["doc"], DOC_FILES[plan["doc"]][1]))
 
     if not a.write:
         print("\n미리 보기입니다. 실제로 적으려면 --write를 주십시오.")
         return 0
 
     touched, synced = apply(p, plans, pr)
-    print("\n_meta/status.json에 적었습니다: %s" % ", ".join(touched))
+    print()
+    if touched:
+        print("_meta/status.json에 적었습니다: %s" % ", ".join(touched))
     if synced:
         print("머리말의 status도 '승인'으로 맞췄습니다: %s" % ", ".join(synced))
     print("바뀐 파일을 커밋하십시오.")

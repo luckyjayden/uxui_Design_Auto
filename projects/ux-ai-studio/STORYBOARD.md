@@ -2,7 +2,7 @@
 doc: SB
 title: 화면설계서
 version: 0.6.2
-status: 검토 필요
+status: 승인
 owner: 김태훈
 updated: 2026-11-27
 refs: [IA, POL, REQ, UF, WF]
