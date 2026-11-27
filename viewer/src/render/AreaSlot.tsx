@@ -21,6 +21,12 @@ interface Props {
   unrenderedMessage: string;
   /** 미리보기 장치(영역 머리와 인터랙션)를 보일지. 기본은 끔. */
   chrome?: boolean;
+  /**
+   * 푼 props 위에 덧씌울 것. 화면 사이를 옮기는 핸들러가 여기로 들어온다.
+   * `ia.json`의 이동을 거는 쪽이 넘기며 미리보기에서는 비어 있다 —
+   * 설계를 들여다보는 자리에서 화면이 바뀌면 보던 것을 잃는다.
+   */
+  overrides?: Record<string, unknown>;
 }
 
 export function AreaSlot({
@@ -31,6 +37,7 @@ export function AreaSlot({
   onSelect,
   unrenderedMessage,
   chrome = false,
+  overrides,
 }: Props) {
   const Block = lookup(area.block.id);
 
@@ -54,7 +61,7 @@ export function AreaSlot({
 
       <div className={chrome ? styles.body : styles.bare}>
         {Block ? (
-          <Block {...resolveProps(area.props, state, setState)} />
+          <Block {...resolveProps(area.props, state, setState)} {...overrides} />
         ) : (
           <p className={styles.unrendered}>
             <span className={styles.blockId}>{area.block.id}</span>

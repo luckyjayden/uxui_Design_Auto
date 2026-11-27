@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { render, screen as query } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { ScreenView } from "./ScreenView";
-import { screen as loadScreen } from "../data/load";
+import { screen as loadScreen, screenIds } from "../data/load";
 import { lookup } from "../render/blockRegistry";
 
 function at(screenId: string) {
@@ -60,5 +60,32 @@ describe("ScreenView — 렌더러를 부르는 껍데기", () => {
   it("없는 화면은 죽지 않고 안내를 보인다", () => {
     at("SCR-999");
     expect(query.getByText(/읽지 못했습니다/)).toBeInTheDocument();
+  });
+});
+
+/* viewer/render.json이 화면마다 무엇을 그렸고 무엇을 비웠다고 적는다.
+ * 그 줄이 참인지는 여기서 본다. 적은 것과 그린 것이 다르면 render.json이 거짓이다. */
+describe("render.json이 적을 것 — 화면 일곱 장을 실제로 그려 센다", () => {
+  it("영역의 수와 차례가 화면 파일과 같다 (POL-014)", () => {
+    for (const id of screenIds("ux-ai-studio")) {
+      const { container, unmount } = at(id);
+      const drawn = [...container.querySelectorAll("[data-area-id]")]
+        // 안쪽 와이어프레임이 그리는 것은 **다른 화면**의 영역이라 세지 않는다.
+        .filter((n) => n.getAttribute("data-area-id")!.startsWith(id))
+        .map((n) => n.getAttribute("data-area-id"));
+      expect(drawn, id).toEqual(loadScreen("ux-ai-studio", id)!.areas.map((a) => a.id));
+      unmount();
+    }
+  });
+
+  it("못 그린 영역이 한 자리도 없다 — areas_unrendered는 비어 있다", () => {
+    for (const id of screenIds("ux-ai-studio")) {
+      const { container, unmount } = at(id);
+      const unrendered = [...container.querySelectorAll('[data-rendered="false"]')].map((n) =>
+        n.getAttribute("data-area-id"),
+      );
+      expect(unrendered, id).toEqual([]);
+      unmount();
+    }
   });
 });

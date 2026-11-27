@@ -12,6 +12,12 @@
  *
  * `on`으로 시작하는 prop의 값이 state 키면 **그 키를 바꾸는 콜백**이 된다.
  * `"onSelectArea": "selectedAreaId"`는 "누르면 selectedAreaId를 바꾼다"는 뜻이다.
+ *
+ * state 키가 아닌 글자가 `on*`에 적힌 자리도 있다(`"onSelect": "openDocItem"`).
+ * 그것은 **바깥으로 나가거나 다른 화면으로 가는 일의 이름**이지 핸들러가 아니다.
+ * 글자 그대로 넘기면 블록이 문자열을 함수로 부르게 되므로 여기서는 비워 둔다.
+ * 값은 라우팅을 거는 쪽(`src/screens/transitions.ts`)이 채우고, 거기에도 없는
+ * 것은 끝까지 비어 있다 — 없는 길을 만들어 내지 않는다(POL-004, POL-011).
  */
 
 export type State = Record<string, unknown>;
@@ -39,10 +45,17 @@ export function resolveProps(
 ): Record<string, unknown> {
   const out: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(props)) {
-    if (key.startsWith("on") && isKey(state, value)) {
-      const stateKey = value;
-      out[key] = set ? (next: unknown) => set(stateKey, next) : undefined;
-      continue;
+    if (key.startsWith("on")) {
+      if (isKey(state, value)) {
+        const stateKey = value;
+        out[key] = set ? (next: unknown) => set(stateKey, next) : undefined;
+        continue;
+      }
+      if (typeof value === "string") {
+        // 일의 이름일 뿐이다. 핸들러 자리에 글자를 놓지 않는다.
+        out[key] = undefined;
+        continue;
+      }
     }
     out[key] = resolveValue(state, value);
   }

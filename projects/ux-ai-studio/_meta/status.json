@@ -94,7 +94,7 @@
     },
     {
       "doc": "RND",
-      "state": "대기",
+      "state": "검토 필요",
       "approved_by": null,
       "approved_at": null,
       "pr": null

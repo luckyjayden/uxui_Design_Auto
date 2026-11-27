@@ -59,8 +59,13 @@ describe("resolveProps — on*은 그 키를 바꾸는 콜백이 된다", () => 
     expect(resolveProps({ onSelectArea: "selectedAreaId" }, state).onSelectArea).toBeUndefined();
   });
 
-  it("state 키가 아닌 on*은 글자 그대로 둔다", () => {
-    expect(resolveProps({ onAction: "열기" }, state).onAction).toBe("열기");
+  it("state 키가 아닌 on*은 일의 이름이지 핸들러가 아니다 — 비워 둔다", () => {
+    // `"onSelect": "openDocItem"` 같은 자리다. 글자를 그대로 넘기면 블록이
+    // 문자열을 함수로 부른다. 값은 라우팅을 거는 쪽이 채우고 거기에도 없으면
+    // 끝까지 비어 있다(POL-004).
+    const out = resolveProps({ onAction: "openDocItem" }, state, vi.fn());
+    expect(out).toHaveProperty("onAction");
+    expect(out.onAction).toBeUndefined();
   });
 });
 

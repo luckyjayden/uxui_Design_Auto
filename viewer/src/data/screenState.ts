@@ -46,8 +46,11 @@ type State = Record<string, unknown>;
 
 /* ---------------------------------------------------------------- 공통 */
 
-/** 일곱 단계. 순서는 고정이다(BRQ-0003의 디자인 설명). */
-const STAGES: { id: string; name: string; docs: DocCode[] }[] = [
+/** 일곱 단계. 순서는 고정이다(BRQ-0003의 디자인 설명).
+ *
+ * 라우팅을 거는 쪽도 이것을 읽는다. SCR-002-A05의 '문서 보기'가 어느 화면으로
+ * 가는지는 **그 단계의 문서 코드**가 정하기 때문이다(SCR-002-A05 디스크립션 2번). */
+export const STAGES: { id: string; name: string; docs: DocCode[] }[] = [
   { id: "project", name: "프로젝트 정의서", docs: [] },
   { id: "requirements", name: "요구사항 정의서", docs: ["REQ"] },
   { id: "policy", name: "정책서", docs: ["POL"] },
@@ -250,19 +253,23 @@ function scr004(projectId: string, ui: UiState): State {
     title: s.title,
     type: (s as { step_type?: string }).step_type,
   }));
+  // 연결 하나가 두 영역에 간다. A03(BRQ-0009)은 다이어그램의 선으로 읽고
+  // A04(BRQ-0008)는 참조 줄로 읽는다. 화면 파일이 둘 다 `edges`를 가리키므로
+  // 한 객체가 두 모양을 함께 든다. 값은 모두 플로우 JSON에서 온 것이다.
   const edges = steps.flatMap((s) =>
     ((s as { next?: { to: string; condition?: string; policy?: string }[] }).next ?? []).map((n) => ({
       from: s.id,
       to: n.to,
       condition: n.condition,
       policy: n.policy ?? null,
+      // 참조 줄로 읽을 때의 모양. ID 배지는 그 갈래에 걸린 정책이다.
+      id: n.policy ?? `${s.id}-${n.to}`,
+      title: n.condition,
+      // 정책이 없는 갈래는 갈 곳이 없어 누를 수 없다(POL-011).
+      broken: !n.policy,
+      sub: n.policy ? undefined : "이 갈래에 정책이 없습니다",
     })),
   );
-
-  const sel = steps.find((s) => s.id === ui.selectedNodeId);
-  const selEdges = sel
-    ? ((sel as { next?: { to: string; condition?: string; policy?: string }[] }).next ?? [])
-    : [];
 
   return {
     flows: [
@@ -273,16 +280,6 @@ function scr004(projectId: string, ui: UiState): State {
     nodes,
     edges,
     selectedNodeId: ui.selectedNodeId ?? null,
-    // 고른 단계의 분기 정책
-    branchPolicies: {
-      label: "분기 정책",
-      items: selEdges.map((e) => ({
-        id: e.policy ?? e.to,
-        title: e.condition,
-        broken: !e.policy,
-        sub: e.policy ? undefined : "이 갈래에 정책이 없습니다",
-      })),
-    },
     exportState: ui.exportState ?? "대기",
     repoReadAt: ui.repoReadAt ?? READ_AT,
   };

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { screen } from "../data/load";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { screen, type Area } from "../data/load";
 import { buildState, type UiState } from "../data/screenState";
 import { AreaList } from "../render/AreaList";
 import { lookup } from "../render/blockRegistry";
+import { pathTo, wire, type NavContext } from "./transitions";
 import styles from "./ScreenView.module.css";
 
 /* 뷰어의 **진짜 화면**이다. 미리보기가 아니다.
@@ -14,13 +15,26 @@ import styles from "./ScreenView.module.css";
  *
  * 블록이 차면 이 화면은 블록만으로 선다. 지금은 블록이 거의 없어 자리마다
  * '블록을 그리지 못했습니다'가 보이고, 맨 위에 몇 개가 남았는지 알려 준다.
- * **그 줄은 블록을 다 만들면 저절로 사라진다.** */
+ * **그 줄은 블록을 다 만들면 저절로 사라진다.**
+ *
+ * `ia.json`의 이동은 `transitions.ts`가 영역마다 덧씌운다. 어느 영역의 어느
+ * prop이 방아쇠인지는 거기 적혀 있고 여기서는 그것을 그대로 넘길 뿐이다. */
 export function ScreenView({ screenId }: { screenId: string }) {
   const { projectId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const data = projectId ? screen(projectId, screenId) : null;
 
+  // 옮겨 오면서 들고 온 것. '그 항목을 고른 채로 연다'가 이 자리다.
+  const carried = (location.state as UiState | null) ?? {};
   // 사람이 고른 것만 쥔다. 나머지는 저장소에서 끌어낸다.
-  const [ui, setUi] = useState<UiState>({});
+  const [ui, setUi] = useState<UiState>(carried);
+  // 옮겨 왔으면 앞 화면에서 고른 것을 들고 있지 않는다. 들고 온 것으로 갈아 끼운다.
+  const [cameFrom, setCameFrom] = useState(location.key);
+  if (cameFrom !== location.key) {
+    setCameFrom(location.key);
+    setUi(carried);
+  }
 
   if (!data) {
     return (
@@ -43,10 +57,24 @@ export function ScreenView({ screenId }: { screenId: string }) {
   const setAt = (key: string, value: unknown) =>
     setUi((prev) => ({ ...prev, [key]: value as never }));
 
+  const nav: NavContext = {
+    projectId: projectId!,
+    screenId,
+    ui,
+    go: (to, carry = {}, pid = projectId!) => navigate(pathTo(pid, to), { state: carry }),
+    set: (patch) => setUi((prev) => ({ ...prev, ...patch })),
+  };
+  const overridesFor = (area: Area) => wire(area, nav);
+
   return (
     <section>
       {header?.block.id === "BLK-0001" ? (
-        <AreaList areas={[header]} state={current} setState={setAt} />
+        <AreaList
+          areas={[header]}
+          state={current}
+          setState={setAt}
+          overridesFor={overridesFor}
+        />
       ) : null}
 
       <div className={styles.body}>
@@ -64,6 +92,7 @@ export function ScreenView({ screenId }: { screenId: string }) {
           setState={setAt}
           unrenderedMessage="블록을 그리지 못했습니다"
           emptyMessage="영역이 없습니다"
+          overridesFor={overridesFor}
         />
       </div>
     </section>
