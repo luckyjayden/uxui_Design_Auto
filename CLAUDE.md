@@ -36,13 +36,19 @@
 
 ## 주 세션의 역할
 
-주 세션이 총괄 에이전트다. **문서를 직접 쓰지 않는다.** 작업을 나눠 주고 문서 간 연결을 관리한다.
+주 세션이 총괄 에이전트다. **문서도 코드도 직접 쓰지 않는다.** 작업을 나눠 주고 사이의 연결을 관리한다.
 
 ```
 PROJECT.md (사람이 씀)
   └─ 01 requirements ─ 02 policy ─┬─ 03 flow (UF) ─┐
-                                  └─ 03 flow (WF) ─┴─ 04 ia ─ 05 screen ─ 06 qa
+                                  └─ 03 flow (WF) ─┴─ 04 ia ─ 05 screen ─ 06 qa ─┐
+                                                                                  │
+   ┌──────────────────────────────────────────────────────────────────────────────┘
+   └─ 07 implement ─ 08 render ─ 09 impl-qa ─ 10 review
+      (블록마다)       (화면 전체)                (사람이 판정)
 ```
+
+01~06이 문서를 만들고 07~10이 그것을 코드로 옮긴다. 07~10의 명세는 `docs/PIPELINE_V2.md`다.
 
 ## 위임 규칙
 
@@ -56,6 +62,10 @@ PROJECT.md (사람이 씀)
 | 정보 구조도와 작업 단위 | `ia` | `IA.md`, `ia.json` |
 | 화면설계서 (작업 단위 하나) | `screen` | `STORYBOARD.md`, `screens/SCR-000.json` |
 | 검증 | `qa` | `QA-REPORT.md`, `validation.json` |
+| UI 블록 구현 (블록 하나) | `implement` | `viewer/src/blocks/<Name>/`, `blocks.json` |
+| 화면 엮기 (렌더러·라우팅) | `render` | `viewer/src/render|screens|data/`, `render.json` |
+| 구현 검증 | `impl-qa` | `IMPL-QA-REPORT.md`, `impl-validation.json` |
+| 프로토타입 검토 차리기 | `review` | `PROTOTYPE-REVIEW.md` |
 
 총괄이 직접 하는 것은 셋뿐이다. **게이트 검사, 상태 파일 갱신, 사람에게 묻기.**
 
@@ -94,6 +104,10 @@ PROJECT.md (사람이 씀)
 | 04 ia | 유저 플로우와 워크 플로우 생성 완료 |
 | 05 screen | 정보 구조도 **승인**, 사용자가 작업 단위를 고름 |
 | 06 qa | 화면설계서 생성 완료 |
+| 07 implement | 화면설계서 **승인**, 사용자가 블록을 고름 (`--block BLK-0000`) |
+| 08 render | P0 블록 아홉이 모두 `검토 필요` 이상, 정보 구조도 **승인** |
+| 09 impl-qa | 08 생성 완료 |
+| 10 review | 09의 규칙 여덟을 **모두** 통과 |
 
 **초안은 승인 전에도 만든다**(POL-007). 선행 문서가 승인 전이어도 생성이 끝났으면 다음 단계를
 실행한다. 사람을 기다리는 곳은 두 군데뿐이다. 첫 단계(정의서 확정)와 화면설계서(정보 구조도
@@ -116,6 +130,9 @@ PROJECT.md (사람이 씀)
 | UI 블록 미존재 | 라이브러리를 다시 찾거나 등록 요청(BRQ)을 남김 |
 | 검증 실패 | `validation.json`의 `owner_agent`가 가리키는 에이전트를 부름 |
 | 검증 통과 | 사람이 화면설계서 PR을 병합하면 프로젝트를 승인 상태로 바꿈 |
+| 블록의 props가 레지스트리와 다름 | 고치지 말고 사람에게 물음. 설계와 레지스트리 중 어느 쪽을 고칠지는 사람이 정함 (POL-026) |
+| 구현 검증 실패 | `impl-validation.json`의 `owner_agent`(`implement` 또는 `render`)를 부름 |
+| 그려 보고 설계가 틀린 것이 드러남 | 05 `screen`으로 돌아감. `SB`가 `검토 필요`로 내려가 06부터 다시 돎 |
 
 QA가 실패를 내면 **규칙마다 `owner_agent`가 누구를 부를지 지정한다.** 총괄이 임의로 고르지 않는다.
 
@@ -139,6 +156,10 @@ QA가 실패를 내면 **규칙마다 `owner_agent`가 누구를 부를지 지�
 | 항목 ID 지우기 | 지우지 말고 `deprecated`를 `true`로 둔다 |
 | 남의 실행이 쥔 문서에 쓰기 | 그 실행이 끝나기를 기다린다. 끊긴 실행이면 사람에게 알린다 |
 
+자물쇠는 `viewer/` 아래 코드에도 걸린다. 경로가 문서 코드로 갈린다.
+`src/blocks/`·`blocks.json`·토큰은 `UI`(07), `src/render|screens|data/`·`render.json`은
+`RND`(08), `impl-validation.json`은 `IQA`(09), `PROTOTYPE-REVIEW.md`는 `PRV`(10)다.
+
 마지막이 자물쇠다. 상태가 `생성 중`인 문서는 그 실행을 띄운 세션만 쓴다. 서브에이전트의 쓰기에도
 주 세션과 같은 세션 식별자가 오므로 내가 부른 에이전트는 통과한다. 막혔다면 **다른 세션이 같은
 단계를 돌고 있거나, 먼저 돌던 실행이 끊긴 것이다.** 둘 다 내가 풀 일이 아니다.
@@ -148,5 +169,6 @@ QA가 실패를 내면 **규칙마다 `owner_agent`가 누구를 부를지 지�
 
 **작업 단위를 병렬로 돌리지 않는다.** `STORYBOARD.md`는 프로젝트에 하나뿐이라 화면설계서를
 여러 작업 단위에 대해 동시에 돌리면 같은 파일을 두 에이전트가 쓴다. 하나씩 돌린다.
+**블록도 마찬가지다.** 블록 전부가 `UI` 하나에 걸리므로 07은 한 번에 하나씩만 돈다.
 
-회귀 시험은 `python3 scripts/test_guard.py`다.
+회귀 시험은 `python3 scripts/test_guard.py`와 `python3 scripts/test_gate.py`다.

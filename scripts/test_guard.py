@@ -32,7 +32,7 @@ def md(rel, txt):
 
 
 def status(**over):
-    docs = ["REQ", "POL", "UF", "WF", "IA", "QA", "SB"]
+    docs = ["REQ", "POL", "UF", "WF", "IA", "QA", "SB", "UI", "RND", "IQA", "PRV"]
     rows = [dict(doc=d, state=over.get(d, "대기"), approved_by=None, approved_at=None, pr=None)
             for d in docs]
     w("_meta/status.json", {"doc": "STATUS", "version": "0.1.0", "items": rows})
@@ -126,6 +126,30 @@ step("남의 세션 + STORYBOARD.md → 막힘", hook(P + "/STORYBOARD.md", "# s
 runs(run("screen", MINE))
 step("내 세션 + STORYBOARD.md → 통과", hook(P + "/STORYBOARD.md", "# sb\n"), 0)
 
+print("--- 자물쇠: 뷰어 코드 (07~10) ---")
+# 뷰어는 프로젝트 폴더 바깥이지만 파일럿 프로젝트의 산출물로 본다 (PV2 2절).
+# 시험 동안만 파일럿을 _guard로 돌려 진짜 프로젝트의 상태를 읽지 않게 한다.
+os.environ["UXIU_PILOT"] = "_guard"
+status(UI="생성 중")
+runs(run("implement", OTHER, run_id="RUN-007"))
+step("남의 세션 + 블록 컴포넌트 → 막힘",
+     hook("viewer/src/blocks/Fake/Fake.tsx", "export function Fake() {}", OTHER + "x"), 2)
+step("남의 세션 + blocks.json → 막힘", hook("viewer/blocks.json", "{}", OTHER + "x"), 2)
+step("내 세션 → 통과", hook("viewer/blocks.json", "{}", OTHER), 0)
+step("다른 단계가 쥔 코드가 아니면 통과 (렌더러는 RND)",
+     hook("viewer/src/render/AreaSlot.tsx", "x", OTHER + "x"), 0)
+
+status(RND="생성 중")
+runs(run("render", OTHER, run_id="RUN-008"))
+step("남의 세션 + 렌더러 → 막힘", hook("viewer/src/render/AreaSlot.tsx", "x", OTHER + "x"), 2)
+step("남의 세션 + 화면 → 막힘", hook("viewer/src/screens/ScreenView.tsx", "x", OTHER + "x"), 2)
+step("블록은 RND가 아니라 UI라 통과", hook("viewer/src/blocks/Fake/Fake.tsx", "x", OTHER + "x"), 0)
+
+status(UI="생성 중")
+runs()                                   # 상태만 '생성 중'이고 실행이 없다
+step("끊긴 실행이 쥔 코드 → 막힘", hook("viewer/blocks.json", "{}", MINE), 2)
+del os.environ["UXIU_PILOT"]
+
 print("--- 먼저 있던 규칙 넷 ---")
 status()
 runs()
@@ -183,7 +207,7 @@ step("항목 ID 지우기 → 막힘 (POL-014)",
 shutil.rmtree(P, ignore_errors=True)
 print()
 if ok[0]:
-    print("전체 통과: 자물쇠 19건과 먼저 있던 규칙 8건이 모두 기대대로 동작합니다.")
+    print("전체 통과: 자물쇠 27건과 먼저 있던 규칙 8건이 모두 기대대로 동작합니다.")
     raise SystemExit(0)
 print("실패한 항목이 있습니다.")
 raise SystemExit(1)
