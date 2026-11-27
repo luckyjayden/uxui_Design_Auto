@@ -11,35 +11,35 @@
     },
     {
       "doc": "POL",
-      "state": "승인",
-      "approved_by": "luckyjayden",
-      "approved_at": "2026-11-26",
-      "pr": 4
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
     },
     {
       "doc": "UF",
-      "state": "승인",
-      "approved_by": "luckyjayden",
-      "approved_at": "2026-11-26",
-      "pr": 4
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
     },
     {
       "doc": "WF",
-      "state": "승인",
-      "approved_by": "luckyjayden",
-      "approved_at": "2026-11-26",
-      "pr": 4
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
     },
     {
       "doc": "IA",
-      "state": "승인",
-      "approved_by": "luckyjayden",
-      "approved_at": "2026-11-26",
-      "pr": 4
+      "state": "검토 필요",
+      "approved_by": null,
+      "approved_at": null,
+      "pr": null
     },
     {
       "doc": "QA",
-      "state": "대기",
+      "state": "검토 필요",
       "approved_by": null,
       "approved_at": null,
       "pr": null
