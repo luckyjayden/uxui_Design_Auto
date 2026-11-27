@@ -1,0 +1,118 @@
+.slot {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-8);
+  overflow: hidden;
+}
+
+.plain {
+  /* 진짜 화면. 블록이 제 모양을 내므로 테두리를 두지 않는다. */
+  display: block;
+}
+
+.bare {
+  padding: 0;
+}
+
+.slot.selected,
+.plain.selected {
+  border-color: var(--color-brand-primary);
+  box-shadow: inset 0 0 0 1px var(--color-brand-primary);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-12);
+  width: 100%;
+  padding: var(--space-8) var(--space-12);
+  background: var(--color-bg-subtle);
+  border: 0;
+  border-bottom: 1px solid var(--color-border-default);
+  font: inherit;
+  font-size: var(--type-caption-s-size);
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+
+.head:hover {
+  background: var(--color-bg-surface);
+}
+
+.head:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: -2px;
+}
+
+.areaId,
+.blockId {
+  font-family: var(--font-mono);
+}
+
+.title {
+  flex: 1;
+  color: var(--color-text-primary);
+}
+
+.body {
+  padding: var(--space-16);
+}
+
+.unrendered {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin: 0;
+  padding: var(--space-16);
+  border: 1px dashed var(--color-border-default);
+  border-radius: var(--radius-8);
+  color: var(--color-text-secondary);
+  font-size: var(--type-caption-s-size);
+}
+
+.interactions {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-8) var(--space-12) var(--space-12);
+  border-top: 1px dashed var(--color-border-default);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.interaction {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+  font-size: var(--type-caption-s-size);
+}
+
+.trigger {
+  flex-shrink: 0;
+  padding: 2px var(--space-8);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-surface);
+  font: inherit;
+  font-size: var(--type-caption-s-size);
+  cursor: pointer;
+}
+
+.trigger:hover:not(:disabled) {
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+}
+
+.trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.result {
+  color: var(--color-text-secondary);
+}
+
+.broken {
+  color: var(--color-status-danger);
+}
