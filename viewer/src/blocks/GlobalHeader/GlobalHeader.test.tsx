@@ -25,7 +25,7 @@ describe("GlobalHeader — 레지스트리 props를 그대로 받는다 (POL-026
   it("로고와 타이틀을 보인다", () => {
     render(<GlobalHeader logo="UX AI Studio" title="프로젝트" />);
     expect(query.getByText("UX AI Studio")).toBeInTheDocument();
-    expect(query.getByRole("heading", { name: "프로젝트" })).toBeInTheDocument();
+    expect(query.getByText("프로젝트")).toBeInTheDocument();
   });
 
   it("showBack이 거짓이면 뒤로가기를 두지 않는다 — 뷰어의 입구", () => {

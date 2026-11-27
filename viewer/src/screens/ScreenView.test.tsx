@@ -16,10 +16,13 @@ function at(screenId: string) {
 }
 
 describe("ScreenView — 렌더러를 부르는 껍데기", () => {
-  it("화면 제목과 ID를 보인다", () => {
-    at("SCR-005");
-    expect(query.getByText("화면설계서 뷰어")).toBeInTheDocument();
-    expect(query.getByText("SCR-005")).toBeInTheDocument();
+  it("화면 이름은 헤더가 보인다. 제목을 두 번 두지 않는다", () => {
+    const { container } = at("SCR-005");
+    // 설계상 화면 이름은 BLK-0001 헤더의 title 자리다. ScreenView가 따로
+    // 제목을 두지 않는다. 와이어프레임이 다른 화면의 헤더를 그리므로
+    // 제목 자리를 h1으로 두면 겹친다.
+    expect(container.querySelectorAll("h1")).toHaveLength(0);
+    expect(container.querySelector("header")).toHaveTextContent("화면설계서");
   });
 
   it("진짜 화면이므로 미리보기 장치를 보이지 않는다", () => {

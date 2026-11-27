@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { READ_AT, screen } from "../data/load";
+import { screen } from "../data/load";
+import { buildState, type UiState } from "../data/screenState";
 import { AreaList } from "../render/AreaList";
 import { lookup } from "../render/blockRegistry";
-import type { State } from "../render/resolveProps";
 import styles from "./ScreenView.module.css";
 
 /* 뷰어의 **진짜 화면**이다. 미리보기가 아니다.
@@ -19,8 +19,8 @@ export function ScreenView({ screenId }: { screenId: string }) {
   const { projectId } = useParams();
   const data = projectId ? screen(projectId, screenId) : null;
 
-  // 화면이 쓰는 state. 화면 파일의 `state`로 초기화한다.
-  const [state, setState] = useState<State | null>(null);
+  // 사람이 고른 것만 쥔다. 나머지는 저장소에서 끌어낸다.
+  const [ui, setUi] = useState<UiState>({});
 
   if (!data) {
     return (
@@ -30,17 +30,18 @@ export function ScreenView({ screenId }: { screenId: string }) {
     );
   }
 
-  // 읽은 시점은 뷰어가 저장소를 읽어 온 때다. 데이터가 빌드할 때 묶여 들어오므로
-  // 그것이 곧 빌드 시점이다(viewer/README.md). 화면 파일의 초기값은 null이라
-  // 여기서 채워 준다. 지어내는 값이 아니라 실제로 읽은 때다.
-  const current = state ?? { ...data.state, repoReadAt: READ_AT };
+  // 화면 파일의 state 키를 저장소 데이터로 채운다(src/data/screenState.ts).
+  const current = buildState(projectId!, screenId, ui);
 
   // 진도는 화면의 **모든** 영역을 센다. 헤더를 따로 그린다고 수에서 빼지 않는다.
   const unrendered = data.areas.filter((a) => !lookup(a.block.id)).length;
 
   // 헤더(A01)는 화면 폭을 다 쓰고 나머지는 가운데로 모은다.
   const [header, ...rest] = data.areas;
-  const setAt = (key: string, value: unknown) => setState({ ...current, [key]: value });
+  // 블록이 state를 바꾸면 '고른 것'으로 받아 둔다. 저장소에서 끌어낸 값은
+  // 다음 그림에서 다시 계산되므로 여기 쌓지 않는다.
+  const setAt = (key: string, value: unknown) =>
+    setUi((prev) => ({ ...prev, [key]: value as never }));
 
   return (
     <section>
@@ -49,11 +50,6 @@ export function ScreenView({ screenId }: { screenId: string }) {
       ) : null}
 
       <div className={styles.body}>
-        <h1 className={styles.title}>
-          <span className={styles.id}>{data.id}</span>
-          {data.title}
-        </h1>
-
         {unrendered > 0 && (
           <p className={styles.progress}>
             영역 {data.areas.length}개 가운데{" "}

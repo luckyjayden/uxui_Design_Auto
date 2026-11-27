@@ -47,7 +47,6 @@
 }
 
 .title {
-  margin: 0;
   font-size: var(--type-label-m-size);
   font-weight: var(--type-label-m-weight);
   line-height: var(--type-label-m-line);

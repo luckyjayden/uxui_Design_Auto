@@ -48,8 +48,11 @@ export function SummaryCard({
     return <div className={styles.card}><p className={styles.empty}>{emptyMessage}</p></div>;
   }
 
-  const inner = links.filter((l) => l.internal);
-  const outer = links.filter((l) => !l.internal);
+  // 화면 파일이 links에 엉뚱한 배열을 넘기는 자리가 있다(SCR-002-A05는
+  // `stages`를 넘긴다). label이 없는 것은 링크가 아니므로 거른다.
+  const usable = links.filter((l) => typeof l?.label === "string");
+  const inner = usable.filter((l) => l.internal);
+  const outer = usable.filter((l) => !l.internal);
 
   return (
     <div className={styles.card}>
@@ -77,7 +80,7 @@ export function SummaryCard({
         </div>
       )}
 
-      {links.length > 0 && (
+      {usable.length > 0 && (
         <div className={styles.links}>
           {inner.map((l) => (
             <button key={l.label} type="button" className={styles.button} onClick={l.onClick}>
