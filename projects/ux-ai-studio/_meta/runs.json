@@ -225,6 +225,67 @@
       "result": "완료",
       "attempt": 1,
       "note": "WU-003 화면설계서 보기(SCR-005, 영역 9개, state 키 13개). STORYBOARD.md 0.4.0. 라이브러리 블록은 새로 쓴 것이 없고 앞 작업 단위가 쓴 넷을 받아 썼습니다. 등록 요청은 새로 셋(BRQ-0011 와이어프레임, BRQ-0012 디스크립션·예외 패널, BRQ-0013 블록 참조 목록), 재사용 둘(BRQ-0008 참조 패널, BRQ-0010 내보내기 상태 줄). 새 요청이 6 → 4 → 3으로 줄었습니다. 누적 영역 33개 중 등록 요청 16개, 요청 13건. BRQ-0008은 이제 영역 셋이, BRQ-0010은 둘이 함께 씁니다. 가르지 않은 근거와 BRQ-0012·0013을 BRQ-0008에 얹지 않은 근거를 7절에 표로 적었습니다. 사람 확인이 필요합니다. 앞 작업 단위 산출물과 선행 문서는 변경 0줄이며 총괄이 직접 대조했습니다."
+    },
+    {
+      "run_id": "RUN-010",
+      "agent": "screen",
+      "session": "feee3262-0820-4a54-a173-4993b979b9bb",
+      "work_units": [
+        "WU-004"
+      ],
+      "started_at": "2026-11-26T17:47:21+09:00",
+      "finished_at": "2026-11-27T09:17:36+09:00",
+      "read": [
+        "projects/ux-ai-studio/PRD.md",
+        "projects/ux-ai-studio/requirements.json",
+        "projects/ux-ai-studio/POLICY.md",
+        "projects/ux-ai-studio/policies.json",
+        "projects/ux-ai-studio/USER-FLOW.md",
+        "projects/ux-ai-studio/user-flow.json",
+        "projects/ux-ai-studio/WORKFLOW.md",
+        "projects/ux-ai-studio/workflow.json",
+        "projects/ux-ai-studio/IA.md",
+        "projects/ux-ai-studio/ia.json",
+        "projects/ux-ai-studio/STORYBOARD.md",
+        "projects/ux-ai-studio/screens/",
+        "docs/08-data-spec.md",
+        "reference/uxui-registry-mock/blocks/"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/screens/SCR-006.json",
+        "projects/ux-ai-studio/screens/SCR-007.json",
+        "projects/ux-ai-studio/STORYBOARD.md"
+      ],
+      "result": "중단",
+      "attempt": 1,
+      "note": "WU-004 검증과 변경 영향(SCR-006 영역 8개, SCR-007 영역 7개). 이 실행을 띄운 세션(feee3262-0820-4a54-a173-4993b979b9bb)이 끊겨 총괄이 6·7단계를 하지 못했습니다. 다음 날 새 세션(8b203abe-fa04-4bf8-8c7b-87e497fb7655)이 산출물을 검수한 결과: 완료 게이트 통과, REQ·POL·UF·WF 참조무결성 이상 없음, BLK 12종 모두 레지스트리에 있음, 새 등록 요청 둘(BRQ-0014, BRQ-0015), SCR-001~005와선행 문서 변경 0줄. 다만 STORYBOARD.md가 덜 찼습니다. 9절(블록)까지는 WU-004가 반영됐으나 10절의'WU-004 요구사항·정책 연결', 11절의 'WU-004에서 새로 넘기는 사항', 변경 이력 0.5.0 줄이 없습니다(머리말은 version 0.5.0). 게이트가 보지 않는 자리라 통과했습니다. 2026-11-27 사람이 '중단'으로 닫기로정했고 RUN-011에서 빈 곳을 채웁니다. 산출물은 지우지 않고 그대로 둡니다."
+    },
+    {
+      "run_id": "RUN-011",
+      "agent": "screen",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "work_units": [
+        "WU-004"
+      ],
+      "started_at": "2026-11-27T09:17:36+09:00",
+      "finished_at": "2026-11-27T09:27:06+09:00",
+      "read": [
+        "projects/ux-ai-studio/STORYBOARD.md",
+        "projects/ux-ai-studio/screens/SCR-005.json",
+        "projects/ux-ai-studio/screens/SCR-006.json",
+        "projects/ux-ai-studio/screens/SCR-007.json",
+        "projects/ux-ai-studio/requirements.json",
+        "projects/ux-ai-studio/policies.json",
+        "projects/ux-ai-studio/ia.json",
+        "projects/ux-ai-studio/user-flow.json",
+        "projects/ux-ai-studio/workflow.json"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/STORYBOARD.md"
+      ],
+      "result": "완료",
+      "attempt": 1,
+      "note": "RUN-010이 끊겨 덜 찬 STORYBOARD.md 0.5.0을 마저 채웠습니다. 화면 파일은 한 줄도 고치지 않았습니다. 더한 것: 10절 'WU-004 검증과 변경 영향'(요구사항 9개·정책 10개, 영역 15개가 모두 QA-01 충족), 11절 'WU-004에서 새로 넘기는 사항' 10건, 변경 이력 0.5.0 줄. 에이전트가 9절 끝 누적 표가 WU-003(합계 33)에서 멈춘 것을 스스로 찾아 알렸고, SCR-006-A06 디스크립션이 이미 '영역 마흔여덟 가운데 스물여섯'이라 적어 표를 두면 화면 파일과 어긋나므로(REQ-020, POL-014) 총괄이 수치를 다시 세어 확인하고 채우게 했습니다(영역 48, 라이브러리 22, 등록 요청 26, 요청 15건). 그 소절의 '비율이 가장 높은 화면'과 '새 요청 6→4→3'도 48/26 기준으로 맞췄고 소절 제목의 '절반 가까이'를 '절반 넘게'로 고쳤습니다. 6절 473행의 '영역 33개 중 16개'는 SCR-005.json이 '지금까지'로 적은 것과 짝이라 그대로 두었습니다. 총괄이 참조 무결성(REQ·POL·UF·WF 없는 ID 0건), 블록 실재(BLK 12종), 변경 범위(화면 일곱과 선행 문서 0줄), 완료 게이트, check_docs를 직접 확인했습니다. attempt는 RUN-010의 이어짐이 아니라 새 실행이라 1입니다."
     }
   ]
 }
