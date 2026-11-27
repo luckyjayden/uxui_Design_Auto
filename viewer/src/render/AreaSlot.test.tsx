@@ -29,6 +29,7 @@ function draw(extra = {}) {
       selected={false}
       onSelect={vi.fn()}
       unrenderedMessage="블록을 그리지 못했습니다"
+      chrome
       {...extra}
     />,
   );
@@ -76,7 +77,7 @@ describe("AreaSlot — 블록을 못 찾았을 때", () => {
     expect(container.querySelector("[data-rendered]")).toHaveAttribute("data-rendered", "false");
   });
 
-  it("그래도 고를 수 있다", () => {
+  it("미리보기에서는 그래도 고를 수 있다", () => {
     lookup.mockReturnValue(undefined);
     const onSelect = vi.fn();
     draw({ onSelect });
@@ -84,9 +85,37 @@ describe("AreaSlot — 블록을 못 찾았을 때", () => {
     expect(onSelect).toHaveBeenCalled();
   });
 
-  it("그래도 인터랙션 자리가 남는다", () => {
+  it("미리보기에서는 그래도 인터랙션 자리가 남는다", () => {
     lookup.mockReturnValue(undefined);
     draw();
     expect(query.getByText("영역을 누른다")).toBeInTheDocument();
+  });
+});
+
+describe("AreaSlot — 미리보기 장치는 chrome에만 달린다", () => {
+  it("진짜 화면에는 영역 ID 머리가 없다", () => {
+    lookup.mockReturnValue(undefined);
+    draw({ chrome: false });
+    expect(query.queryByText("SCR-005-A03")).not.toBeInTheDocument();
+    expect(query.queryByRole("button", { name: /와이어프레임/ })).not.toBeInTheDocument();
+  });
+
+  it("진짜 화면에는 인터랙션 버튼이 없다", () => {
+    lookup.mockReturnValue(undefined);
+    draw({ chrome: false });
+    expect(query.queryByText("영역을 누른다")).not.toBeInTheDocument();
+  });
+
+  it("진짜 화면에도 못 그린 자리의 안내는 남는다", () => {
+    lookup.mockReturnValue(undefined);
+    const { container } = draw({ chrome: false });
+    expect(query.getByText("블록을 그리지 못했습니다")).toBeInTheDocument();
+    expect(container.querySelector("[data-area-id]")).toBeInTheDocument();
+  });
+
+  it("진짜 화면에서도 블록은 그대로 그린다", () => {
+    lookup.mockReturnValue(() => <p>그려진 블록</p>);
+    draw({ chrome: false });
+    expect(query.getByText("그려진 블록")).toBeInTheDocument();
   });
 });

@@ -6,8 +6,11 @@ import styles from "./AreaSlot.module.css";
 /* 영역 하나가 앉는 자리다.
  *
  * 블록을 찾으면 그 블록을 그리고, 못 찾으면 **건너뛰지 않고** 블록 ID와 안내를
- * 보인다(SCR-005-A03의 예외). 못 그린 영역도 고를 수 있어 디스크립션과 예외는
- * 읽힌다. 그래서 영역의 수는 그린 쪽이든 못 그린 쪽이든 화면 파일과 늘 같다. */
+ * 보인다(SCR-005-A03의 예외). 그래서 영역의 수는 그린 쪽이든 못 그린 쪽이든
+ * 화면 파일과 늘 같다.
+ *
+ * `chrome`이 참이면 영역 ID·블록 ID 머리와 인터랙션 버튼을 함께 보인다.
+ * **미리보기(BRQ-0011)에서만 참이다.** 뷰어의 진짜 화면에서는 블록만 보인다. */
 
 interface Props {
   area: Area;
@@ -16,8 +19,8 @@ interface Props {
   selected: boolean;
   onSelect: () => void;
   unrenderedMessage: string;
-  /** 인터랙션을 눌러 보게 할지. 뷰어가 그린 화면 안에서만 참이다. */
-  interactive?: boolean;
+  /** 미리보기 장치(영역 머리와 인터랙션)를 보일지. 기본은 끔. */
+  chrome?: boolean;
 }
 
 export function AreaSlot({
@@ -27,27 +30,29 @@ export function AreaSlot({
   selected,
   onSelect,
   unrenderedMessage,
-  interactive = true,
+  chrome = false,
 }: Props) {
   const Block = lookup(area.block.id);
 
   return (
     <section
-      className={`${styles.slot} ${selected ? styles.selected : ""}`}
+      className={`${chrome ? styles.slot : styles.plain} ${selected ? styles.selected : ""}`}
       data-area-id={area.id}
       data-block-id={area.block.id}
       data-rendered={Block ? "true" : "false"}
       aria-labelledby={`${area.id}-label`}
     >
-      <button type="button" className={styles.head} onClick={onSelect}>
-        <span className={styles.areaId}>{area.id}</span>
-        <span id={`${area.id}-label`} className={styles.title}>
-          {area.title}
-        </span>
-        <span className={styles.blockId}>{area.block.id}</span>
-      </button>
+      {chrome && (
+        <button type="button" className={styles.head} onClick={onSelect}>
+          <span className={styles.areaId}>{area.id}</span>
+          <span id={`${area.id}-label`} className={styles.title}>
+            {area.title}
+          </span>
+          <span className={styles.blockId}>{area.block.id}</span>
+        </button>
+      )}
 
-      <div className={styles.body}>
+      <div className={chrome ? styles.body : styles.bare}>
         {Block ? (
           <Block {...resolveProps(area.props, state, setState)} />
         ) : (
@@ -58,7 +63,7 @@ export function AreaSlot({
         )}
       </div>
 
-      {interactive && area.interactions.length > 0 && (
+      {chrome && area.interactions.length > 0 && (
         <Interactions area={area} state={state} setState={setState} />
       )}
     </section>

@@ -5,7 +5,17 @@
   overflow: hidden;
 }
 
-.slot.selected {
+.plain {
+  /* 진짜 화면. 블록이 제 모양을 내므로 테두리를 두지 않는다. */
+  display: block;
+}
+
+.bare {
+  padding: 0;
+}
+
+.slot.selected,
+.plain.selected {
   border-color: var(--color-brand-primary);
   box-shadow: inset 0 0 0 1px var(--color-brand-primary);
 }

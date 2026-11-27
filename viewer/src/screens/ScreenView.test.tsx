@@ -21,13 +21,25 @@ describe("ScreenView — 렌더러를 부르는 껍데기", () => {
     expect(query.getByText("SCR-005")).toBeInTheDocument();
   });
 
-  it("previewState를 화면 파일의 state로 초기화한다", () => {
-    // SCR-005의 state 키가 previewState로 들어가야 A03의 인터랙션이 돈다
+  it("진짜 화면이므로 미리보기 장치를 보이지 않는다", () => {
+    at("SCR-001");
+    // 영역 ID 배지도 인터랙션 버튼도 없다. 그것은 와이어프레임의 것이다.
+    expect(query.queryByText("SCR-001-A01")).not.toBeInTheDocument();
+    expect(query.queryByRole("button", { name: /글로벌 헤더/ })).not.toBeInTheDocument();
+  });
+
+  it("그래도 못 그린 자리와 남은 수는 보인다", () => {
+    at("SCR-001");
+    expect(query.getAllByText("블록을 그리지 못했습니다")).toHaveLength(4);
+    expect(query.getByText(/나머지 4개는 블록이 아직 없습니다/)).toBeInTheDocument();
+  });
+
+  it("SCR-005의 A03은 와이어프레임이라 그 안에서만 장치가 켜진다", () => {
     const { container } = at("SCR-005");
-    const a03 = container.querySelector('[data-area-id="SCR-005-A03"]');
-    expect(a03).toBeInTheDocument();
-    // set이 가리키는 키가 state에 있으므로 트리거가 눌릴 수 있어야 한다
-    expect(query.getByText("영역을 누른다")).toBeEnabled();
+    const a03 = container.querySelector('[data-area-id="SCR-005-A03"]')!;
+    expect(a03).toHaveAttribute("data-rendered", "true");
+    // 바깥(진짜 화면)에는 영역 머리가 없다
+    expect(query.queryByText("SCR-005-A01")).not.toBeInTheDocument();
   });
 
   it("영역을 하나도 빠뜨리지 않는다", () => {
