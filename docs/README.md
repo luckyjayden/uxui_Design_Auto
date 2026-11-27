@@ -19,7 +19,12 @@
 | DEV | 개발 아키텍처 | [10-dev-architecture.md](10-dev-architecture.md) | 0.1.0 | 검토 필요 | FSD, IA, SB, DATA, AGT | 없음 |
 | DRM | 개발 로드맵 | [11-dev-roadmap.md](11-dev-roadmap.md) | 0.2.0 | 검토 필요 | RM, DEV, FSD, REQ | 없음 |
 | RM | 프로젝트 로드맵 | [roadmap.md](roadmap.md) | 0.5.0 | 검토 필요 | PRJ, REQ, POL, FSD | 없음 |
-| DEC | 결정 기록 | [decisions.md](decisions.md) | 0.7.0 | 검토 필요 | 없음 | 없음 |
+| DEC | 결정 기록 | [decisions.md](decisions.md) | 0.8.0 | 검토 필요 | 없음 | 없음 |
+| GAP | MVP 간극 분석 | [MVP_GAP_ANALYSIS.md](MVP_GAP_ANALYSIS.md) | 0.2.0 | 검토 필요 | DEV, DRM, SB, DATA, AGT | 없음 |
+| COV | UI 블록 커버리지 | [UI_BLOCK_COVERAGE.md](UI_BLOCK_COVERAGE.md) | 0.2.0 | 검토 필요 | GAP, SB, DATA, DEV | 없음 |
+| PV2 | 파이프라인 v2 | [PIPELINE_V2.md](PIPELINE_V2.md) | 0.2.0 | 검토 필요 | GAP, AGT, DATA, DEV, COV | 없음 |
+| IMP | MVP 구현 계획 | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | 0.2.0 | 검토 필요 | GAP, COV, PV2, DEV, DRM | 없음 |
+| ACC | MVP 수용 기준 | [MVP_ACCEPTANCE_CRITERIA.md](MVP_ACCEPTANCE_CRITERIA.md) | 0.1.0 | 검토 필요 | IMP, DRM, FSD, COV, PV2 | 없음 |
 
 상태의 뜻과 버전 규칙은 [CONTRIBUTING.md](../CONTRIBUTING.md)에 있습니다.
 
@@ -35,6 +40,19 @@ PRJ 프로젝트 정의서
          ├─ UF 유저 플로우 ───┤
          └─ WF 워크 플로우 ───┴─ IA 정보 구조도 ── SB 화면설계서
 ```
+
+### 구현 쪽 문서
+
+DEV·DRM과 2026-11-27에 더한 다섯은 설계가 아니라 **그 설계를 코드로 옮기는 일**을 다룹니다.
+
+```
+SB 화면설계서 ── GAP MVP 간극 분석 ─┬─ COV UI 블록 커버리지 ─┐
+                                    ├─ PV2 파이프라인 v2 ────┼─ IMP MVP 구현 계획 ── ACC MVP 수용 기준
+AGT 에이전트 명세 ───────────────────┘                        │
+DEV 개발 아키텍처 · DRM 개발 로드맵 ───────────────────────────┘
+```
+
+겹치는 자리의 기준은 이렇습니다. 뷰어 아키텍처와 기술 스택은 **DEV**, MVP의 정의와 M0~M7은 **DRM**, 파이프라인 01~06은 **AGT**입니다. 새 다섯은 그 셋을 대체하지 않고 간극 측정·블록별 구현 방법·07~10 단계·작업 의존·수용 기준을 맡습니다.
 
 기능 정의서는 표준 순서에 없는 문서입니다. 요구사항과 정책을 이 시스템의 기능, 화면, 데이터, 실행 규칙으로 옮긴 것으로, 이 프로젝트에서는 요구사항 정의서와 정책서보다 먼저 쓰였습니다. 요구사항 정의서와 정책서는 그 내용에서 거꾸로 뽑아 정리한 초안이며, 세 문서가 서로 어긋나지 않는지는 검토 때 확인해야 합니다.
 
