@@ -182,8 +182,11 @@ for name, text in flow_text.items():
                 err(f"{name}: 없는 항목 {ref}를 참조합니다")
 
 # 5. 상대 링크
-for base, _, files in os.walk(ROOT):
-    if ".git" in base.split(os.sep) or "uxui-registry-mock" in base and base.count(os.sep) > ROOT.count(os.sep) + 2:
+# 우리가 쓴 Markdown만 본다. 내려받은 것과 빌드 결과는 우리가 고칠 것이 아니다.
+SKIP_DIRS = {".git", "node_modules", "dist", "build", ".vite", "coverage"}
+for base, dirs, files in os.walk(ROOT):
+    dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+    if "uxui-registry-mock" in base and base.count(os.sep) > ROOT.count(os.sep) + 2:
         continue
     for f in files:
         if not f.endswith(".md"):
