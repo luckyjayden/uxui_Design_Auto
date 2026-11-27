@@ -1,0 +1,45 @@
+/* Figma node 1:157. px space/8, py 2, radius-4, caption/s. */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-8);
+  border-radius: var(--radius-4);
+  font-size: var(--type-caption-s-size);
+  font-weight: var(--type-caption-s-weight);
+  line-height: var(--type-caption-s-line);
+  white-space: nowrap;
+}
+
+.neutral {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+}
+
+.info {
+  background: var(--color-status-info-subtle);
+  color: var(--color-status-info);
+}
+
+.warning {
+  background: var(--color-status-warning-subtle);
+  color: var(--color-status-warning);
+}
+
+.success {
+  background: var(--color-status-success-subtle);
+  color: var(--color-status-success);
+}
+
+.danger {
+  background: var(--color-status-danger-subtle);
+  color: var(--color-status-danger);
+}
+
+/* 다섯 값 밖. 점선으로 구분한다. */
+.unknown {
+  background: transparent;
+  border: 1px dashed var(--color-border-default);
+  color: var(--color-text-secondary);
+  padding: 1px calc(var(--space-8) - 1px);
+}

@@ -1,5 +1,11 @@
 import type { ComponentType } from "react";
 import { GlobalHeader } from "../blocks/GlobalHeader/GlobalHeader";
+import { ExportStatusBar } from "../blocks/ExportStatusBar/ExportStatusBar";
+import { AreaDetailPanel } from "../blocks/AreaDetailPanel/AreaDetailPanel";
+import { RefList } from "../blocks/RefList/RefList";
+import { EmptyState } from "../blocks/EmptyState/EmptyState";
+import { ButtonGroup } from "../blocks/ButtonGroup/ButtonGroup";
+import { TabContent } from "../blocks/TabContent/TabContent";
 import { Wireframe } from "./Wireframe";
 
 /* 블록 ID → 컴포넌트 대응표.
@@ -26,13 +32,21 @@ const REGISTRY: Record<string, BlockComponent> = {
   // A-2. 일곱 화면이 모두 쓴다. BRQ-0016으로 '읽은 시점'과 '새로고침'을 더했다.
   "BLK-0001": GlobalHeader,
 
-  // A-3  BLK-0020: TabContent,
-  // A-4  BLK-0003: ButtonGroup,
-  // A-5  BLK-0012: EmptyState,
-  // A-6  BRQ-0008: RefPanel,
-  // A-7  BRQ-0013: BlockRefList,
-  // A-8  BRQ-0012: AreaDetailPanel,
-  // A-9  BRQ-0010: ExportStatusBar,
+  // A-3. 문서·플로우·화면 고르개 셋이 쓴다. prop 이름은 D-3에서 확정했다.
+  "BLK-0020": TabContent,
+  // A-4. 바깥으로 나가는 링크 둘. 주소가 없으면 비활성이고 까닭을 적는다.
+  "BLK-0003": ButtonGroup,
+  // A-5. 여섯 화면이 쓴다. illustration 이름으로 그림을 고른다.
+  "BLK-0012": EmptyState,
+  // A-6·A-7·A-18. 컴포넌트 하나가 등록 요청 셋을 덮는다(D-4: 구현 공유,
+  // BRQ 번호 유지). 화면 파일의 block.id는 저마다 그대로다.
+  "BRQ-0008": RefList,
+  "BRQ-0013": RefList,
+  "BRQ-0015": RefList,
+  // A-8. sections·sectionLabels·emptyMessages가 자리로 짝지어진다.
+  "BRQ-0012": AreaDetailPanel,
+  // A-9. 네 상태(대기·내보내는 중·완료·실패). 실패해도 화면의 값은 그대로다.
+  "BRQ-0010": ExportStatusBar,
 };
 
 /** 그 블록의 컴포넌트. 아직 만들지 않았으면 undefined. */

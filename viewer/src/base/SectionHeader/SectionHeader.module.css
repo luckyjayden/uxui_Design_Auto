@@ -1,0 +1,23 @@
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-8) var(--space-12);
+  border-bottom: 1px solid var(--color-border-default);
+  white-space: nowrap;
+}
+
+.label {
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-secondary);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: var(--type-code-s-size);
+  line-height: var(--type-code-s-line);
+  color: var(--color-text-disabled);
+}

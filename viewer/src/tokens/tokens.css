@@ -26,6 +26,9 @@
   --color-border-default: #e3e3e3;
   --color-border-strong: #1a1a1a;
 
+  /* 고른 줄의 바탕. */
+  --color-bg-selected: #ededed;
+
   --color-icon-default: #1a1a1a;
   --color-icon-muted: #8a8a8a;
 
@@ -52,7 +55,8 @@
   /* ---- typography ---- */
   --font-sans: "Noto Sans KR", "Pretendard", "Apple SD Gothic Neo", system-ui,
     -apple-system, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", Menlo, "Roboto Mono", monospace;
+  /* ID와 버전 범위처럼 글자 너비가 고르게 보여야 하는 자리. */
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --type-title-m-size: 16px;
   --type-title-m-weight: 700;
@@ -69,6 +73,11 @@
   --type-caption-s-size: 12px;
   --type-caption-s-weight: 400;
   --type-caption-s-line: 1.45;
+
+  /* type/code/s — JetBrains Mono. ID 태그와 메타가 쓴다. */
+  --type-code-s-size: 12px;
+  --type-code-s-weight: 400;
+  --type-code-s-line: 1.45;
 }
 
 * {
