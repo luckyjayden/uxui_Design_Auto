@@ -34,17 +34,24 @@ describe("Wireframe (BRQ-0011) — 블록이 없어도 선다", () => {
     // 블록을 만들 때마다 한 줄씩 는다. 수를 세는 다른 시험들은 이것을 보고
     // 저절로 따라오므로 손댈 필요가 없다.
     expect(registered()).toEqual([
-      "BLK-0001", "BLK-0003", "BLK-0012", "BLK-0020",
-      "BRQ-0008", "BRQ-0010", "BRQ-0011", "BRQ-0012", "BRQ-0013", "BRQ-0015",
+      "BLK-0001", "BLK-0003", "BLK-0012", "BLK-0013", "BLK-0020",
+      "BRQ-0001", "BRQ-0002", "BRQ-0003", "BRQ-0004", "BRQ-0005", "BRQ-0006",
+      "BRQ-0007", "BRQ-0008", "BRQ-0009", "BRQ-0010", "BRQ-0011", "BRQ-0012",
+      "BRQ-0013", "BRQ-0014", "BRQ-0015",
     ]);
   });
 
-  it("SCR-001에서 블록이 없는 자리마다 안내가 뜬다", () => {
+  it("블록이 없는 자리마다 안내가 뜬다", () => {
     const { container } = draw("SCR-001");
     expect(container.querySelectorAll("[data-area-id]")).toHaveLength(4);
     const missing = unrenderedOf("SCR-001");
-    expect(missing.length).toBeGreaterThan(0); // 아직 다 만들지 않았다
-    expect(query.getAllByText("블록을 그리지 못했습니다")).toHaveLength(missing.length);
+    expect(query.queryAllByText("블록을 그리지 못했습니다")).toHaveLength(missing.length);
+  });
+
+  it("이제 영역 48개가 모두 블록으로 그려진다", () => {
+    for (const id of screenIds(P)) {
+      expect(unrenderedOf(id)).toEqual([]);
+    }
   });
 
   it("블록이 있는 자리는 블록으로 그린다", () => {
@@ -164,12 +171,9 @@ describe("Wireframe — 예외", () => {
     expect(query.getByText("영역이 없습니다")).toBeInTheDocument();
   });
 
-  it("못 그린 영역이 있으면 몇 개가 남았는지 보인다", () => {
+  it("다 그렸으면 남은 수를 보이지 않는다", () => {
     draw("SCR-001");
-    const n = unrenderedOf("SCR-001").length;
-    expect(
-      query.getByText(new RegExp(`나머지 ${n}개는 블록이 아직 없습니다`)),
-    ).toBeInTheDocument();
+    expect(query.queryByText(/블록이 아직 없습니다/)).not.toBeInTheDocument();
   });
 });
 

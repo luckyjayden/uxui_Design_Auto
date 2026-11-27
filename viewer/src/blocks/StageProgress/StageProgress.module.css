@@ -1,0 +1,102 @@
+/* Figma node 6:737. 일곱 칸을 가로로 고르게. 위쪽 굵은 선이 상태를 가른다. */
+
+.wrap {
+  padding: var(--space-16) var(--space-24);
+  background: var(--color-bg-canvas);
+}
+
+.steps {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-8);
+  width: 100%;
+  padding: var(--space-12);
+  border: 0;
+  border-top: 2px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.step:hover { background: var(--color-bg-subtle); }
+.step:focus-visible { outline: 2px solid var(--color-border-strong); outline-offset: -2px; }
+
+/* 지금 진행 중인 단계. 위 선이 굵고 이름이 짙다. */
+.current {
+  border-top: 3px solid var(--color-border-strong);
+}
+
+.current .name {
+  color: var(--color-text-primary);
+}
+
+.selected {
+  background: var(--color-bg-selected);
+}
+
+.index {
+  font-family: var(--font-mono);
+  font-size: var(--type-code-s-size);
+  line-height: var(--type-code-s-line);
+  color: var(--color-text-secondary);
+}
+
+.name {
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-secondary);
+}
+
+.waiting {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--type-caption-s-size);
+  line-height: var(--type-caption-s-line);
+  color: var(--color-status-warning);
+}
+
+.docs {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-8) var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--color-bg-surface);
+  border-top: 1px solid var(--color-border-default);
+}
+
+.doc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.docName {
+  font-size: var(--type-caption-s-size);
+  color: var(--color-text-secondary);
+}
+
+.empty {
+  margin: 0;
+  padding: var(--space-16);
+  color: var(--color-text-secondary);
+}

@@ -29,15 +29,14 @@ describe("ScreenView — 렌더러를 부르는 껍데기", () => {
     expect(query.queryByRole("button", { name: /글로벌 헤더/ })).not.toBeInTheDocument();
   });
 
-  it("그래도 못 그린 자리와 남은 수는 보인다", () => {
+  it("블록이 다 있으면 안내도 남은 수도 보이지 않는다", () => {
     at("SCR-001");
     const n = loadScreen("ux-ai-studio", "SCR-001")!.areas.filter(
       (a) => !lookup(a.block.id),
     ).length;
-    expect(query.getAllByText("블록을 그리지 못했습니다")).toHaveLength(n);
-    expect(
-      query.getByText(new RegExp(`나머지 ${n}개는 블록이 아직 없습니다`)),
-    ).toBeInTheDocument();
+    expect(n).toBe(0); // 블록 스물이 영역 48개를 다 덮는다
+    expect(query.queryAllByText("블록을 그리지 못했습니다")).toHaveLength(0);
+    expect(query.queryByText(/블록이 아직 없습니다/)).not.toBeInTheDocument();
   });
 
   it("SCR-005의 A03은 와이어프레임이라 그 안에서만 장치가 켜진다", () => {
