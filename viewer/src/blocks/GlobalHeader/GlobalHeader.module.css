@@ -1,12 +1,14 @@
-/* 레지스트리 spec.layout: 가로, gap space/8, padding space/16, height FIXED 56,
- * 상단 고정, autoLayout. spec.tokens의 이름만 쓰고 값을 직접 적지 않는다. */
+/* Figma 6sNGJRUgMlVSCDuym6e08z node 1:242 (Block/GlobalHeader)
+ *
+ * 높이 56, 좌우 padding space/24, 양 끝으로 벌림. 왼쪽 묶음은 gap space/12,
+ * 오른쪽 묶음은 gap space/16. 값을 직접 적지 않고 토큰 변수만 쓴다. */
 
 .header {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  justify-content: space-between;
   height: 56px;
-  padding: 0 var(--space-16);
+  padding: 0 var(--space-24);
   background: var(--color-bg-surface);
   border-bottom: 1px solid var(--color-border-default);
   position: sticky;
@@ -14,98 +16,151 @@
   z-index: 10;
 }
 
-.back {
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-8);
-  background: var(--color-bg-surface);
-  color: var(--color-text-primary);
-  font: inherit;
-  cursor: pointer;
+.left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-width: 0;
 }
 
-.back:hover {
-  border-color: var(--color-brand-primary);
-  color: var(--color-brand-primary);
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
 }
 
+/* 로고는 title/m, 화면 이름은 label/m. 사이에 1px 구분선. */
 .logo {
   flex-shrink: 0;
-  font-weight: var(--type-title-m-weight);
-  color: var(--color-brand-primary);
-}
-
-.title {
-  margin: 0;
   font-size: var(--type-title-m-size);
   font-weight: var(--type-title-m-weight);
   line-height: var(--type-title-m-line);
   color: var(--color-text-primary);
+  white-space: nowrap;
 }
 
-.search {
-  width: 200px;
-  margin-left: var(--space-12);
-  padding: 4px var(--space-8);
+.divider {
+  flex-shrink: 0;
+  width: 1px;
+  height: 16px;
+  background: var(--color-border-default);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Base/IconButton 32×32. 헤더의 뒤로가기와 새로고침이 쓴다. */
+.iconButton {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-4);
   background: var(--color-bg-surface);
-  font: inherit;
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  border-color: var(--color-border-strong);
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid var(--color-border-strong);
+  outline-offset: 1px;
+}
+
+/* Base/SearchField 240×32. */
+.searchField {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  width: 240px;
+  height: 32px;
+  padding: 0 var(--space-8);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-4);
+  background: var(--color-bg-surface);
+}
+
+.searchField:focus-within {
+  border-color: var(--color-border-strong);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: inherit;
   font-size: var(--type-body-m-size);
+  line-height: var(--type-body-m-line);
   color: var(--color-text-primary);
 }
 
-.search:focus-visible {
-  outline: 2px solid var(--color-brand-primary);
-  outline-offset: -1px;
+.searchInput::placeholder {
+  color: var(--color-text-disabled);
 }
 
-.right {
-  margin-left: auto;
+/* 읽은 시점. 시계 아이콘 + 글. caption/s. */
+.readAt {
   display: flex;
   align-items: center;
   gap: var(--space-8);
   font-size: var(--type-caption-s-size);
-}
-
-.readAt {
-  font-family: var(--font-mono);
+  line-height: var(--type-caption-s-line);
   color: var(--color-text-secondary);
   white-space: nowrap;
 }
 
-.refresh,
-.action {
-  flex-shrink: 0;
-  padding: 3px var(--space-8);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-8);
-  background: var(--color-bg-surface);
-  color: var(--color-text-primary);
-  font: inherit;
-  font-size: var(--type-caption-s-size);
-  text-decoration: none;
-  cursor: pointer;
+.readAtText {
   white-space: nowrap;
 }
 
-.refresh:hover,
+/* 다시 읽지 못했을 때. 경고 색이고 앞서 읽은 시점 옆에 붙는다. */
+.failed {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-status-warning);
+  white-space: nowrap;
+}
+
+/* Base/TextLink. 바깥으로 나가는 링크. */
+.action {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .action:hover {
-  border-color: var(--color-brand-primary);
-  color: var(--color-brand-primary);
+  text-decoration: underline;
 }
 
 .actionDisabled {
-  padding: 3px var(--space-8);
-  border: 1px dashed var(--color-border-default);
-  border-radius: var(--radius-8);
-  color: var(--color-text-secondary);
-  white-space: nowrap;
-}
-
-.failed {
-  color: var(--color-status-danger);
+  flex-shrink: 0;
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-disabled);
   white-space: nowrap;
 }
