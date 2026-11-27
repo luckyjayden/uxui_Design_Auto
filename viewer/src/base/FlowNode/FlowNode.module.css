@@ -1,0 +1,64 @@
+/* Figma node 9:793. 180px 폭, padding space/8 space/12. 유형마다 테두리가 다르다. */
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  width: 180px;
+  padding: var(--space-8) var(--space-12);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-4);
+  background: var(--color-bg-surface);
+  font-family: inherit;
+  text-align: left;
+}
+
+button.node { cursor: pointer; }
+
+/* 진입 — 굵은 테두리 */
+.entry { border: 2px solid var(--color-border-strong); }
+/* 선택 — 기본 */
+.choice { }
+/* 분기 — 옅은 경고 바탕에 파란 굵은 테두리 */
+.branch {
+  background: var(--color-status-warning-subtle);
+  border: 2px solid var(--color-status-info);
+}
+/* 완료 — 옅은 성공 바탕 */
+.end {
+  background: var(--color-status-success-subtle);
+  border-color: var(--color-status-success);
+}
+/* 이탈 — 점선. 뷰어 밖이거나 다른 화면으로 나간다 */
+.exit {
+  background: var(--color-bg-subtle);
+  border: 1px dashed var(--color-text-disabled);
+}
+
+.selected {
+  box-shadow: 0 0 0 2px var(--color-border-strong);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--space-4);
+}
+
+.type {
+  font-size: var(--type-caption-s-size);
+  line-height: var(--type-caption-s-line);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.title {
+  width: 100%;
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-primary);
+}

@@ -1,0 +1,65 @@
+/* Figma node 7:782. 변경이 있으면 눈에 띄고, 없으면 흐리게 자리만 지킨다. */
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-4);
+  background: var(--color-status-info-subtle);
+}
+
+.off {
+  background: var(--color-bg-subtle);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-primary);
+}
+
+.description {
+  font-size: var(--type-caption-s-size);
+  line-height: var(--type-caption-s-line);
+  color: var(--color-text-secondary);
+}
+
+.off .title,
+.off .description {
+  color: var(--color-text-disabled);
+}
+
+.action {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  padding: var(--space-8) var(--space-16);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-4);
+  background: var(--color-bg-surface);
+  font-family: inherit;
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.action:disabled {
+  background: var(--color-bg-subtle);
+  border-color: var(--color-border-default);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}

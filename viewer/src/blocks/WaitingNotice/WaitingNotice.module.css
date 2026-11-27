@@ -1,0 +1,103 @@
+/* Figma node 7:744. 왼쪽에 굵은 경고 선, 옅은 경고 바탕. */
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-16);
+  border-left: 3px solid var(--color-status-warning);
+  border-radius: var(--radius-4);
+  background: var(--color-status-warning-subtle);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  width: 100%;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-primary);
+}
+
+.description {
+  font-size: var(--type-caption-s-size);
+  line-height: var(--type-caption-s-line);
+  color: var(--color-text-secondary);
+}
+
+.expand {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-status-warning);
+  cursor: pointer;
+}
+
+.chevronDown { transform: rotate(90deg); }
+.chevronUp { transform: rotate(-90deg); }
+
+.link {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.link:hover { text-decoration: underline; }
+
+.linkOff {
+  flex-shrink: 0;
+  font-size: var(--type-caption-s-size);
+  color: var(--color-text-disabled);
+}
+
+/* 나머지 대기들. 머리의 아이콘 폭만큼 들여쓴다. */
+.others {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.other {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border-default);
+}
+
+.otherTitle {
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-m-line);
+  color: var(--color-text-primary);
+}

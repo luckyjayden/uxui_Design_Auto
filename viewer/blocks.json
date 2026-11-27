@@ -1,6 +1,6 @@
 {
   "doc": "UI",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "figma": {
     "file_key": "6sNGJRUgMlVSCDuym6e08z",
     "file_name": "UX AI Studio 블록",
@@ -294,85 +294,272 @@
       "note": "네 상태(대기·내보내는 중·완료·실패). 실패해도 화면의 값을 비우지 않고 다시 시도만 둔다. 알림 줄(BRQ-0005·0006)과 props가 달라 따로 둔다.",
       "origin": "ai",
       "updated_at": "2026-11-27"
-    }
-  ],
-  "pending": [
+    },
     {
       "block_id": "BRQ-0002",
       "name": "요약 수치",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "MetricSummary",
+      "path": "viewer/src/blocks/MetricSummary/MetricSummary.tsx",
       "figma_node": "6:587",
-      "priority": "P1",
-      "task": "A-10"
+      "props": [
+        "metrics",
+        "columns",
+        "selectedId",
+        "onSelect",
+        "emptyMessage"
+      ],
+      "areas": [
+        "SCR-002-A03",
+        "SCR-006-A02",
+        "SCR-007-A02"
+      ],
+      "assets": [],
+      "note": "저장소에서 센 값만 보인다. 비율도 예상 완료일도 만들지 않고, 값이 없는 칸은 지어내지 않는다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     },
     {
       "block_id": "BRQ-0007",
       "name": "문서 항목 목록",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "ItemList",
+      "path": "viewer/src/blocks/ItemList/ItemList.tsx",
       "figma_node": "8:801",
-      "priority": "P1",
-      "task": "A-11",
-      "shares": [
-        "BRQ-0014"
-      ]
+      "props": [
+        "items",
+        "selectedId",
+        "onSelect",
+        "showOrigin",
+        "emptyMessage"
+      ],
+      "areas": [
+        "SCR-003-A03",
+        "SCR-007-A03"
+      ],
+      "assets": [],
+      "note": "BRQ-0014와 컴포넌트를 공유한다(D-4). 순서는 파일 그대로 두고 다시 정렬하지 않는다(POL-009). ai는 'AI 생성', human은 '사람 수정', 그 밖은 표시하지 않는다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     },
     {
       "block_id": "BRQ-0014",
       "name": "판정 결과 목록",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "ItemList",
+      "path": "viewer/src/blocks/ItemList/ItemList.tsx",
       "figma_node": "8:801",
-      "priority": "P1",
-      "task": "A-12",
-      "shares_with": "BRQ-0007"
+      "props": [
+        "items",
+        "selectedId",
+        "onSelect",
+        "showVerdict",
+        "emptyMessage"
+      ],
+      "areas": [
+        "SCR-006-A03"
+      ],
+      "assets": [],
+      "note": "BRQ-0007과 같은 컴포넌트에 Variant로 얹었다(D-4). 판정은 통과·실패 둘뿐이다(POL-018).",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     },
     {
       "block_id": "BRQ-0001",
       "name": "프로젝트 카드 목록",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "ProjectCardList",
+      "path": "viewer/src/blocks/ProjectCardList/ProjectCardList.tsx",
       "figma_node": "6:486",
-      "priority": "P1",
-      "task": "A-13"
+      "props": [
+        "items",
+        "onSelect",
+        "selectedId",
+        "keyword",
+        "emptyMessage",
+        "noResultMessage"
+      ],
+      "areas": [
+        "SCR-001-A02"
+      ],
+      "assets": [],
+      "note": "keyword로 이미 읽어 둔 목록의 이름만 거른다. 저장소를 다시 뒤지지 않는다. 거른 결과가 없으면 제목을 '검색 결과가 없습니다'로 바꾼다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     },
     {
       "block_id": "BRQ-0004",
       "name": "단계 요약 카드",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "SummaryCard",
+      "path": "viewer/src/blocks/SummaryCard/SummaryCard.tsx",
       "figma_node": "7:681",
-      "priority": "P1",
-      "task": "A-14"
+      "props": [
+        "summary",
+        "status",
+        "links",
+        "emptyMessage"
+      ],
+      "areas": [
+        "SCR-002-A05",
+        "SCR-006-A04"
+      ],
+      "assets": [],
+      "note": "카드 안에 승인·실행 버튼을 두지 않는다(POL-002). 고치는 자리는 GitHub, 실행·수정 요청은 세션이다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     },
     {
       "block_id": "BRQ-0003",
       "name": "일곱 단계 진행 표시",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "StageProgress",
+      "path": "viewer/src/blocks/StageProgress/StageProgress.tsx",
       "figma_node": "6:737",
-      "priority": "P1",
-      "task": "A-15"
+      "props": [
+        "steps",
+        "currentIndex",
+        "onSelect",
+        "selectedId",
+        "expandedId",
+        "onExpand"
+      ],
+      "areas": [
+        "SCR-002-A04"
+      ],
+      "assets": [],
+      "note": "플로우 단계는 두 문서를 한 칸으로 묶고 뒤처진 쪽을 단계 상태로 삼는다(POL-006). 뒤처진 쪽은 POL-005의 차례에서 앞에 오는 쪽이다. 펼치면 문서마다 따로 보인다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     },
     {
       "block_id": "BRQ-0005",
       "name": "대기 알림 줄",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "WaitingNotice",
+      "path": "viewer/src/blocks/WaitingNotice/WaitingNotice.tsx",
       "figma_node": "7:744",
-      "priority": "P1",
-      "task": "A-16"
+      "props": [
+        "tone",
+        "title",
+        "description",
+        "actionLabel",
+        "actionHref",
+        "onAction",
+        "others",
+        "expandable",
+        "expanded",
+        "onExpand"
+      ],
+      "areas": [
+        "SCR-002-A02"
+      ],
+      "assets": [],
+      "note": "기다리는 일이 없으면 줄 자체를 보이지 않는다. 뷰어 안에 승인·실행 버튼을 두지 않는다(POL-002). **BRQ-0006과 구현을 공유하지 않는다**(2026-11-26 확정). Figma의 컴포넌트 설명도 그렇게 적고 있다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     },
     {
       "block_id": "BRQ-0006",
       "name": "변경 영향 알림 줄",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "ChangeNotice",
+      "path": "viewer/src/blocks/ChangeNotice/ChangeNotice.tsx",
       "figma_node": "7:782",
-      "priority": "P1",
-      "task": "A-17"
+      "props": [
+        "tone",
+        "title",
+        "description",
+        "actionLabel",
+        "disabled",
+        "onAction"
+      ],
+      "areas": [
+        "SCR-002-A07",
+        "SCR-006-A08"
+      ],
+      "assets": [],
+      "note": "변경이 없으면 줄을 감추지 않고 '변경이 없습니다'로 흐리게 둔다. 판정은 만들지 않는다(POL-019). **BRQ-0005와 구현을 공유하지 않는다**.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     },
     {
       "block_id": "BRQ-0009",
       "name": "플로우 다이어그램",
+      "version": "0.1.0",
+      "range": "^0",
+      "source": "request",
+      "state": "검토 필요",
+      "component": "FlowDiagram",
+      "path": "viewer/src/blocks/FlowDiagram/FlowDiagram.tsx",
       "figma_node": "9:849",
-      "priority": "P1",
-      "task": "A-19"
+      "props": [
+        "nodes",
+        "edges",
+        "selectedNodeId",
+        "onSelectNode",
+        "showBranchCondition",
+        "emptyMessage"
+      ],
+      "areas": [
+        "SCR-004-A03"
+      ],
+      "assets": [],
+      "note": "플로우 JSON 그대로 그린다. 정책이 없는 분기는 '정책 없음'과 빨간 점선으로 구분한다(QA-03). **배치는 깊이에 따른 층 배치를 직접 계산했다.** DEV 4절이 React Flow를 제안했으나 확정이 아니라 의존성을 늘리지 않았다. 사람이 정할 일이다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     },
     {
       "block_id": "BLK-0013",
       "name": "무한 스크롤 목록",
+      "version": "2.0.0",
+      "range": "^2",
+      "source": "library",
+      "state": "검토 필요",
+      "component": "InfiniteList",
+      "path": "viewer/src/blocks/InfiniteList/InfiniteList.tsx",
       "figma_node": null,
-      "priority": "P2",
-      "task": "A-20",
-      "note": "MVP 밖. 디자인에도 없다"
+      "props": [
+        "renderItem",
+        "loading",
+        "endMessage",
+        "showScrollTop",
+        "repoHref"
+      ],
+      "areas": [
+        "SCR-002-A06"
+      ],
+      "assets": [],
+      "note": "**MVP 밖이라 만들지 않고 자리만 메웠다.** 열린 PR의 실시간 조회를 미뤘고(DRM 2절) 조회가 없으면 다음 쪽을 불러올 일도 없다. Figma에도 이 블록이 없다. 화면설계서는 고치지 않았다. 자리를 비우지 않고 왜 비었는지 보인다.",
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     }
   ],
+  "pending": [],
   "base_components": {
     "note": "블록이 아니라 블록이 쓰는 화면 요소다. src/base/ 아래 둔다.",
     "items": [
@@ -399,7 +586,36 @@
         "figma_node": "1:212",
         "path": "viewer/src/base/RefRow/RefRow.tsx",
         "note": "참조 목록 한 줄. 세 블록이 공유한다."
+      },
+      {
+        "name": "MetricItem",
+        "figma_node": "6:460",
+        "path": "viewer/src/base/MetricItem/MetricItem.tsx",
+        "note": "수치 하나. 센 값만 보인다."
+      },
+      {
+        "name": "ItemRow",
+        "figma_node": "8:717",
+        "path": "viewer/src/base/ItemRow/ItemRow.tsx",
+        "note": "평면 목록 한 줄. 순서를 다시 정렬하지 않는다."
+      },
+      {
+        "name": "ProjectCard",
+        "figma_node": "6:451",
+        "path": "viewer/src/base/ProjectCard/ProjectCard.tsx",
+        "note": "프로젝트 카드와 일곱 단계 막대."
+      },
+      {
+        "name": "FlowNode",
+        "figma_node": "9:793",
+        "path": "viewer/src/base/FlowNode/FlowNode.tsx",
+        "note": "플로우 단계 노드. 유형을 글자로도 적는다."
       }
     ]
+  },
+  "coverage": {
+    "areas": 48,
+    "rendered": 48,
+    "note": "영역 48개가 모두 블록으로 그려진다. BLK-0013은 MVP 밖이라 자리만 메웠다."
   }
 }

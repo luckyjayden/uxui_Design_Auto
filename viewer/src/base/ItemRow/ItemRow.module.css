@@ -1,0 +1,60 @@
+/* Figma node 8:717. padding space/12, gap space/12, 위에서부터 정렬. */
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  width: 100%;
+  padding: var(--space-12);
+  border: 0;
+  border-bottom: 1px solid var(--color-border-default);
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+}
+
+button.row { cursor: pointer; }
+button.row:hover { background: var(--color-bg-subtle); }
+button.row:focus-visible { outline: 2px solid var(--color-border-strong); outline-offset: -2px; }
+
+.selected {
+  background: var(--color-bg-selected);
+  border-left: 2px solid var(--color-border-strong);
+  padding-left: calc(var(--space-12) - 2px);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--type-label-m-size);
+  font-weight: var(--type-label-m-weight);
+  line-height: var(--type-label-m-line);
+  color: var(--color-text-primary);
+}
+
+.description {
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-m-line);
+  color: var(--color-text-secondary);
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--type-code-s-size);
+  line-height: var(--type-code-s-line);
+  color: var(--color-text-secondary);
+}

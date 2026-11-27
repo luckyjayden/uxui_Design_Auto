@@ -1,0 +1,15 @@
+/* Figma node 6:587. 가로로 고르게 벌리고 gap space/16. */
+
+.row {
+  display: grid;
+  gap: var(--space-16);
+  padding: var(--space-16) var(--space-24);
+  background: var(--color-bg-canvas);
+}
+
+.empty {
+  margin: 0;
+  padding: var(--space-16);
+  color: var(--color-text-secondary);
+  font-size: var(--type-body-m-size);
+}
