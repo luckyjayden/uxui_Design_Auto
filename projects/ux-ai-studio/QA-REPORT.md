@@ -2,7 +2,7 @@
 doc: QA
 title: 검증 보고서
 version: 0.3.0
-status: 검토 필요
+status: 승인
 owner: 김태훈
 updated: 2026-11-27
 refs: [REQ, POL, UF, WF, IA, SB]
