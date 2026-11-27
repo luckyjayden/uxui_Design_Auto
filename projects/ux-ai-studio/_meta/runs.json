@@ -310,6 +310,263 @@
       "result": "완료",
       "attempt": 2,
       "note": "PR #10 검토 중 사람이 POL-018 충돌을 먼저 정리하기로 했습니다. 총괄이 확인한 원인: docs/08-data-spec.md 5절이 changes.json의 verdict 근거로 POL-018을 적는데 그것은 이 시스템 정책서의 '영향 판정'이고, 이 프로젝트의 POL-018은 '검증 결과는 규칙마다 통과와 실패로 보인다'입니다. screen 에이전트가 데이터 규격의 인용을 프로젝트 화면 파일로 그대로 옮기면서 번호가 어긋났습니다. '수정 필요·검토 필요'를 정한 프로젝트 정책은 POL-019라 정책을 고칠 일은 없고 인용만 고칩니다. 총괄이 화면 일곱 장을 훑은 결과 같은 유형은 SCR-007.json:196 한 줄뿐이고 STORYBOARD.md:630이 같은 문장을 옮겨 적었습니다. SCR-006의 POL-018 인용 여섯과 SCR-007-A05의 POL-018은 모두 프로젝트 POL-018(통과·실패)이 맞아 고치지 않습니다. 결과: SCR-007.json 196행과 STORYBOARD.md 630행의 POL-018을 POL-019로 고치고, 데이터 규격 5절의 POL-018이 시스템 번호라는 것을 문서가 이미 쓰는 '시스템 규칙' 표기로 덧붙였습니다. 11절 1162행은 '아직 남은 사항'에서 정해진 것으로 고쳐 썼고 'Policy Agent가 정해야 한다'를 거뒀습니다. STORYBOARD.md 0.5.1, updated 2026-11-27. 정책서와 데이터 규격은 고치지 않았습니다. 총괄이 화면 일곱 장을 다시 훑어 그 영역 policies에 없고 시스템 표시도 없는 POL 인용 8건이 모두 프로젝트 정책을 바르게 가리키는 교차 인용임을 확인했습니다. 게이트와 check_docs 통과."
+    },
+    {
+      "run_id": "RUN-013",
+      "agent": "qa",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "started_at": "2026-11-27T09:42:53+09:00",
+      "finished_at": "2026-11-27T10:00:34+09:00",
+      "read": [
+        "projects/ux-ai-studio/ (전체)",
+        "docs/03-functional-spec.md",
+        "docs/08-data-spec.md",
+        "reference/uxui-registry-mock/"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/validation.json",
+        "projects/ux-ai-studio/QA-REPORT.md"
+      ],
+      "result": "완료",
+      "attempt": 1,
+      "note": "06 QA 최종 검증. 작업 단위 넷의 PR(#7~#10)이 모두 병합돼 화면 일곱 장이 다 있습니다. 다만 승인 기록을 사람이 나중에 채우기로 해 status.json의 WU-001~004는 아직 '검토 필요'입니다. POL-039는 최종 검증을 '모든 작업 단위가 승인된 뒤'로 두었으므로 QA-06이 이것을 어떻게 판정하는지 보아야 합니다. 결과: 통과 3(QA-01 반영률 1.0, QA-05, QA-07) 실패 4. QA-02 5건 screen, QA-03 7건 flow(단 7번은 ia·screen), QA-04 4건 ia, QA-06 10건 총괄. 규칙 밖으로 SCR-006·007에 공통 필수 필드 origin·updated_at이 없는 것을 보고서 10절에 적었습니다(screen). 총괄이 UF-027의 next에 UF-012 갈래가 실재하는 것, SCR-006·007에 두 필드가 없는 것, 선행 문서 다섯의 Markdown 머리말이 모두 '검토 필요'인 것을 직접 대조해 확인했습니다. 완료 게이트 통과."
+    },
+    {
+      "run_id": "RUN-014",
+      "agent": "flow",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "started_at": "2026-11-27T10:00:34+09:00",
+      "finished_at": "2026-11-27T10:11:14+09:00",
+      "read": [
+        "projects/ux-ai-studio/QA-REPORT.md",
+        "projects/ux-ai-studio/validation.json",
+        "projects/ux-ai-studio/user-flow.json",
+        "projects/ux-ai-studio/workflow.json",
+        "projects/ux-ai-studio/ia.json",
+        "projects/ux-ai-studio/screens/",
+        "projects/ux-ai-studio/policies.json"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/USER-FLOW.md",
+        "projects/ux-ai-studio/user-flow.json",
+        "projects/ux-ai-studio/WORKFLOW.md",
+        "projects/ux-ai-studio/workflow.json"
+      ],
+      "result": "완료",
+      "attempt": 1,
+      "note": "QA-03 실패 6건을 고칩니다(validation.json의 owner_agent=flow). 화면에는 그려졌는데 유저 플로우에 대응 단계가 없는 길입니다. UF-014의 참조 이동, SCR-002→SCR-001, 그리고 SCR-003·004·005·007 헤더의 진행 현황 되돌아가기 넷. QA-03의 7번(UF-027)은 플로우가 맞고 IA.md와 STORYBOARD.md가 낡은 것이라 flow가 고칠 것이 아닙니다. UF·WF를 '승인'에서 '생성 중'으로 되돌려 쥡니다. 고치면 다시 검토와 승인을 받아야 합니다. 결과: UF 35→41, WF 35→41. 더한 것은 UF-036(참조 이동)·UF-037(프로젝트 목록)과 UF-038~041(화면 넷의 되돌아가기), 짝이 되는 WF-036~041입니다. 3~6은 screen이 한 값이고 WF의 state_change.from이 넷 다 달라 묶지 않고 넷으로 두었습니다. UF-014는 '연결됨' 갈래를 같은 문서(→UF-013)와 다른 산출물(→UF-036)로 갈랐습니다. 일대일 대응 유지, 연결 55개 모두 policy 보유, 화면 배정 28개, UF-027 변경 0줄 — 총괄이 직접 대조했습니다. 되돌아가기 자체를 정한 정책이 없어 제안으로 두고 USER-FLOW.md 9절에서 policy에 넘겼습니다. UF·WF가 바뀌었으므로 '승인'에서 '검토 필요'로 내리고 승인 세 필드를 비웠습니다. 다시 승인을 받아야 합니다."
+    },
+    {
+      "run_id": "RUN-015",
+      "agent": "ia",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "started_at": "2026-11-27T10:11:14+09:00",
+      "finished_at": "2026-11-27T10:20:07+09:00",
+      "read": [
+        "projects/ux-ai-studio/QA-REPORT.md",
+        "projects/ux-ai-studio/validation.json",
+        "projects/ux-ai-studio/USER-FLOW.md",
+        "projects/ux-ai-studio/user-flow.json",
+        "projects/ux-ai-studio/WORKFLOW.md",
+        "projects/ux-ai-studio/workflow.json",
+        "projects/ux-ai-studio/screens/",
+        "projects/ux-ai-studio/STORYBOARD.md"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/IA.md",
+        "projects/ux-ai-studio/ia.json"
+      ],
+      "result": "완료",
+      "attempt": 1,
+      "note": "QA-04 실패 4건(owner_agent=ia)과 QA-03 7번(담당 ia)을 고칩니다. transitions에 없는 되돌아가기 넷과, IA.md 3·7절이 UF-027을 잘못 읽은 서술입니다. RUN-014가 UF-036~041을 새로 만들어 되돌아가기의 근거가 '제안'에서 실재하는 단계로 바뀌었습니다. 결과: IA.md 0.2.0, ia.json 0.2.0. transitions 16→20(SCR-003·004·005·007 → SCR-002, 근거 UF-038~041). 3절의 '제안' 표기를 둘 다 거뒀습니다 — SCR-002→SCR-001은 UF-037, SCR-007→SCR-003은 UF-027의 UF-012 갈래가 근거입니다. 7절의 'UF-027은 완료로만 간다'를 통째로 거뒀습니다. 5절 배정표를 22→28로 넓혔고 user-flow.json은 한 글자도 고치지 않았습니다. 4절 요구사항 배정표를 두 칸(화면을 뽑은 근거 18개 + 화면설계서가 더 건 것)으로 넓혀 REQ 21개가 다 들어가게 했으나 ia.json의 refs는 넓히지 않았습니다. 총괄이 게이트·check_docs·끊긴 이동 0건·work_units 불변·파일 수정 시각을 직접 확인했습니다. IA가 바뀌었으므로 '승인'에서 '검토 필요'로 내리고 승인 세 필드를 비웠습니다."
+    },
+    {
+      "run_id": "RUN-016",
+      "agent": "screen",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "work_units": [
+        "WU-001",
+        "WU-002",
+        "WU-003",
+        "WU-004"
+      ],
+      "started_at": "2026-11-27T10:20:07+09:00",
+      "finished_at": "2026-11-27T10:40:57+09:00",
+      "read": [
+        "projects/ux-ai-studio/QA-REPORT.md",
+        "projects/ux-ai-studio/validation.json",
+        "projects/ux-ai-studio/USER-FLOW.md",
+        "projects/ux-ai-studio/IA.md",
+        "projects/ux-ai-studio/policies.json",
+        "reference/uxui-registry-mock/blocks/",
+        "docs/08-data-spec.md"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/STORYBOARD.md",
+        "projects/ux-ai-studio/screens/SCR-001.json",
+        "projects/ux-ai-studio/screens/SCR-002.json",
+        "projects/ux-ai-studio/screens/SCR-003.json",
+        "projects/ux-ai-studio/screens/SCR-004.json",
+        "projects/ux-ai-studio/screens/SCR-005.json",
+        "projects/ux-ai-studio/screens/SCR-006.json",
+        "projects/ux-ai-studio/screens/SCR-007.json"
+      ],
+      "result": "완료",
+      "attempt": 1,
+      "note": "QA-02 실패 3건(owner_agent=screen), QA-03 7번의 STORYBOARD 몫, 보고서 10절의 공통 필수 필드 누락을 고칩니다. 사람이 2026-11-27에 정한 것 둘을 반영합니다. (1) POL-004의 '읽은 시점'은 조건을 거두지 않고 공통 헤더에 자리를 만든다. (2) SCR-007-A03의 출처 구분은 화면을 고친다. 작업 단위 넷에 걸치는 수정이라 work_units에 넷을 다 적습니다. 화면설계서는 프로젝트에 하나라 한 실행으로 돕니다. 결과: STORYBOARD.md 0.6.0. (1) POL-004의 읽은 시점은 BRQ-0016(BLK-0001을 2.1.0→2.2.0 MINOR로 넓히는 확장 요청)으로 풀었습니다. 참조 범위 ^2 안이라 block.id는 그대로 두었고 reference/는 손대지 않았습니다. 화면 일곱이 state repoReadAt과 헤더 props를 받았습니다. (2) SCR-007-A03에서 POL-009를 빼고 showOrigin을 false로, by를 자유 문자열로 다시 썼습니다. (3) SCR-002-A04에 POL-006의 뒤처진 쪽 규칙을 넣었습니다. (4) 11절의 UF-027 서술을 거뒀습니다. (5) SCR-006·007에 origin·updated_at을 채웠습니다. (6) 화면 refs에 UF/WF 12개를 더했습니다 — ia.json을 맞춰야 QA-04가 깨지지 않습니다. 총괄이 게이트 넷·check_docs·영역 48개 불변·refs 차이 12개를 직접 대조했습니다."
+    },
+    {
+      "run_id": "RUN-017",
+      "agent": "ia",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "started_at": "2026-11-27T10:40:57+09:00",
+      "finished_at": "2026-11-27T10:43:01+09:00",
+      "read": [
+        "projects/ux-ai-studio/screens/",
+        "projects/ux-ai-studio/STORYBOARD.md",
+        "projects/ux-ai-studio/ia.json"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/IA.md",
+        "projects/ux-ai-studio/ia.json"
+      ],
+      "result": "완료",
+      "attempt": 2,
+      "note": "RUN-016이 화면 refs에 더한 UF/WF 12개를 ia.json에 맞춥니다. QA-04는 화면 파일과 ia.json의 refs가 글자 하나까지 같을 것을 보므로 한쪽만 늘어난 지금은 어긋납니다. 이것 하나만 하는 짧은 실행입니다. 결과: IA.md·ia.json 0.2.1. refs 12개를 화면 파일과 같은 차례로 더했습니다. 총괄이 일곱 화면의 refs를 리스트 비교(순서 포함)로 대조해 전부 일치함을 확인했습니다. transitions 20개와 work_units는 그대로입니다."
+    },
+    {
+      "run_id": "RUN-018",
+      "agent": "qa",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "started_at": "2026-11-27T10:43:01+09:00",
+      "finished_at": "2026-11-27T10:59:01+09:00",
+      "read": [
+        "projects/ux-ai-studio/ (전체)",
+        "docs/03-functional-spec.md",
+        "docs/08-data-spec.md",
+        "reference/uxui-registry-mock/"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/validation.json",
+        "projects/ux-ai-studio/QA-REPORT.md"
+      ],
+      "result": "완료",
+      "attempt": 2,
+      "note": "RUN-013의 실패 넷을 고친 뒤의 재검증입니다. RUN-014(flow, UF·WF 35→41), RUN-015·017(ia, transitions 16→20 및 refs 12개), RUN-016(screen, STORYBOARD 0.6.0)이 차례로 돌았습니다. QA-06은 사람이 승인 기록을 미루기로 해 그대로 남아 있을 것입니다. 결과: 통과 4 / 실패 3 (전 판 통과 3 / 실패 4). 닫힌 실패 11건. QA-04가 통과로 바뀌었습니다. 남은 셋 가운데 둘은 전 판 QA가 놓쳤던 것입니다. (1) SCR-006-A01의 뒤로가기에 대응 단계가 없음 — UF-042 하나면 닫힘, 담당 flow. (2) 다섯 상태의 앞뒤 차례가 POL-005의 states 순서와 다름(수정 필요의 자리가 셋째/다섯째로 갈림) — 담당 policy. 총괄이 직접 대조해 확인했습니다. (3) _meta/changes.json이 빈 배열인데 승인됐던 UF·WF·IA가 바뀜(POL-033) — 담당 총괄. BRQ-0016은 통과로 판정하고 확장 요청을 셋째 묶음으로 따로 표시했습니다. POL-009는 고아가 되지 않았습니다(참조 없는 POL 0개)."
+    },
+    {
+      "run_id": "RUN-019",
+      "agent": "policy",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "started_at": "2026-11-27T10:59:01+09:00",
+      "finished_at": "2026-11-27T11:07:56+09:00",
+      "read": [
+        "projects/ux-ai-studio/QA-REPORT.md",
+        "projects/ux-ai-studio/validation.json",
+        "projects/ux-ai-studio/screens/SCR-002.json",
+        "projects/ux-ai-studio/USER-FLOW.md",
+        "docs/03-functional-spec.md",
+        "docs/05-workflow.md"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/POLICY.md",
+        "projects/ux-ai-studio/policies.json"
+      ],
+      "result": "완료",
+      "attempt": 2,
+      "note": "QA-02 실패 3건(owner_agent=policy)을 고칩니다. POL-005에 다섯 상태의 앞뒤 차례가 없어 SCR-002-A04가 임의로 정했습니다. 함께 '보기 화면에서 머리의 뒤로가기로 되돌아갈 수 있다'를 정한 정책이 없다는 flow의 넘김도 봅니다 — 그것이 서면 뒤이어 돌 flow가 UF-042에 걸 근거가 생깁니다. POL이 '승인'이었으므로 '생성 중'으로 내리고 승인 세 필드를 비웠습니다. 고치면 재승인 대상입니다. 결과: POLICY.md·policies.json 0.2.0, 고친 항목은 POL-005·006·008 셋. 차례를 '대기 → 수정 필요 → 생성 중 → 검토 필요 → 승인'으로 정했습니다. 화면이 쓴 것과 '수정 필요'와 '생성 중'의 자리가 바뀝니다. 근거는 docs/05-workflow.md WF-005의 전이 '대기·수정 필요 → 생성 중'이며, 기준을 '승인까지 남은 일'로 잡아 도출했습니다. 차례는 POL-005에 두고 POL-006에는 쓰는 규칙만 두었습니다. states 배열 순서는 SCR-001-A02가 같은 열거를 인용하고 있어 건드리지 않았습니다. 되돌아가기는 새 ID 없이 POL-006·POL-008 조건에 적었습니다 — 고아 정책을 만들지 않으려는 판단입니다. 이 프로젝트 정책은 POL-001~021이고 다음 번호는 POL-022입니다(총괄이 지시에 적은 POL-040은 시스템 정책서 번호와 혼동한 것으로 에이전트가 잡아냈습니다). SCR-002-A04의 차례 문장 한 줄은 screen이 고쳐야 QA-02가 닫힙니다."
+    },
+    {
+      "run_id": "RUN-020",
+      "agent": "flow",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "started_at": "2026-11-27T11:07:56+09:00",
+      "finished_at": "2026-11-27T11:12:25+09:00",
+      "read": [
+        "projects/ux-ai-studio/QA-REPORT.md",
+        "projects/ux-ai-studio/POLICY.md",
+        "projects/ux-ai-studio/policies.json",
+        "projects/ux-ai-studio/screens/SCR-006.json"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/USER-FLOW.md",
+        "projects/ux-ai-studio/user-flow.json",
+        "projects/ux-ai-studio/WORKFLOW.md",
+        "projects/ux-ai-studio/workflow.json"
+      ],
+      "result": "완료",
+      "attempt": 2,
+      "note": "QA-03의 남은 실패 1건(owner_agent=flow). SCR-006-A01의 머리 뒤로가기에 대응하는 유저 플로우 단계가 없습니다. 전 판 QA가 넷만 짚고 넘어간 자리입니다. UF-042와 WF-042 하나씩이면 닫힙니다. POL-006이 RUN-019에서 '보기 화면에서 머리의 뒤로가기를 누르면 진행 현황으로 돌아온다'를 조건에 담았으므로 그대로 걸면 됩니다. 결과: USER-FLOW.md 0.4.0, WORKFLOW.md 0.3.0. UF-042(검증 결과에서 진행 현황으로 돌아간다, 화면 SCR-006, POL-006)와 WF-042를 더했습니다. UF·WF 42↔42 일대일 유지, 연결 56개 모두 policy 보유, 화면 배정 29개 — 총괄이 직접 대조했습니다. 3.7절에 SCR-006으로 돌아오는 길이 둘(UF-025 결과 없음은 뷰어의 판정, UF-042는 사용자가 누르는 길)임을 갈라 적었고, 0.3.0에서 앞의 것이 뒤의 것을 덮는다고 본 것이 틀렸다고 남겼습니다. POL-005의 새 차례와 어긋나는 서술은 플로우 문서에 없어 아무것도 고치지 않았습니다."
+    },
+    {
+      "run_id": "RUN-021",
+      "agent": "screen",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "work_units": [
+        "WU-001",
+        "WU-004"
+      ],
+      "started_at": "2026-11-27T11:12:25+09:00",
+      "finished_at": "2026-11-27T11:23:08+09:00",
+      "read": [
+        "projects/ux-ai-studio/POLICY.md",
+        "projects/ux-ai-studio/policies.json",
+        "projects/ux-ai-studio/USER-FLOW.md",
+        "projects/ux-ai-studio/QA-REPORT.md",
+        "docs/05-workflow.md"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/STORYBOARD.md",
+        "projects/ux-ai-studio/screens/SCR-001.json",
+        "projects/ux-ai-studio/screens/SCR-002.json",
+        "projects/ux-ai-studio/screens/SCR-003.json",
+        "projects/ux-ai-studio/screens/SCR-004.json",
+        "projects/ux-ai-studio/screens/SCR-005.json",
+        "projects/ux-ai-studio/screens/SCR-006.json"
+      ],
+      "result": "완료",
+      "attempt": 2,
+      "note": "둘입니다. (1) RUN-019가 정한 상태 차례('대기 → 수정 필요 → 생성 중 → 검토 필요 → 승인')에 SCR-002-A04의 디스크립션을 맞춥니다. 화면이 임의로 정했던 차례와 '수정 필요'·'생성 중'의 자리가 바뀝니다. 이것이 QA-02의 마지막 한 줄입니다. (2) RUN-020이 만든 UF-042·WF-042를 SCR-006의 refs에 더합니다. 뒤이어 ia가 ia.json을 맞춥니다. 결과: STORYBOARD.md 0.6.2. 차례 문장을 네 자리에서 고쳤고 SCR-006의 refs에 UF-042·WF-042를 더해 여덟이 됐습니다. A01 디스크립션에 대응 UF를 적고 11절의 'UF-025로 이미 있다'는 틀린 서술을 바로잡았습니다. 에이전트가 범위 밖에서 어긋남 하나를 찾아 보고하고 멈췄습니다 — policy가 POL-005에 더한 셋째 예외가 POL-005를 건 영역 일곱 중 여섯에 없어 QA-05가 6건 실패할 상태였습니다. 총괄이 대조해 확인하고 범위를 열어 같은 실행에서 닫았습니다. 정책×예외 짝 193개 누락 0, 영역 48개 불변 — 총괄이 직접 대조했습니다. 넘긴 것 하나: SCR-001-A02가 '지금 진행 중인 단계'를 보이는데 그것이 플로우 단계나 화면설계서 단계면 한 배지에 상태가 여럿 묶입니다. 뒤처진 쪽을 골라야 하는지가 디스크립션에 없고 POL-006도 걸려 있지 않아 ia·policy와 함께 정할 일로 남겼습니다."
+    },
+    {
+      "run_id": "RUN-022",
+      "agent": "ia",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "started_at": "2026-11-27T11:23:08+09:00",
+      "finished_at": "2026-11-27T11:26:56+09:00",
+      "read": [
+        "projects/ux-ai-studio/screens/SCR-006.json",
+        "projects/ux-ai-studio/user-flow.json",
+        "projects/ux-ai-studio/ia.json"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/IA.md",
+        "projects/ux-ai-studio/ia.json"
+      ],
+      "result": "완료",
+      "attempt": 3,
+      "note": "RUN-021이 SCR-006의 refs에 UF-042·WF-042를 더했습니다. ia.json의 SCR-006을 맞춥니다. QA-04는 화면 파일과 ia.json의 refs가 글자·순서까지 같을 것을 봅니다. 나머지 여섯 화면의 refs는 RUN-017에서 이미 맞춰 두었습니다. 결과: IA.md·ia.json 0.3.0. SCR-006의 refs에 UF-042·WF-042를 더해 일곱 장이 모두 화면 파일과 일치합니다. transitions를 20→21로 늘렸습니다(SCR-006 → SCR-002, 근거 UF-042). SCR-006 → SCR-002가 두 줄인 것은 까닭이 다른 두 길이기 때문입니다 — 기존은 뷰어가 돌려보내는 길(UF-025 결과 없음), 새것은 사용자가 머리를 눌러 떠나는 길(UF-042)이며 transitions는 trigger 단위로 적습니다. 5절 배정표 28→29. 총괄이 refs 일곱 장·transitions 21개·화면 배정 29개를 직접 대조했습니다. 넘겨받은 것 하나: SCR-001-A02의 단계 배지에 상태가 여럿 묶이는 자리(담당 policy→screen)."
+    },
+    {
+      "run_id": "RUN-023",
+      "agent": "qa",
+      "session": "8b203abe-fa04-4bf8-8c7b-87e497fb7655",
+      "started_at": "2026-11-27T11:26:56+09:00",
+      "finished_at": "2026-11-27T11:38:55+09:00",
+      "read": [
+        "projects/ux-ai-studio/ (전체)",
+        "docs/03-functional-spec.md",
+        "docs/05-workflow.md",
+        "docs/08-data-spec.md",
+        "reference/uxui-registry-mock/"
+      ],
+      "wrote": [
+        "projects/ux-ai-studio/validation.json",
+        "projects/ux-ai-studio/QA-REPORT.md"
+      ],
+      "result": "완료",
+      "attempt": 3,
+      "note": "3차 재검증. QA 0.2.0의 실패 3건을 고친 뒤입니다. RUN-019(policy, POL-005·006·008), RUN-020(flow, UF-042·WF-042), RUN-021(screen, 차례 문장과 SCR-006 refs, POL-005 셋째 예외를 영역 여섯에), RUN-022(ia, refs 동기화와 transitions 21)가 차례로 돌았습니다. POL이 '승인'에서 '검토 필요'로 내려가 재승인 대상이 REQ를 뺀 넷이 됐습니다. QA-06의 changes.json 공백은 커밋 뒤 총괄이 채웁니다. 결과: 통과 6 / 실패 1. QA-02와 QA-03이 닫혔고 새로 생긴 실패는 0건입니다. 문서 내용에 걸린 규칙 위반이 하나도 남지 않았고 남은 QA-06은 저장소 밖의 일입니다. POL-005의 셋째 예외가 일곱 영역에 다 들어갔음을 확인(짝 193개 누락 0). 상태 차례를 POL-005에 둔 것과 states 배열을 건드리지 않은 것 모두 타당하다고 판정했습니다. 되돌아가기를 새 ID 없이 담은 것도 타당하나 '고아 정책이 생긴다'는 둘째 근거는 과장이라고 지적했습니다 — 고아는 결과가 아니라 선택입니다. SCR-006 → SCR-002가 두 줄인 것은 묶으면 UF-042의 자취가 사라져 고친 것을 되돌리는 꼴이라 실패가 아닙니다. SCR-001-A02는 POL-008과 POL-005가 둘 다 걸려 있어 값이 정해지므로 미정으로 보았고, 그래도 최종 승인 전에 닫기를 권했습니다. 낡은 서술 둘을 찾았습니다 — USER-FLOW.md 9절의 두 줄은 이미 닫혔는데 줄이 안 그어졌고, IA.md 7절 끝줄은 IA가 PR #4로 승인됐다는데 지금 검토 필요입니다."
     }
   ]
 }

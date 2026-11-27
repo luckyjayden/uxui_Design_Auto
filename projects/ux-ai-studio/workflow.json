@@ -1,6 +1,6 @@
 {
   "doc": "WF",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "items": [
     {
       "id": "WF-001",
@@ -853,6 +853,219 @@
       ],
       "origin": "ai",
       "updated_at": "2026-11-26"
+    },
+    {
+      "id": "WF-036",
+      "title": "참조한 항목의 종류로 옮겨 갈 보기 화면을 정한다",
+      "description": "참조 패널에서 고른 항목의 ID 앞자리로 옮겨 갈 화면을 정한다. UF·WF면 플로우 미리보기를, SCR이면 화면설계서 뷰어를 열고 그 항목을 고른 상태로 둔다. 어느 쪽도 아니면 같은 화면 안에서 항목만 옮긴다(WF-028). 저장소에는 아무것도 쓰지 않는다.",
+      "step_type": "상태 변경",
+      "input": [
+        "고른 참조 항목의 ID와 문서 코드",
+        "projects/<id>/user-flow.json",
+        "projects/<id>/workflow.json",
+        "projects/<id>/screens/SCR-000.json"
+      ],
+      "output": [
+        "옮겨 갈 보기 화면",
+        "옮겨 간 화면에서 고른 상태로 둘 항목"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 화면(React State)",
+        "from": "문서 보기",
+        "to": "플로우 미리보기 또는 화면설계서 뷰어"
+      },
+      "user_step": "UF-036",
+      "refs": [
+        "UF-036",
+        "REQ-006",
+        "REQ-005",
+        "POL-010",
+        "POL-012",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "id": "WF-037",
+      "title": "프로젝트 목록으로 되돌리고 고른 프로젝트를 비운다",
+      "description": "진행 현황에서 프로젝트 목록으로 되돌리고 고른 프로젝트를 비운다. 목록은 이미 만들어 둔 카드 목록을 그대로 쓰고, 들고 있지 않으면 WF-001을 다시 돌린다. 저장소에는 아무것도 쓰지 않는다.",
+      "step_type": "상태 변경",
+      "input": [
+        "프로젝트 카드 목록",
+        "projects/",
+        "projects/<id>/project.json"
+      ],
+      "output": [
+        "프로젝트 목록 화면 데이터",
+        "비운 '고른 프로젝트'"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 화면(React State)",
+        "from": "진행 현황",
+        "to": "프로젝트 목록"
+      },
+      "user_step": "UF-037",
+      "refs": [
+        "UF-037",
+        "REQ-001",
+        "REQ-015",
+        "POL-008",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "id": "WF-038",
+      "title": "문서 보기에서 진행 현황으로 되돌리고 참조 자취를 버린다",
+      "description": "문서 보기를 떠나면서 따라간 참조 자취(WF-028의 `visitedTrail`)와 고른 항목을 버리고 진행 현황 화면 데이터를 다시 만든다. 저장소에는 아무것도 쓰지 않는다.",
+      "step_type": "상태 변경",
+      "input": [
+        "projects/<id>/_meta/status.json",
+        "이미 만들어 둔 진행 현황 화면 데이터"
+      ],
+      "output": [
+        "진행 현황 화면 데이터",
+        "버린 참조 자취와 고른 항목"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 화면(React State)",
+        "from": "문서 보기",
+        "to": "진행 현황"
+      },
+      "user_step": "UF-038",
+      "refs": [
+        "UF-038",
+        "REQ-002",
+        "REQ-005",
+        "REQ-015",
+        "POL-006",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "id": "WF-039",
+      "title": "플로우 미리보기에서 진행 현황으로 되돌리고 다이어그램 상태를 버린다",
+      "description": "플로우 미리보기를 떠나면서 다이어그램을 보던 상태(고른 단계, 접힘, 확대)를 버리고 진행 현황 화면 데이터를 다시 만든다. 만들어 둔 PNG는 내려받기로 이미 넘겼으므로 들고 있지 않는다.",
+      "step_type": "상태 변경",
+      "input": [
+        "projects/<id>/_meta/status.json",
+        "이미 만들어 둔 진행 현황 화면 데이터"
+      ],
+      "output": [
+        "진행 현황 화면 데이터",
+        "버린 다이어그램 보기 상태"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 화면(React State)",
+        "from": "플로우 미리보기",
+        "to": "진행 현황"
+      },
+      "user_step": "UF-039",
+      "refs": [
+        "UF-039",
+        "REQ-002",
+        "REQ-007",
+        "REQ-015",
+        "POL-006",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "id": "WF-040",
+      "title": "화면설계서 뷰어에서 진행 현황으로 되돌리고 화면 state를 버린다",
+      "description": "화면설계서 뷰어를 떠나면서 고른 영역과 인터랙션으로 바뀐 화면 state를 버리고 진행 현황 화면 데이터를 다시 만든다. 누른 결과는 저장소에 남지 않는다(POL-014).",
+      "step_type": "상태 변경",
+      "input": [
+        "projects/<id>/_meta/status.json",
+        "이미 만들어 둔 진행 현황 화면 데이터"
+      ],
+      "output": [
+        "진행 현황 화면 데이터",
+        "버린 고른 영역과 화면 state"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 화면(React State)",
+        "from": "화면설계서 뷰어",
+        "to": "진행 현황"
+      },
+      "user_step": "UF-040",
+      "refs": [
+        "UF-040",
+        "REQ-002",
+        "REQ-009",
+        "REQ-017",
+        "REQ-015",
+        "POL-006",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "id": "WF-041",
+      "title": "변경 영향에서 진행 현황으로 되돌리고 고른 변경 줄을 버린다",
+      "description": "변경 영향을 떠나면서 고른 변경 줄 표시를 버리고 진행 현황 화면 데이터를 다시 만든다. 검증 결과에서 들어왔어도 돌아가는 곳은 진행 현황 하나다.",
+      "step_type": "상태 변경",
+      "input": [
+        "projects/<id>/_meta/status.json",
+        "이미 만들어 둔 진행 현황 화면 데이터"
+      ],
+      "output": [
+        "진행 현황 화면 데이터",
+        "버린 고른 변경 줄 표시"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 화면(React State)",
+        "from": "변경 영향",
+        "to": "진행 현황"
+      },
+      "user_step": "UF-041",
+      "refs": [
+        "UF-041",
+        "REQ-002",
+        "REQ-014",
+        "REQ-015",
+        "POL-006",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "id": "WF-042",
+      "title": "검증 결과에서 진행 현황으로 되돌리고 고른 규칙을 버린다",
+      "description": "검증 결과를 떠나면서 고른 규칙과 그 규칙의 실패 항목 표시(A04·A05가 쓰는 값)를 버리고 진행 현황 화면 데이터를 다시 만든다. 읽은 시점은 화면마다 따로 들고 있으므로 진행 현황의 것으로 돌아간다. 검증을 다시 돌리지 않는다.",
+      "step_type": "상태 변경",
+      "input": [
+        "projects/<id>/_meta/status.json",
+        "이미 만들어 둔 진행 현황 화면 데이터"
+      ],
+      "output": [
+        "진행 현황 화면 데이터",
+        "버린 고른 규칙과 실패 항목 표시"
+      ],
+      "state_change": {
+        "target": "뷰어가 보는 화면(React State)",
+        "from": "검증 결과",
+        "to": "진행 현황"
+      },
+      "user_step": "UF-042",
+      "refs": [
+        "UF-042",
+        "REQ-002",
+        "REQ-013",
+        "REQ-015",
+        "POL-006",
+        "POL-014"
+      ],
+      "origin": "ai",
+      "updated_at": "2026-11-27"
     }
   ]
 }
